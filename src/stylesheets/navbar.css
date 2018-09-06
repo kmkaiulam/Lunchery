@@ -1,0 +1,23 @@
+nav{
+    background-color: gray;
+    height:50px;
+    width:100%;
+    position:fixed;
+    top: 0;
+}
+
+#menu{
+  text-align: center;
+  color: black;
+  margin-top: 15px;
+}
+.menuitem{
+  margin-top:100px;
+  padding: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.menuitem:hover{
+  background-color: black;
+  color: white !important;
+}
