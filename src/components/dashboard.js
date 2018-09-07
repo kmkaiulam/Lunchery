@@ -1,7 +1,6 @@
 import React from 'react';
-import NavBar from './navbar';
-import MyChefs from './mychefs';
-import MyWorkWeek from './myworkweek';
+import MyChefs from './my-chefs';
+import MyWorkWeek from './my-work-week';
 import Messages from './messages';
 import '../stylesheets/dashboard.css';
 
@@ -37,7 +36,6 @@ export default function Dashboard(props) {
     ]
     return (
      <div className='dashboard'>
-            <NavBar />
             <MyWorkWeek schedule={workweek} />
             <div className='row'>
                 <MyChefs myChefs={chefs} />

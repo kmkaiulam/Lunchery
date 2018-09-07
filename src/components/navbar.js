@@ -8,9 +8,9 @@ export default function NavBar(props) {
         <div id="menu">
             <a href='/dashboard' className="menuitem">Dashboard</a>
             <a href='/' className="menuitem">About</a>
-            <a href="/searchChef.html" className="menuitem">Search Chefs</a>
-            <a href="/login.html" className="menuitem">Login</a>
-            <a href="/signup.html" className="menuitem">Signup</a>
+            <a href="/chefsearch" className="menuitem">Chef Search</a>
+            <a href="/login" className="menuitem">Login</a>
+            <a href="/signup" className="menuitem">Signup</a>
         </div>
   </nav>
   )

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../stylesheets/mychefs.css';
+import '../stylesheets/my-chefs.css';
 
 export default function MyChefs(props) {
    const myChef = props.myChefs.map((myChef, index) => 

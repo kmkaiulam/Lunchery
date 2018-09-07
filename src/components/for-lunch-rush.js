@@ -1,8 +1,9 @@
 import React from 'react';
 
-import '../stylesheets/landing.css';
+import '../stylesheets/for-lunch-rush.css';
 
 export default function ForLunchRush(props) {
+    return (
     <div className='forLunchRush'>
         <section>
           <header> For the Lunch Rush
@@ -27,4 +28,5 @@ export default function ForLunchRush(props) {
               <button type='button'>Let's do Lunch</button>
         </section>
     </div>
+    )
 }
