@@ -8,22 +8,22 @@ import '../stylesheets/dashboard.css';
 export default function Dashboard(props) {
     const workweek = {
         monday: 'Chef Amy',
-        tuesday: 'Chef Taylor',
+        tuesday: 'Chef Guy',
         wednesday: 'Chef Max',
         thursday: 'Chef Gladys',
         friday: 'Not Scheduled'
     }
     const chefs = [{
         name: 'Chef Amy',
-        image: 'https://myhero.com/content/images/thumbs/0047770_amy-carmichael_400.jpeg',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
         speciality: 'Indian',
         dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
     },
     {
-    name: 'Chef Amy2',
-    image: 'https://myhero.com/content/images/thumbs/0047770_amy-carmichael_400.jpeg',
-    speciality: 'Indian',
-    dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
+    name: 'Chef Guy',
+    image: 'https://assets3.thrillist.com/v1/image/2670144/size/tmg-gift_guide_default.jpg',
+    speciality: 'American',
+    dish: 'https://cms.splendidtable.org/sites/default/files/styles/w2000/public/Easy_Steak_Frites-LEDE.jpg?itok=IdQsXmBP'
     }
 ]
     const messages = [
