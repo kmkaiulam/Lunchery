@@ -8,13 +8,13 @@ export default function Login(props) {
             <form id = 'js-login-form'>
                 <h1>Log in</h1>
                 <div >
-                    <label  for='inputUsername'>Username</label>
-                    <input aria-label = 'username' name = 'username' type='username' id='inputUsername' placeholder='Username' required autofocus/>
+                    <label  htmlFor='inputUsername'>Username</label>
+                    <input aria-label = 'username' name = 'username' type='username' id='inputUsername' placeholder='Username' required autoFocus/>
                 </div>
                 <div>
-                    <input type="text" autocomplete="username" hidden/>
-                    <label for='inputPassword'>Password</label>
-                    <input autocomplete= 'current-password'  aria-label='password' name = 'password' type='password' id='inputPassword'  placeholder='Password' required/>
+                    <input type="text" autoComplete="username" hidden/>
+                    <label htmlFor='inputPassword'>Password</label>
+                    <input autoComplete= 'current-password'  aria-label='password' name = 'password' type='password' id='inputPassword'  placeholder='Password' required/>
                 </div>
                 <button type='submit'>Log in</button>
                 <p>&copy; 2018</p>

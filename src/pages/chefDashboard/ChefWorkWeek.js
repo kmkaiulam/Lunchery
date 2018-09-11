@@ -3,24 +3,31 @@ import React from 'react';
 import './ChefWorkWeek.css';
 
 export default function ChefWorkWeek(props) {
-let chefMonday= props.dailyRequests.monday.map(request =>
-    <div>{request}</div>
+let confirmedMonday= props.workWeek.monday.confirmed.map((guest, index) =>
+    <div key={index} className='confirmed'>
+      <div>{guest}</div>
+    </div>
 )
-let chefTuesday= props.dailyRequests.tuesday.map(request =>
-    <div>{request}</div>
+let confirmedTuesday= props.workWeek.tuesday.confirmed.map((guest, index) =>
+    <div key={index} className='confirmed'>
+      <div>{guest}</div>
+    </div>
 )
-let chefWednesday= props.dailyRequests.wednesday.map(request =>
-    <div>{request}</div>
+let confirmedWednesday= props.workWeek.wednesday.confirmed.map((guest, index) =>
+    <div key={index} className='confirmed'>
+      <div>{guest}</div>
+    </div>
 )
-let chefThursday= props.dailyRequests.thursday.map(request =>
-    <div>{request}</div>
+let confirmedThursday= props.workWeek.thursday.confirmed.map((guest, index) =>
+    <div key={index} className='confirmed'>
+      <div>{guest}</div>
+    </div>
 )
-let chefFriday= props.dailyRequests.friday.map(request =>
-    <div>{request}</div>
+let confirmedFriday= props.workWeek.friday.confirmed.map((guest, index) =>
+    <div key={index} className='confirmed'>
+      <div>{guest}</div>
+    </div>
 )
-
-
-console.log(chefMonday);
     return  (
     <div className='chefWorkWeekTitle'><h2>WorkWeek</h2>
         <section className= 'chefWorkWeek'>
@@ -29,10 +36,7 @@ console.log(chefMonday);
                     <strong>Monday</strong>
                 </div>
                 <div>
-                    {chefMonday}
-                </div>
-                <div>
-                Confirmed: {chefMonday.length}
+                    {confirmedMonday}
                 </div>
             </div>
             <div>
@@ -40,10 +44,7 @@ console.log(chefMonday);
                     <strong>Tuesday</strong>
                 </div>
                 <div>
-                    {chefTuesday}
-                </div>
-                <div>
-                Confirmed: {chefTuesday.length}
+                    {confirmedTuesday}
                 </div>
             </div>
             <div>
@@ -51,10 +52,7 @@ console.log(chefMonday);
                     <strong>Wednesday</strong>
                 </div>
                 <div>
-                    {chefWednesday}
-                </div>
-                <div>
-                Confirmed: {chefWednesday.length}
+                    {confirmedWednesday}
                 </div>
             </div>
             <div>
@@ -62,10 +60,7 @@ console.log(chefMonday);
                     <strong>Thursday</strong>
                 </div>
                 <div>
-                    {chefThursday}
-                </div>
-                <div>
-                Confirmed: {chefThursday.length}
+                    {confirmedThursday}
                 </div>
             </div>
             <div>
@@ -73,10 +68,7 @@ console.log(chefMonday);
                     <strong>Friday</strong>
                 </div>
                 <div>
-                    {chefFriday}
-                </div>
-                <div>
-                    Confirmed: {chefFriday.length}
+                    {confirmedFriday}
                 </div>
             </div>
         </section>
