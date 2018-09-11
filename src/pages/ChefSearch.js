@@ -1,7 +1,7 @@
 import React from 'react';
-import ChefResults from './chef-results';
-import ChefForm from './chef-form';
-import '../stylesheets/chef-search.css';
+import ChefResults from './chefSearch/ChefResults';
+import ChefForm from './chefSearch/ChefForm';
+import './ChefSearch.css';
 
 export default function ChefSearch(props) {
     const results= [

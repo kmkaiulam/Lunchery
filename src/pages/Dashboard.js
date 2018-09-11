@@ -1,8 +1,8 @@
 import React from 'react';
-import MyChefs from './my-chefs';
-import MyWorkWeek from './my-work-week';
-import Messages from './messages';
-import '../stylesheets/dashboard.css';
+import MyChefs from './dashboard/MyChefs';
+import MyWorkWeek from './dashboard/MyWorkWeek';
+import Messages from './dashboard/Messages';
+import './Dashboard.css';
 
 export default function Dashboard(props) {
     const workweek = {
@@ -31,6 +31,7 @@ export default function Dashboard(props) {
         text: 'Your request has been accepted!', 
         },
         {from:'Chef Taylor',
+        
         company: 'CIM',
         text: 'Sorry we cannot accomodate your dietary restrictions.'}
     ]

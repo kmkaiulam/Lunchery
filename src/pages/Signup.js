@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../stylesheets/signup.css';
+import './Signup.css';
 
 export default function Signup(props) {
     return (

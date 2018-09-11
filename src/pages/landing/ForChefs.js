@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../stylesheets/for-chefs.css';
+import './ForChefs.css';
 
 export default function ForChefs(props) {
     return ( 

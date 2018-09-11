@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../stylesheets/my-work-week.css';
+import './MyWorkWeek.css';
 
 export default function MyWorkWeek(props) {
     return  (

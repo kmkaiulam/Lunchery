@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheets/chef-form.css';
+import './ChefForm.css';
 
 export default function ChefForm(props) {
     return (

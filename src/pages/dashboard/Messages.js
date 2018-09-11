@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../stylesheets/messages.css';
+import './Messages.css';
 
 export default function Messages(props) {
     let messages = props.messages.map((message, index) =>

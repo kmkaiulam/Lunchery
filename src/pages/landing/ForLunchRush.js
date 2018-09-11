@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../stylesheets/for-lunch-rush.css';
+import './ForLunchRush.css';
 
 export default function ForLunchRush(props) {
     return (

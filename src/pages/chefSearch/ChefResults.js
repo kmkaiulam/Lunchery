@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../stylesheets/chef-results.css';
+import './ChefResults.css';
 
 export default function ChefResults(props) {
     const chefResults= props.chefResults.map((chefResult, index) =>

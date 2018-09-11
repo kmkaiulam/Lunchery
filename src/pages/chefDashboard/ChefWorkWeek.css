@@ -1,0 +1,8 @@
+.chefWorkWeek{
+    display:flex;
+    justify-content:space-evenly;
+    margin-top: 50px;
+}
+.chefWorkWeekTitle{
+    margin-top:100px;
+}
