@@ -32,6 +32,7 @@ export default function ChefRequests(props) {
             </div>
         </div>
     </div>
+
     )
     let requestThursday= props.workWeek.thursday.request.map((request, index) =>
     <div key={index} className='request'>

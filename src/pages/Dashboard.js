@@ -1,7 +1,7 @@
 import React from 'react';
 import MyChefs from './dashboard/MyChefs';
 import MyWorkWeek from './dashboard/MyWorkWeek';
-import Messages from './dashboard/Messages';
+import MessagesInbox from './dashboard/MessagesInbox';
 import './Dashboard.css';
 
 export default function Dashboard(props) {
@@ -40,7 +40,7 @@ export default function Dashboard(props) {
             <MyWorkWeek schedule={workweek} />
             <div className='row'>
                 <MyChefs myChefs={chefs} />
-                <Messages messages={messages} />
+                <MessagesInbox messages={messages} />
             </div>
     </div>
     )

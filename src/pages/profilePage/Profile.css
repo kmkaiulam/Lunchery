@@ -1,0 +1,7 @@
+.availability{
+    display:flex;
+    justify-content:center;
+}
+.days{
+    margin: 0 5px;
+}

@@ -1,8 +1,10 @@
-.workweek{
+.myWorkWeek{
+    margin-top: 100px;
+}
+.workWeek{
     display:flex;
-    justify-content:center;
-    min-width:600px;
-    margin: 100px 0 auto auto;
+    justify-content:space-evenly;
+    margin-bottom: 50px;
 }
 
 .day{

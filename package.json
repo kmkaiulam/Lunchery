@@ -1,12 +1,15 @@
 {
-  "name": "lunchery2",
+  "name": "lunchery-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5"
+    "react-scripts": "1.1.5",
+    "reducers": "^3.0.0-alpha",
+    "redux": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
