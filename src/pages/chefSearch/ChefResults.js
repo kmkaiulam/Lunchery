@@ -5,7 +5,7 @@ import './ChefResults.css';
 export default function ChefResults(props) {
     const chefResults= props.chefResults.map((chefResult, index) =>
         <tr key={index} className='chefResult'>
-            <td><h3>{chefResult.chef}</h3></td>
+            <td><h3>{chefResult.name}</h3></td>
             <tr>
                 <td><img src={chefResult.image} alt='Chef Portrait'/></td>
             </tr>

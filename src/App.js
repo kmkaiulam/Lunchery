@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import Landing from './pages/Landing';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import LoginForm from './pages/LoginForm'
 import ChefSearch from './pages/ChefSearch';
 import NavBar from './components/Navbar';
 import './App.css';
@@ -17,10 +18,12 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <Route exact path='/' component={Landing}/>
+          <Route exact path='/chefdashboard' component={ChefDashboard}/>
           <Route exact path='/dashboard' component={Dashboard}/>
           <Route exact path='/signup' component={Signup}/>
-          <Route exact path='/login' component={Login}/>
-          <Route exact path='/chefsearch' component={ProfilePage}/>
+          <Route exact path='/login' component={LoginForm}/>
+          <Route exact path='/chefsearch' component={ChefSearch}/>
+          <Route exact path='/profilepage' component={ProfilePage}/>
         </div>
       </Router>
     );

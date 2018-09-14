@@ -1,9 +1,11 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
 import './MyChefs.css';
 
-export default function MyChefs(props) {
-   const myChef = props.myChefs.map((myChef, index) => 
+export class  MyChefs extends React.Component {
+    
+    render() {
+        const myChef = this.props.myChefs.map((myChef, index) => 
     <div key={index} className='myChef'>
         <div><img className='chefPortrait' src={myChef.image} alt={myChef.name}/></div>
         <div>
@@ -17,13 +19,17 @@ export default function MyChefs(props) {
         </div>
     </div>
    );
-  
-    return (
+    return ( 
         <div className = 'myChef'>
             <h2>My Chefs</h2>
             {myChef}
         </div>
     )
+   }
 }
-        
-          
+
+const mapStateToProps=state => ({
+    myChefs:state.auth.user.mychefs
+});
+
+export default connect(mapStateToProps)(MyChefs);

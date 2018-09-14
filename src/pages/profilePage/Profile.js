@@ -18,7 +18,7 @@ export default function Profile(props){
             <div className='name'>
                 <h1>{props.profile.name}</h1>   
             </div>
-            <div clasName='company'>
+            <div className='company'>
                 <h2>{props.profile.company} in {props.profile.location}</h2>   
             </div>
             <div className='picture'>
