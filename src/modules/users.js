@@ -5,6 +5,7 @@ import {normalizeResponseErrors} from '../utils/error';
 
 
 export const registerUser = user => dispatch => {
+    console.log('this made it to register user')
     return fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: {
@@ -15,6 +16,7 @@ export const registerUser = user => dispatch => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .catch(err => {
+            console.log(err)
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
                 // Convert ValidationErrors into SubmissionErrors for Redux Form

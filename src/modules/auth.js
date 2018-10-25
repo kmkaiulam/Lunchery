@@ -47,6 +47,7 @@ const initialState = {
     error: null
 };
 
+
 // ----REDUCER----
 export default function authReducer(state = initialState, action) {
     if (action.type === SET_AUTH_TOKEN) {
@@ -89,6 +90,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 
 export const login = (username, password) => dispatch => {
     dispatch(authRequest());
+    console.log('user logging in')
     return (
         fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
@@ -122,6 +124,10 @@ export const login = (username, password) => dispatch => {
             })
     );
 };
+
+export const logout = () => dispatch => {
+    dispatch(clearAuth());
+}
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());

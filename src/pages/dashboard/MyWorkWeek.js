@@ -53,8 +53,18 @@ export class MyWorkWeek extends React.Component {
     }  
 }
 
+MyWorkWeek.defaultProps = {
+    workweek: {
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday:  ''
+    }
+};
+
 const mapStateToProps=state => ({
-    workweek:state.auth.user.workweek
+    workweek:state.auth.currentUser.workweek
 });
 
 export default connect(mapStateToProps)(MyWorkWeek);
