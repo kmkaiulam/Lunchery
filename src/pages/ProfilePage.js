@@ -1,23 +1,41 @@
 import React from 'react';
 import Profile from './profilePage/Profile';
 import ProfileForm from './profilePage/ProfileForm';
+import {connect} from 'react-redux';
+import {profileEdit, profileCancelEdit} from '../modules/auth';
+import RequiresLogin from './RequiresLogin';
 import './ProfilePage.css';
 
-export default function ProfilePage(props) {
-    const profile = {
-        name: 'Chef Thomas',
-        company: 'Kelly Services',
-        location: 'San Francisco',
-        picture: 'Placeholder image',
-        bio: 'lorem ipsum',
-        specialty: 'American',
-        availability: ['Monday', 'Tuesday', 'Wednesday', 'Friday'],
-        dishes: ['placeholder dish, placeholder dish']
+export function ProfilePage(props) {
+    let onClickEdit = () => {
+        props.dispatch(profileEdit())
     }
-    return (
-        <div className='profilePage'>
-            <Profile profile={profile} />
-            <ProfileForm />
-        </div>
-    )
+    let onClickCancel = () => {
+        props.dispatch(profileCancelEdit())
+    }
+        if (props.profileEdit === false){
+            return (
+                <div className='profilePage'>
+                    <Profile />
+                    <button onClick={() => onClickEdit()}> Edit Profile </button>
+                </div>
+            )
+        }
+        else if (props.profileEdit === true) {
+            return (
+                <div className='profilePage'>
+                    <Profile />
+                    <button onClick={() => onClickCancel()}> Cancel Edit</button>
+                    <ProfileForm />
+                   
+                </div>
+            )
+        }
+    }
+const mapStateToProps= state => {
+    console.log(state)
+    return {
+        profileEdit: state.auth.profileEdit
+    }
 }
+export default RequiresLogin()(connect(mapStateToProps)(ProfilePage))

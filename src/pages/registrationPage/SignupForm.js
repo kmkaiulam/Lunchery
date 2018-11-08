@@ -12,8 +12,8 @@ const matchesPassword = matches('password');
 
 export class SignupForm extends React.Component {
     onSubmit(values) {
-        const {firstName, lastName, username, password} = values;
-        const user = {username, password, firstName, lastName}
+        const {firstName, lastName, username, password, chef} = values;
+        const user = {username, password, firstName, lastName, chef}
         console.log(user);
         return this.props
             .dispatch(registerUser(user))
@@ -62,7 +62,10 @@ export class SignupForm extends React.Component {
                     validate={[required, nonEmpty, matchesPassword]}
                 />
                 <label htmlFor='chef'>Chef Account?</label>
-                <Field component={Input} type='checkbox' name='chef' />
+                <Field 
+                    component={Input} 
+                    type='checkbox' 
+                    name='chef' />
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>

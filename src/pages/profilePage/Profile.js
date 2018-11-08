@@ -1,49 +1,49 @@
 import React from 'react'
 import './Profile.css';
-export default function Profile(props){
-    const availability = props.profile.availability.map((day, index) =>
-     <div key={index}>
-        <div className='days'>
-            {day} 
-        </div>
-     </div>
-    )
-     const dishes = props.profile.dishes.map((dish, index) =>
-     <div key={index}> 
-        <div className='dish'> {dish} </div>
-     </div>
-    )
-    return (
-        <div className='profile'>
-            <div className='name'>
-                <h1>{props.profile.name}</h1>   
+import {connect} from 'react-redux';
+import {getUserInfo} from '../../modules/auth';
+export function Profile(props) {
+    console.log(props.profileUpToDate);
+    if (props.profileUpToDate === false) {
+        console.log('Getting User Info')
+        props.dispatch(getUserInfo(props.authToken));
+        return <div>Loading...</div>
+    }
+    else {
+        return (
+            <div className='profile'>
+                <div className='name'>
+                    <h1>{props.userInfo.chefProfile.displayName}</h1>   
+                </div>
+                <div className='company'>
+                    <h2>{props.userInfo.chefProfile.company} in {props.userInfo.chefProfile.location}</h2>   
+                </div>
+                 <div className='picture'>
+                    <div>{props.userInfo.chefProfile.picture}</div>   
+                </div> 
+                <h2>Style</h2>
+                <div className='style'>
+                    {props.userInfo.chefProfile.style}  
+                </div>
+                <div className='availability'> Daily Limit
+                     <div> Monday: {props.availability.mondayLimit}</div>
+                     <div> Tuesday: {props.availability.tuesdayLimit}</div>
+                     <div> Wednesday: {props.availability.wednesdayLimit}</div>
+                     <div> Thursday: {props.availability.thursdayLimit}</div>
+                     <div> Friday: {props.availability.fridayLimit}</div>
+                </div>
             </div>
-            <div className='company'>
-                <h2>{props.profile.company} in {props.profile.location}</h2>   
-            </div>
-            <div className='picture'>
-                <div>{props.profile.picture}</div>   
-            </div>
-            <h2>Bio</h2>
-            <div className='bio'>
-                <p>{props.profile.bio}</p> 
-            </div>
-            <h2>Speciality</h2>
-            <div className='speciality'>
-                {props.profile.specialty}  
-            </div>
-            <h2>Availability </h2>
-            <div className='availability'>
-                {availability}   
-            </div>
-            <h2>Dishes</h2>
-            <div className='dishes'>
-                {dishes}
-            </div>
-        </div>
+        )
+    };
+};
 
-
-
-    )
-
+const mapStateToProps= state => {
+    return {
+        authToken:state.auth.authToken,
+        userInfo: state.auth.currentUser,
+        profileUpToDate: state.auth.profileUpToDate,
+        availability: state.auth.currentUser.availability
+    }
 }
+
+export default connect(mapStateToProps)(Profile)

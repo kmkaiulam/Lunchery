@@ -1,17 +1,28 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
+import {logout} from '../modules/auth';
+import {Link} from  'react-router-dom'; 
 import './Navbar.css';
 
-export default function NavBar(props) {
+export function NavBar(props) {
+  let onClick = () => {
+    console.log('clicked Log out')
+    props.dispatch(logout())
+  }
   return (
     <nav>
         <div id='menu'>
-            <a href='/dashboard' className='menuitem'>Dashboard</a>
-            <a href='/' className='menuitem'>About</a>
-            <a href='/chefsearch' className='menuitem'>Chef Search</a>
-            <a href='/registration' className='menuitem'>Registration</a>
-            <a href='/login' className='menuitem'>Login</a>
+            <Link to='/' className='menuitem'>About</Link>
+            <Link to='/chefsearch' className='menuitem'>Chef Search</Link>
+            <Link to='/registration' className='menuitem'>Registration</Link>
+            <Link to='/login' className='menuitem'>Login</Link>
+            <Link to='/profilepage' className='menuitem'> Profile Page</Link>
+            <button onClick={() => onClick()}> Logout  </button>
+            {/* why does this automatically run if not written as an empty function? */}
         </div>
   </nav>
   )
 }
+
+export default connect()(NavBar);
+
