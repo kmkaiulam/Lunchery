@@ -3,9 +3,7 @@ import './Profile.css';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../modules/auth';
 export function Profile(props) {
-    console.log(props.profileUpToDate);
     if (props.profileUpToDate === false) {
-        console.log('Getting User Info')
         props.dispatch(getUserInfo(props.authToken));
         return <div>Loading...</div>
     }

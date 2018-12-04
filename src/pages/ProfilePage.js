@@ -13,6 +13,14 @@ export function ProfilePage(props) {
     let onClickCancel = () => {
         props.dispatch(profileCancelEdit())
     }
+        if (props.currentUser.chefProfile.displayName ===''){
+            return (
+                <div className='profilePage'> 
+                    <div>Please Update your Chef Profile</div>
+                    <ProfileForm />
+                </div>
+            )
+        }
         if (props.profileEdit === false){
             return (
                 <div className='profilePage'>
@@ -33,9 +41,9 @@ export function ProfilePage(props) {
         }
     }
 const mapStateToProps= state => {
-    console.log(state)
     return {
-        profileEdit: state.auth.profileEdit
+        profileEdit: state.auth.profileEdit,
+        currentUser: state.auth.currentUser
     }
 }
 export default RequiresLogin()(connect(mapStateToProps)(ProfilePage))

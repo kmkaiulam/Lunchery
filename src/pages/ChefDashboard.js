@@ -1,7 +1,6 @@
 import React from 'react';
 import './ChefDashboard.css';
 import ChefWorkWeek from './chefDashboard/ChefWorkWeek';
-import ChefRequests from './chefDashboard/ChefRequests';
 export default function ChefDashboard(props) {
     let workWeek= {
         monday: {
@@ -28,7 +27,6 @@ export default function ChefDashboard(props) {
       return(
     <div className='chefDashboard'>
         <ChefWorkWeek workWeek={workWeek}/>
-        <ChefRequests workWeek ={workWeek}/>
     </div>
     )
 }

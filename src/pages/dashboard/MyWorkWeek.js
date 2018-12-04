@@ -13,6 +13,7 @@ export class MyWorkWeek extends React.Component {
                     </div>
                     <div>
                         {this.props.workweek.monday}
+
                     </div>
                 </div>
                 <div>

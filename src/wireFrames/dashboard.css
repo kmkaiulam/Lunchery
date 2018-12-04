@@ -1,0 +1,75 @@
+
+
+nav{
+    background-color: gray;
+    height:62px;
+    width:100%;
+    position:fixed;
+    top: 0;
+}
+
+#menu{
+  text-align: center;
+  color: black;
+  margin-top: 15px;
+}
+.menuitem{
+  margin-top:100px;
+  padding: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.menuitem:hover{
+  background-color: black;
+  color: white !important;
+}
+
+main{
+    min-width: 500px;
+    max-width: 900px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.dashInfo{
+    display:flex;
+
+    
+
+}
+.col-12{
+    width:100%;
+}
+.col-6{
+    width: 50%;
+}
+.col-4{
+    width: 33%;
+}
+.col-3{
+    width: 25%;
+}
+
+.card{
+    position: relative;
+    padding-left: 20px;
+    padding-right:20px;
+    margin: 20px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.calendar{
+    width: 400px;
+    height: auto;
+}
+
