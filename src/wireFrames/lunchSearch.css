@@ -9,22 +9,24 @@ nav{
 }
 
 #menu{
-  text-align: center;
-  color: black;
-  margin-top: 15px;
-}
-.menuitem{
-  margin-top:100px;
-  padding: 20px;
-  cursor: pointer;
-  text-decoration: none;
-}
-.menuitem:hover{
-  background-color: black;
-  color: white !important;
-}
+    text-align: center;
+    color: black;
+    margin-top: 15px;
+  }
+  .menuitem{
+    margin-top:100px;
+    padding: 20px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .menuitem:hover{
+    background-color: black;
+    color: white !important;
+  }
+  
 
 main{
+    margin-top:100px;
     min-width: 500px;
     max-width: 900px;
     width: 100%;
@@ -34,9 +36,11 @@ main{
     margin-left: auto;
 }
 
-.dashInfo{
+.lunch-groups{
     display:flex;
+    flex-direction: row;
 }
+
 .col-12{
     width:100%;
 }
@@ -65,8 +69,3 @@ main{
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
-.calendar{
-    width: 400px;
-    height: auto;
-}
-

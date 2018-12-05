@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <title>Lunchery - LunchSearch</title>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css">
+    <link href='lunchSearch.css' rel='stylesheet'>
+  </head>
+  <body>
+      <nav>
+        <div id="menu">
+            <a href="/dashboard.html" class="menuitem">Dashboard</a>
+            <a href="/landing.html" class="menuitem">About</a>
+            <a href="/searchChef.html" class="menuitem">Search Chefs</a>
+            <a href="/login.html" class="menuitem">Login</a>
+            <a href="/signup.html" class="menuitem">Signup</a>
+        </div>
+      </nav>
+      <main>
+        <form>
+            <p> //Live Search for Company Lunch Groups//</p>
+            <h1>Lunch Search</h1>
+            <div>
+                <label  for='inputCompanyName'></label>Company Name</label>
+                <input aria-label='company name' name='companyName' type='text' id='inputCompanyName' placeholder='ABC Company'>
+            </div>
+            <button type='submit'>Clear</button>
+        </form>
+        <hr>
+        <div class= 'lunch-groups'>
+            <div class='lunch-group card col-4'>
+                <h3> ABC Company in Fairville, CA | Date: Monday, December 10, 2018 @ 12pm  | Chef Daniel </h3>
+                <h4> Menu: Mashed Potatoes and Ribs | Cost: $5</h4>
+                <p>  Location: Near the Patio </p>
+                <p>  Seats Remaining: 4</p>
+                <button type='submit'> Join this Lunch Group </button>
+            </div> 
+            <div class='lunch-group card col-4'>
+                <h3> JJ & Co. in Sacramento, CA | Date: Monday, December 10, 2018 @ 12pm  | Chef Wilson </h3>
+                <h4> Menu: Chicken and Waffles| Cost: $3</h4>
+                <p> Location: Cafe area </p>
+                <p>  Seats Remaining: 3</p>
+                <button type='submit'> Join this Lunch Group </button>
+            </div> 
+            <div class='lunch-group card col-4'>
+                <h3> JJ & Co. in Sacramento, CA | Date: Wednesday, December 12, 2018 @ 12pm  | Chef Sara </h3>
+                <h4> Menu: Chicken Adobo, Rice and Pancit | Cost: $3</h4>
+                <p> Seats Remaining: 3</p>
+                <button type='submit'> Join this Lunch Group </button>
+            </div>
+            <div class='lunch-group card col-4'>
+                <h3> JSC in Vacaville, CA | Date: Wednesday, December 12, 2018 @ 12pm  | Chef Laura </h3>
+                <h4> Menu: Penne a l'arrabiata w/ Zupa toscana | Cost: $6</h4>
+                <p> Seats Remaining: 3</p>
+                <button type='submit'> Join this Lunch Group </button>
+            </div>
+        </div> 
+      </main>
+  </body>
+</html>
