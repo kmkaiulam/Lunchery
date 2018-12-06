@@ -5,17 +5,17 @@ import Input from '../../components/Input';
 //do a filter instead - display all registered chefs - then according to what the user inputs
 
 
-export class ChefForm extends React.Component{
+export class GroupSearchForm extends React.Component{
     onChange(values) {
         const {company} = values;
-        const chefQuery = {company}
-        console.log(chefQuery);
+        const groupQuery = {company}
+        console.log(groupQuery);
         return //this.props.dispatch(updateProfile(values))
     }
         render(){
             return ( 
                 <form  
-                    className='chefQuery' 
+                    className='groupQuery' 
                     onSubmit={this.props.handleSubmit(values => 
                         this.onSubmit(values)
                     )}>
@@ -36,6 +36,6 @@ export class ChefForm extends React.Component{
 }
     
     export default reduxForm({
-        form: 'chef',
+        form: 'groupsearch',
         onSubmitFail: (errors, dispatch) => console.log(errors) //dispatch(focus('profile', Object.keys(errors)[0]))
-    })(ChefForm)
+    })(GroupSearchForm)

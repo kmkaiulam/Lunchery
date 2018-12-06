@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './ChefResults.css';
+import './LunchResults.css';
 
 //write function that filters the results beforehand and call through mapStateToProps
-export class ChefResults  extends React.Component{
+export class LunchResults  extends React.Component{
     render(){
         let results;
         if (this.props.chefResults == null || this.props.chefsLoaded === false)
@@ -39,4 +39,4 @@ const mapStateToProps = (state, props) => {
     }
 }
 
-export default connect(mapStateToProps)(ChefResults);
+export default connect(mapStateToProps)(LunchResults);

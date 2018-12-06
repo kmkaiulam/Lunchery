@@ -19,6 +19,12 @@ export const PROFILE_EDIT_CANCEL = 'app/auth/PROFILE_EDIT_CANCEL';
 export const PROFILE_UPDATE_REQUEST = 'app/auth/PROFILE_UPDATE_REQUEST';
 export const PROFILE_SUCCESS = 'app/auth/PROFILE_SUCCESS';
 export const PROFILE_ERROR = 'app/auth/PROFILE_ERROR';
+//LUNCH GROUP
+export const LUNCH_GROUP_CREATE_CLICK = 'app/auth/LUNCH_GROUP_CREATE_CLICK';
+export const LUNCH_GROUP_CREATE_CANCEL= 'app/auth/LUNCH_GROUP_CREATE_CANCEL';
+export const LUNCH_GROUP_CREATE_REQUEST= 'app/auth/LUNCH_GROUP_CREATE_REQUEST';
+export const LUNCH_GROUP_CREATE_SUCCESS= 'app/auth/LUNCH_GROUP_CREATE_SUCCESS';
+export const LUNCH_GROUP_CREATE_ERROR= 'app/auth/LUNCH_GROUP_CREATE_ERROR';
 //CHEF
 export const CHEF_LOAD = 'app/auth/CHEF_LOAD';
 export const CHEF_FILTER = 'app/auth/CHEF_FILTER';
@@ -30,7 +36,7 @@ export const WORKWEEK_LOAD = 'app/auth/WORKWEEK_LOAD';
 export const WORKWEEK_EDIT_CLICK= 'app/auth/WORKWEEK_EDIT_CLICK';
 export const WORKWEEK_EDIT_CANCEL = 'app/auth/WORKWEEK_EDIT_CANCEL';
 export const WORKWEEK_UPDATE_REQUEST = 'app/auth/WORKWEEK_UPDATE_REQUEST';
-export const WORKWEEK_SUCESS = 'app/auth/WORKWEEK_SUCCESS';
+export const WORKWEEK_SUCCESS = 'app/auth/WORKWEEK_SUCCESS';
 export const WORKWEEK_ERROR = 'app/auth/WORKWEEK_ERROR';
 // ----ACTION CREATORS----
 //AUTHORIZATION
@@ -84,6 +90,14 @@ export const profileError = error => ({
     type: PROFILE_ERROR,
     error
 });
+//LUNCHGROUP
+export const lunchGroupCreateClick = () => ({
+    type: LUNCH_GROUP_CREATE_CLICK
+});
+export const lunchGroupCreateCancel = () => ({
+    type:LUNCH_GROUP_CREATE_CANCEL
+});
+
 
 //CHEF
 export const chefLoad = () => ({
@@ -126,7 +140,7 @@ export const workWeekUpdateRequest = () => ({
 });
 
 export const workWeekSuccess = workWeekUpdate => ({
-    type: WORKWEEK_SUCESS,
+    type: WORKWEEK_SUCCESS,
     workWeekUpdate
 });
 
@@ -150,6 +164,7 @@ const initialState = {
     chefsLoaded: false,
     profileEdit: false,
     profileUpToDate: false,
+    createLunchGroup: false,
     loading: false,
     error: null,
     searchTerm:'',
@@ -213,6 +228,14 @@ export default function authReducer(state=initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             error: action.error
+        });
+    } else if (action.type === LUNCH_GROUP_CREATE_CLICK) {
+        return Object.assign({}, state, {
+            createLunchGroup: true
+        });
+    } else if (action.type === LUNCH_GROUP_CREATE_CANCEL) {
+        return Object.assign({}, state, {
+            createLunchGroup: false
         });
     } else if (action.type === CHEF_LOAD) {
         return Object.assign({}, state, {
@@ -323,6 +346,19 @@ export const updateProfile = profile => (dispatch, getState) => {
         );
     })
 };
+
+//LUNCHGROUP FUNCTIONS
+export const lunchGroupCreate = () => (dispatch) => {
+    dispatch(lunchGroupCreateClick());
+}
+
+export const lunchGroupCancel = () => (dispatch) => {
+    dispatch(lunchGroupCreateCancel());
+}
+
+
+
+
 //WORKWEEK FUNCTIONS
 export const workWeekEdit = () => (dispatch) => {
     dispatch(workWeekEditClick());

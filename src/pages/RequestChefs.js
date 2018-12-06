@@ -13,7 +13,7 @@ export default () => Component => {
     }
 
     const displayName = Component.displayName || Component.name || 'Component';
-    RequestChefs.displayName = `RequuestsChefs(${displayName})`;
+    RequestChefs.displayName = `RequestsChefs(${displayName})`;
 
     const mapStateToProps = (state, props) => ({
         authToken: state.auth.authToken,
