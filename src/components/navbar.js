@@ -13,7 +13,8 @@ export function NavBar(props) {
     <nav>
         <div id='menu'>
             <Link to='/' className='menuitem'>About</Link>
-            <Link to='/chefsearch' className='menuitem'>Chef Search</Link>
+            <Link to='/dashboard' className='menuitem'> Dashboard</Link>
+            <Link to='/lunchgroups' className='menuitem'> Lunch Groups</Link>
             <Link to='/registration' className='menuitem'>Registration</Link>
             <Link to='/login' className='menuitem'>Login</Link>
             <Link to='/profilepage' className='menuitem'> Profile Page</Link>

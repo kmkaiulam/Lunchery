@@ -1,7 +1,9 @@
 import React from 'react';
-import './ChefForm.css';
+import './GroupSearchForm.css';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../../components/Input';
+
+//doesn't need to be a live search yet -- dispatch an action that accepts a defines a searchTerm state.auth.searchTerm = submission
 //do a filter instead - display all registered chefs - then according to what the user inputs
 
 
@@ -37,5 +39,5 @@ export class GroupSearchForm extends React.Component{
     
     export default reduxForm({
         form: 'groupsearch',
-        onSubmitFail: (errors, dispatch) => console.log(errors) //dispatch(focus('profile', Object.keys(errors)[0]))
+        onSubmitFail: (errors, dispatch) => dispatch(focus('profile', Object.keys(errors)[0]))
     })(GroupSearchForm)

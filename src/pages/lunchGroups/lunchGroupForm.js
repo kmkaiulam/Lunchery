@@ -2,15 +2,17 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../../components/Input';
 import {required, nonEmpty} from '../../validators';
+import {createNewGroup} from '../../modules/auth';
 import './LunchGroupForm.css'
 
 
 export class LunchGroupForm extends React.Component{
     onSubmit(values) {
-        const {eventDate, lunchLocation, menu, cost, seatLimit} = values;
-        const groupDetails = {eventDate, lunchLocation, menu, cost, seatLimit}
+        const {lunchDate, lunchLocation, menu, cost, seatLimit} = values;
+        const groupDetails = {lunchDate, lunchLocation, menu, cost, seatLimit}
         console.log(groupDetails);
-       // return this.props.dispatch(updateProfile(values))
+        console.log(this.props);
+        this.props.dispatch(createNewGroup(values))
     }
     render(){
         return ( 
@@ -19,11 +21,11 @@ export class LunchGroupForm extends React.Component{
                 onSubmit={this.props.handleSubmit(values => 
                     this.onSubmit(values)
                 )}>
-                <label  htmlFor='date'>Date</label>
+                <label  htmlFor='lunchDate'>Date</label>
                 <Field 
                     component={Input}
                     type='date'
-                    name='eventDate'
+                    name='lunchDate'
                     validate={[required, nonEmpty]}
                 />                
                 <label  htmlFor='lunchLocation'>Location</label>
@@ -66,7 +68,7 @@ export class LunchGroupForm extends React.Component{
 
 export default reduxForm({
     form: 'lunchGroup',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('lunchGroup', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) => console.log(errors) //dispatch(focus('lunchGroup', Object.keys(errors)[0]))
 })(LunchGroupForm);
 
 

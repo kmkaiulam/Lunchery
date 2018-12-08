@@ -1,14 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './LunchResults.css';
+import './GroupResults.css';
 
-//write function that filters the results beforehand and call through mapStateToProps
-export class LunchResults  extends React.Component{
+//write function that filters the results beforehand
+//call through mapStateToProps 
+//if searchTerm !== '' results=this.props.groupResults.filter(this.props.searchTerm).map
+export class GroupResults  extends React.Component{
     render(){
         let results;
         if (this.props.chefResults == null || this.props.chefsLoaded === false)
         return (
-            <div> Loading...</div>
+            <div> Loading.... work in progress</div>
         )
         else
          results= this.props.chefResults.map((chefResult, index) => 
@@ -34,9 +36,10 @@ const mapStateToProps = (state, props) => {
     return {
         authToken:state.auth.authToken,
         chefsLoaded: state.auth.chefsLoaded,
-        chefResults:state.auth.chefResults
+        chefResults:state.auth.chefResults,
+        groupResults: state.auth.groupResults
         //add filter term here
     }
 }
 
-export default connect(mapStateToProps)(LunchResults);
+export default connect(mapStateToProps)(GroupResults);

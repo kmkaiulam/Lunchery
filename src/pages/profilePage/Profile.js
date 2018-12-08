@@ -3,6 +3,7 @@ import './Profile.css';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../modules/auth';
 export function Profile(props) {
+    console.log(props.userInfo.chefProfile);
     if (props.profileUpToDate === false) {
         props.dispatch(getUserInfo(props.authToken));
         return <div>Loading...</div>
@@ -19,16 +20,12 @@ export function Profile(props) {
                  <div className='picture'>
                     <div>{props.userInfo.chefProfile.picture}</div>   
                 </div> 
+                <div className='bio'>
+                    <div>{props.userInfo.chefProfile.bio}</div>   
+                </div> 
                 <h2>Style</h2>
                 <div className='style'>
                     {props.userInfo.chefProfile.style}  
-                </div>
-                <div className='availability'> Daily Limit
-                     <div> Monday: {props.availability.mondayLimit}</div>
-                     <div> Tuesday: {props.availability.tuesdayLimit}</div>
-                     <div> Wednesday: {props.availability.wednesdayLimit}</div>
-                     <div> Thursday: {props.availability.thursdayLimit}</div>
-                     <div> Friday: {props.availability.fridayLimit}</div>
                 </div>
             </div>
         )
@@ -40,7 +37,6 @@ const mapStateToProps= state => {
         authToken:state.auth.authToken,
         userInfo: state.auth.currentUser,
         profileUpToDate: state.auth.profileUpToDate,
-        availability: state.auth.currentUser.availability
     }
 }
 
