@@ -3,7 +3,6 @@ import './Profile.css';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../modules/auth';
 export function Profile(props) {
-    console.log(props.userInfo.chefProfile);
     if (props.profileUpToDate === false) {
         props.dispatch(getUserInfo(props.authToken));
         return <div>Loading...</div>
@@ -29,8 +28,8 @@ export function Profile(props) {
                 </div>
             </div>
         )
-    };
-};
+    }
+}
 
 const mapStateToProps= state => {
     return {

@@ -27,3 +27,5 @@ export default () => Component => {
         
         
 
+//is there a quick way to check if this function is still being used without needing to look through my code?
+//Have lot of superfluous code that I didn't get sort through and get rid of when I rethought through my app

@@ -25,6 +25,12 @@ export const LUNCH_GROUP_CREATE_CANCEL= 'app/auth/LUNCH_GROUP_CREATE_CANCEL';
 export const LUNCH_GROUP_CREATE_REQUEST= 'app/auth/LUNCH_GROUP_CREATE_REQUEST';
 export const LUNCH_GROUP_CREATE_SUCCESS= 'app/auth/LUNCH_GROUP_CREATE_SUCCESS';
 export const LUNCH_GROUP_CREATE_ERROR= 'app/auth/LUNCH_GROUP_CREATE_ERROR';
+export const LUNCH_GROUP_JOIN_REQUEST= 'app/auth/LUNCH_GROUP_JOIN_REQUEST';
+export const LUNCH_GROUP_JOIN_SUCCESS= 'app/auth/LUNCH_GROUP_JOIN_SUCCESS';
+export const LUNCH_GROUP_JOIN_ERROR= 'app/auth/LUNCH_GROUP_JOIN_ERROR';
+export const LUNCH_GROUP_LEAVE_REQUEST= 'app/auth/LUNCH_GROUP_LEAVE_REQUEST';
+export const LUNCH_GROUP_LEAVE_SUCCESS= 'app/auth/LUNCH_GROUP_LEAVE_SUCCESS';
+export const LUNCH_GROUP_LEAVE_ERROR= 'app/auth/LUNCH_GROUP_LEAVE_ERROR';
 //GROUP
 export const GROUP_LOAD = 'app/auth/CHEF_LOAD';
 export const GROUP_FILTER = 'app/auth/CHEF_FILTER';
@@ -97,6 +103,38 @@ export const lunchGroupCreateClick = () => ({
 export const lunchGroupCreateCancel = () => ({
     type:LUNCH_GROUP_CREATE_CANCEL
 });
+export const lunchGroupCreateRequest = () => ({
+    type: LUNCH_GROUP_CREATE_REQUEST
+});
+export const lunchGroupCreateSuccess = newLunchGroup => ({
+    type: LUNCH_GROUP_CREATE_REQUEST,
+    newLunchGroup
+});
+export const lunchGroupCreateError = error => ({
+    type: LUNCH_GROUP_CREATE_ERROR,
+    error
+});
+export const lunchGroupJoinRequest = () => ({
+    type: LUNCH_GROUP_JOIN_REQUEST
+});
+export const lunchGroupJoinSuccess = newLunchGroup => ({
+    type: LUNCH_GROUP_JOIN_SUCCESS,
+    newLunchGroup
+});
+export const lunchGroupJoinError = error => ({
+    type: LUNCH_GROUP_JOIN_ERROR,
+    error
+});
+export const lunchGroupLeaveRequest = () => ({
+    type: LUNCH_GROUP_LEAVE_REQUEST
+});
+export const lunchGroupLeaveSuccess = () => ({
+    type: LUNCH_GROUP_LEAVE_SUCCESS
+});
+export const lunchGroupLeaveError = error => ({
+    type: LUNCH_GROUP_LEAVE_ERROR,
+    error
+});
 
 
 //GROUP
@@ -104,12 +142,14 @@ export const groupLoad = () => ({
     type: GROUP_LOAD,
 });
 
-export const groupRequest = () => ({
+export const groupRequest = (groupId) => ({
     type: GROUP_REQUEST,
+    groupId
 });
 
-export const groupFilter = () => ({
+export const groupFilter = (searchTerm) => ({
     type: GROUP_FILTER,
+    searchTerm
 });
 
 export const groupSuccess = groupResults => ({
@@ -122,32 +162,7 @@ export const groupError = error => ({
     error
 });
 
-//WORKWEEK
-export const workWeekLoad = () => ({
-    type: WORKWEEK_LOAD
-});
 
-export const workWeekEditClick = () => ({
-    type: WORKWEEK_EDIT_CLICK
-});
-
-export const workWeekEditCancel = () => ({
-    type: WORKWEEK_EDIT_CANCEL
-});
-
-export const workWeekUpdateRequest = () => ({
-    type: WORKWEEK_UPDATE_REQUEST
-});
-
-export const workWeekSuccess = workWeekUpdate => ({
-    type: WORKWEEK_SUCCESS,
-    workWeekUpdate
-});
-
-export const workWeekError = error => ({
-    type: WORKWEEK_ERROR,
-    error
-});
 
 
 
@@ -165,10 +180,12 @@ const initialState = {
     profileEdit: false,
     profileUpToDate: false,
     createLunchGroup: false,
-    loading: false,
+    lunchGroupUpdated: false,
+    authLoading: false,
+    loading:false,
     error: null,
     searchTerm:'',
-    workWeekEdit: false
+    newGroup: null
 };
 
 
@@ -185,17 +202,17 @@ export default function authReducer(state=initialState, action) {
         });
     } else if (action.type === AUTH_REQUEST) {
         return Object.assign({}, state, {
-            loading: true,
+            authLoading: true,
             error: null,
         });
     } else if (action.type === AUTH_SUCCESS) {
         return Object.assign({}, state, {
-            loading: false,
+            authLoading: false,
             currentUser: action.currentUser,
         });
     } else if (action.type === AUTH_ERROR) {
         return Object.assign({}, state, {
-            loading: false,
+            authLoading: false,
             error: action.error
         });
     } else if (action.type === PROFILE_LOAD) {
@@ -237,32 +254,68 @@ export default function authReducer(state=initialState, action) {
         return Object.assign({}, state, {
             createLunchGroup: false
         });
-    // } else if (action.type === LUNCH_GROUP_CREATE_REQUEST) {
-    //     return Object.assign({}, state, {
-
-    //     })
-    // }
-    } else if (action.type === GROUP_LOAD) {
+    } else if (action.type === LUNCH_GROUP_CREATE_REQUEST) {
+         return Object.assign({}, state, {
+            loading: true,
+        });
+    } else if (action.type === LUNCH_GROUP_CREATE_SUCCESS) {
         return Object.assign({}, state, {
-            chefsLoaded: true
+            loading: false,
+            newLunchGroup: action.newLunchGroup,
+            lunchGroupUpdated: true,
+       });
+    } else if (action.type === LUNCH_GROUP_CREATE_ERROR) {
+        return Object.assign({}, state, {
+            loading: false,
+            error: action.error
+        });
+    } else if (action.type === LUNCH_GROUP_JOIN_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true,
+        });
+    } else if (action.type === LUNCH_GROUP_JOIN_SUCCESS) {
+        return Object.assign({}, state, {
+            loading: false,
+        });        
+    } else if (action.type === LUNCH_GROUP_JOIN_ERROR) {
+        return Object.assign({}, state, {
+            loading: false,
+            error: action.error
+        });
+    } else if (action.type === LUNCH_GROUP_LEAVE_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true,
+        });
+    } else if (action.type === LUNCH_GROUP_LEAVE_SUCCESS) {
+        return Object.assign({}, state, {
+            loading: false,
+            lunchGroupUpdated: true
+        });        
+    } else if (action.type === LUNCH_GROUP_LEAVE_ERROR) {
+        return Object.assign({}, state, {
+            loading: false,
+            error: action.error
+        });
+    } else if (action.type === GROUP_REQUEST) {
+        return Object.assign({}, state, {
+            loading:true,
+            error: null,
         });
     } else if (action.type === GROUP_SUCCESS) {
         return Object.assign({}, state, {
-            groupResults: action.groupResults 
+            loading: false,
+            groupResults: action.groupResults, 
+            lunchGroupUpdated: false,
         });
-    } else if (action.type === WORKWEEK_EDIT_CLICK) {
+    } else if (action.type === GROUP_ERROR) {
         return Object.assign({}, state, {
-           workWeekEdit: true
+            loading: false,
+            error: action.error, 
+        });    
+    } else if (action.type === GROUP_FILTER) {
+        return Object.assign({}, state, {
+           searchTerm: action.searchTerm
         });
-    } else if (action.type === WORKWEEK_EDIT_CANCEL) {
-        return Object.assign({}, state, {
-           workWeekEdit: false 
-        });
-    } else if (action.type === WORKWEEK_UPDATE_REQUEST) {
-        return Object.assign({}, state, {
-            error: null,
-            loading: true
-            });
     }
     return state;
 }
@@ -289,23 +342,37 @@ export const getUserInfo = (authToken) => dispatch => {
 };
 
 //   CHANGE TO GET GROUP INFO
-// export const getGroupInfo = () => dispatch => {
-//     return (
-//         fetch(`${API_BASE_URL}/groups`, {
-//             method: 'GET',
-//             headers:{
-//                 'Content-Type': 'application/json',
-//             }
-//         })
-//         .then(res => normalizeResponseErrors(res))
-//         .then(res => res.json())
-//         .then(chefInfo => {
-//             console.log(chefInfo)
-//             dispatch(chefLoad())
-//             dispatch(chefSuccess(chefInfo))
-//         })   
-//     )
-//}
+export const getGroupResults = () => dispatch => {
+    dispatch(groupRequest())
+    return (
+        fetch(`${API_BASE_URL}/groups/`, {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(groupInfo => {
+            console.log(groupInfo)
+            dispatch(groupSuccess(groupInfo))
+        }) 
+        .catch(err => {
+            console.log(err);
+            const {code} = err;
+            const message =
+                code === 401
+                    ? 'Cannot get group results'
+                    : 'please try again';
+            dispatch(groupError(err));
+            return Promise.reject(
+                new SubmissionError({
+                    _error: message
+            })
+            );
+        })
+    )
+};
 
 //PROFILE FUNCTIONS
 export const profileEdit = () => (dispatch) => {
@@ -362,17 +429,112 @@ export const lunchGroupCancel = () => (dispatch) => {
     dispatch(lunchGroupCreateCancel());
 }
 
+export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
+    console.log('posting a new group')
+    dispatch(lunchGroupCreateRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/groups/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify(newLunchGroup)
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(newGroup => {
+        dispatch(lunchGroupCreateSuccess(newGroup))
+        dispatch(lunchGroupCancel())
+    })
+    .catch(err => {
+        console.log(err);
+        const {code} = err;
+        const message =
+            code === 401
+                ? 'Cannot update'
+                : 'please try again';
+        dispatch(lunchGroupCreateError(err));
+        return Promise.reject(
+            new SubmissionError({
+                _error: message
+            })
+        );
+    })
+};
 
-
-
-//WORKWEEK FUNCTIONS
-export const workWeekEdit = () => (dispatch) => {
-    dispatch(workWeekEditClick());
+export const filterLunchGroups = (searchTerm) => (dispatch, getState) => {
+    dispatch(groupFilter(searchTerm))
 }
 
-export const workWeekCancel = () => (dispatch) => {
-    dispatch(workWeekEditCancel());
-}
+export const joinLunchGroup = (groupId) => (dispatch, getState) => {
+    console.log(`joining a new group: ${groupId}`)
+    dispatch(lunchGroupJoinRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/groups/members/${groupId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify()
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(newGroup => {
+        console.log(newGroup)
+        dispatch(lunchGroupJoinSuccess(newGroup))
+        dispatch(getGroupResults())}
+    )
+    .catch(err => {
+        console.log(err);
+        const {code} = err;
+        const message =
+            code === 401
+                ? 'Cannot join'
+                : 'please try again';
+        dispatch(lunchGroupJoinError(err));
+        return Promise.reject(
+            new SubmissionError({
+                _error: message
+            })
+        );
+    })
+};
+
+export const leaveLunchGroup = (groupId) => (dispatch, getState) => {
+    console.log(`leaving lunch group: ${groupId}`)
+    dispatch(lunchGroupLeaveRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/groups/members/${groupId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify()
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => 
+        dispatch(lunchGroupLeaveSuccess())    
+    )
+    .catch(err => {
+        console.log(err);
+        const {code} = err;
+        const message =
+            code === 401
+                ? 'Not authorized or'
+                : 'No longer a member of this group';
+        dispatch(lunchGroupLeaveError(err));
+        return Promise.reject(
+            new SubmissionError({
+                _error: message
+            })
+        );
+    })
+};
+
+
 
 //AUTHENTICATION FUNCTIONS
 // Stores the auth token in state and localStorage, and decodes and stores
@@ -385,38 +547,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 
-export const createNewGroup = (groupDetails) => (dispatch, getState) => {
-    console.log('posting a new group')
-    // dispatch(profileUpdateRequest());
-    const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/groups/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${authToken}`
-        },
-        body: JSON.stringify(groupDetails)
-    })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => res.json()
-    // .then(newGroup => {
-    //     dispatch(profileSuccess(updatedProfile))}
-    )
-    .catch(err => {
-        console.log(err);
-        const {code} = err;
-        const message =
-            code === 401
-                ? 'Cannot update'
-                : 'please try again';
-       // dispatch(profileError(err));
-        return Promise.reject(
-            new SubmissionError({
-                _error: message
-            })
-        );
-    })
-};
+
 //}
 
 export const login = (username, password) => dispatch => {

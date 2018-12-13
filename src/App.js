@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Dashboard from  './pages/Dashboard';
 import ProfilePage from './pages/ProfilePage';
 import Landing from './pages/Landing';

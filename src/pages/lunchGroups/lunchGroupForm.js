@@ -8,10 +8,9 @@ import './LunchGroupForm.css'
 
 export class LunchGroupForm extends React.Component{
     onSubmit(values) {
-        const {lunchDate, lunchLocation, menu, cost, seatLimit} = values;
-        const groupDetails = {lunchDate, lunchLocation, menu, cost, seatLimit}
+        const {lunchDate, lunchLocation, lunchTime, menu, cost, seatLimit} = values;
+        const groupDetails = {lunchDate, lunchLocation, lunchTime, menu, cost, seatLimit}
         console.log(groupDetails);
-        console.log(this.props);
         this.props.dispatch(createNewGroup(values))
     }
     render(){
@@ -35,7 +34,14 @@ export class LunchGroupForm extends React.Component{
                     name='lunchLocation'
                     validate={[required, nonEmpty]}
                 />
-                 <label  htmlFor='menu'>Menu</label>
+                <label  htmlFor='lunchTime'>Time</label>
+                <Field 
+                    component={Input}
+                    type='time'
+                    name='lunchTime'
+                    validate={[required, nonEmpty]}
+                />
+                <label  htmlFor='menu'>Menu</label>
                 <Field 
                     component={Input}
                     type='textarea'
@@ -68,7 +74,7 @@ export class LunchGroupForm extends React.Component{
 
 export default reduxForm({
     form: 'lunchGroup',
-    onSubmitFail: (errors, dispatch) => console.log(errors) //dispatch(focus('lunchGroup', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) =>  dispatch(focus('lunchGroup', Object.keys(errors)[0])) 
 })(LunchGroupForm);
 
 

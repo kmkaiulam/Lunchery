@@ -1,3 +1,38 @@
-.chefResult{
-    border: black solid 2px;
+.noVacancy{
+    color:red;
+    background-color: white;
+
+}
+.groupResults{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width: 900px;
+}
+
+.card{
+    position: relative;
+    margin: 5px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 2px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.groupResult{
+    padding:20px;
+  
+    
+}
+
+.col-4{
+    width: 33%;
+}
+.col-12{
+    width:100%;
 }

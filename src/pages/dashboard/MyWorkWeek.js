@@ -65,7 +65,7 @@ MyWorkWeek.defaultProps = {
 };
 
 const mapStateToProps=state => ({
-    workweek:state.auth.currentUser.workweek
+    
 });
 
 export default connect(mapStateToProps)(MyWorkWeek);

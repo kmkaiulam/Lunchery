@@ -6,8 +6,9 @@ export default () => Component => {
     function RequiresLogin(props) {
         const {authenticating, loggedIn, error, ...passThroughProps} = props;
         if (authenticating) {
-            return <div>Logging in...</div>;
-        } else if (!loggedIn || error) {
+             return <div>Authenticating...</div>;
+        }
+        else if (!loggedIn || error) {
             return <Redirect to='/login' />;
         }
         return <Component {...passThroughProps} />;
@@ -17,7 +18,7 @@ export default () => Component => {
     RequiresLogin.displayName = `RequiresLogin(${displayName})`;
 
     const mapStateToProps = (state, props) => ({
-        authenticating: state.auth.loading,
+        authenticating: state.auth.authLoading,
         loggedIn: state.auth.currentUser !== null,
         error: state.auth.error
     });
