@@ -1,6 +1,7 @@
 import React from 'react';
 import Profile from './profilePage/Profile';
 import ProfileForm from './profilePage/ProfileForm';
+import ProfilePicForm from './profilePage/ProfilePicForm';
 import {connect} from 'react-redux';
 import {profileEdit, profileCancelEdit} from '../modules/auth';
 import RequiresLogin from './RequiresLogin';
@@ -32,9 +33,10 @@ export function ProfilePage(props) {
         else if (props.profileEdit === true) {
             return (
                 <div className='profilePage'>
-                    <Profile />
+                    <Profile /> 
                     <button onClick={() => onClickCancel()}> Cancel Edit</button>
-                    <ProfileForm />
+                    <ProfileForm /> 
+                    <ProfilePicForm />
                    
                 </div>
             )
@@ -43,7 +45,8 @@ export function ProfilePage(props) {
 const mapStateToProps= state => {
     return {
         profileEdit: state.auth.profileEdit,
-        currentUser: state.auth.currentUser
+        currentUser: state.auth.currentUser,
+        profilePicEdit: state.auth.profilePicEdit
     }
 }
 export default RequiresLogin()(connect(mapStateToProps)(ProfilePage))

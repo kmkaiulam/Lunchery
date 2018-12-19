@@ -15,8 +15,8 @@ export function NavBar(props) {
             <Link to='/' className='menuitem'>About</Link>
             <Link to='/dashboard' className='menuitem'> Dashboard</Link>
             <Link to='/lunchgroups' className='menuitem'> Lunch Groups</Link>
-            <Link to='/registration' className='menuitem'>Registration</Link>
-            <Link to='/login' className='menuitem'>Login</Link>
+            <Link hidden={props.currentUser} to='/registration' className='menuitem'>Registration</Link>
+            <Link hidden={props.currentUser} to='/login' className='menuitem'>Login</Link>
             <Link to='/profilepage' className='menuitem'> Profile Page</Link>
             <button onClick={() => onClick()}> Logout  </button>
             {/* why does this automatically run if not written as an empty function? */}
@@ -25,5 +25,12 @@ export function NavBar(props) {
   )
 }
 
-export default connect()(NavBar);
+const mapStateToProps= state => {
+  return {
+      currentUser: state.auth.currentUser
+  }
+}
+
+
+export default connect(mapStateToProps)(NavBar);
 

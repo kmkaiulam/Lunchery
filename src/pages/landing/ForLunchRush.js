@@ -6,11 +6,11 @@ export default function ForLunchRush(props) {
     return (
     <div className='forLunchRush'>
         <section>
-          <header> For the Lunch Rush
+          <header> For Diners
               <h3>Browse for Chefs in your Company</h3>
           </header>
-          <p>[<em>placeholder for screenshot of chef profile</em>]</p>
-          <p>View Chef Profiles and Check their Availability</p>
+          <p>[<em>placeholder for screenshot of Search</em>]</p>
+          <p>Join A Lunch Group</p>
         </section>
         <section>
           <header>

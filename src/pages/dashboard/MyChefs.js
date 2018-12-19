@@ -1,80 +1,44 @@
 import React from 'react';
+
 import {connect} from 'react-redux';
-import './MyChefs.css';
+import {currentMembersCheck, groupCreatorCheck, membersPresent, uniqueEntries} from '../../utils/common';
+import './MyGroups.css';
 
-export class  MyChefs extends React.Component {
-    render() {
-        const myChef = this.props.myChefs.map((myChef, index) => 
-    <div key={index} className='myChef'>
-        <div><img className='chefPortrait' src={myChef.image} alt={myChef.name}/></div>
-        <div>
-            <div><h3>{myChef.name}</h3></div>
-        </div>
-        <div>
-            <div><p>Speciality: {myChef.speciality}</p></div>
-        </div>
-        <div>
-            <div><img className='dish' src={myChef.dish} alt='signature dish' /></div>
-        </div>
-    </div>
-   );
-    return ( 
-        <div className = 'myChef'>
-            <h2>My Chefs</h2>
-            {myChef}
-        </div>
-    )
-   }
+
+
+export class MyChefs extends React.Component {
+    render(){
+        let creators = this.props.groupResults.filter(group => membersPresent(group) === true && currentMembersCheck(group, this.props.currentUser._id) === true).map(group => group.createdBy._id)
+        let myChefsArray = this.props.groupResults.filter(group => membersPresent(group) === true && currentMembersCheck(group, this.props.currentUser._id) === true)
+        let uniqueCreators= [...new Set(creators)]   
+        let finalObject = [{}]
+      uniqueEntries(uniqueCreators, myChefsArray, finalObject);
+     console.log(finalObject); 
+     console.log(this.props.groupResults);
+         let myChefs = finalObject.map((group, index) =>
+                <div key={index} className='myGroups'>
+                     <div> Chef {group.createdBy.chefProfile.displayName}</div>
+                     <div> {group.createdBy.chefProfile.company} in {group.createdBy.chefProfile.location} </div>
+                     <div className='chef-portrait'> {group.createdBy.chefProfile.picture}> </div>
+                     <h2> Bio</h2>
+                     <div className='bio'> {group.createdBy.chefProfile.bio}</div> 
+                     <div> Style: {group.createdBy.chefProfile.style}</div>
+                </div> 
+            )
+               
+           return (
+               <div className='myChefs'>
+               <h2> My Chefs </h2>
+                    {myChefs} 
+               </div>
+           ) 
+    }   
 }
-
-
-MyChefs.defaultProps = [
-    {
-    company: 'ABC Company',
-    name: 'Chef Amy',
-    bio: 'Lorem Ipsum dolor',
-    availability: 'everyday',
-    reviews: '',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-    speciality: 'Indian',
-    dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-    },
-    {
-    company: 'ABC Company',
-    name: 'Chef Jaz',
-    bio: 'Lorem Ipsum dolor',
-    availability: 'everyday',
-    reviews: '',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-    speciality: 'Indian',
-    dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-    },
-]
-    
-
-const mapStateToProps=state => ({
-    myChefs:[
-        {
-        company: 'ABC Company',
-        name: 'Chef Amy',
-        bio: 'Lorem Ipsum dolor',
-        availability: 'everyday',
-        reviews: '',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-        speciality: 'Indian',
-        dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-        },
-        {
-        company: 'ABC Company',
-        name: 'Chef Jaz',
-        bio: 'Lorem Ipsum dolor',
-        availability: 'everyday',
-        reviews: '',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-        speciality: 'Indian',
-        dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-        },
-    ]
+const mapStateToProps= state => ({
+    loading: state.auth.loading,
+    groupResults: state.auth.groupResults,
+    myGroups: state.auth.myGroups,
+    currentUser: state.auth.currentUser
 });
 
 export default connect(mapStateToProps)(MyChefs);

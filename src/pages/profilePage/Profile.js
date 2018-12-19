@@ -17,7 +17,7 @@ export function Profile(props) {
                     <h2>{props.userInfo.chefProfile.company} in {props.userInfo.chefProfile.location}</h2>   
                 </div>
                  <div className='picture'>
-                    <div>{props.userInfo.chefProfile.picture}</div>   
+                    <div>{props.userInfo.chefProfile.picture}</div> 
                 </div> 
                 <div className='bio'>
                     <div>{props.userInfo.chefProfile.bio}</div>   

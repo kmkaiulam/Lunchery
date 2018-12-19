@@ -1,7 +1,7 @@
 import React from 'react';
 import Loading from '../components/Loading';
 import {connect} from 'react-redux';
-import { lunchGroupCreate, lunchGroupCancel, getGroupResults } from '../modules/auth';
+import { lunchGroupCreate, lunchGroupCancel, getLunchGroupResults } from '../modules/auth';
 import LunchGroupForm from './lunchGroups/LunchGroupForm';
 import GroupResults from './lunchGroups/GroupResults';
 import GroupSearchInput from './lunchGroups/GroupSearchInput';
@@ -17,7 +17,7 @@ export function LunchGroups(props) {
      }
     console.log(props.createLunchGroup);
     if (props.lunchGroupUpdated === true || !props.groupResults) {
-        props.dispatch(getGroupResults());
+        props.dispatch(getLunchGroupResults());
         return ( <div className= 'loader'>
         <Loading type='spinningBubbles' color='black' />
         </div>

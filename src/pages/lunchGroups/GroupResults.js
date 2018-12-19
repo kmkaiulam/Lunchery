@@ -1,8 +1,8 @@
 import React from 'react';
 import Loading from 'react-loading';
 import {connect} from 'react-redux';
-import {joinLunchGroup, getGroupResults} from '../../modules/auth'
-import {convertDate, seatsAvailable, seatVacancyCheck, currentMembersCheck, groupCreatorcheck} from '../../utils/common';
+import {joinLunchGroup, getLunchGroupResults} from '../../modules/auth'
+import {convertDate, seatsAvailable, seatVacancyCheck, currentMembersCheck, groupCreatorCheck, sortByDate} from '../../utils/common';
 import './GroupResults.css';
 
 
@@ -16,7 +16,7 @@ export class GroupResults  extends React.Component{
     //style the loader 
     render(){
         if (this.props.loading === true) {
-            this.props.dispatch(getGroupResults());
+            this.props.dispatch(getLunchGroupResults());
             return (
             <div className= 'loader'>
                 <Loading type='spinningBubbles' color='black' />
@@ -24,7 +24,7 @@ export class GroupResults  extends React.Component{
             )
         }
         else {
-            let results= this.props.groupResults.filter(group => group.createdBy.chefProfile.company.toLowerCase().includes(this.props.searchTerm.toLowerCase())).map((group, index) => 
+            let results= this.props.groupResults.filter(group => group.createdBy.chefProfile.company.toLowerCase().includes(this.props.searchTerm.toLowerCase())).sort((a,b) => sortByDate( a, b)).map((group, index) => 
                 <div key={index} className='groupResult card col-4'>
                     <div> Company: {group.createdBy.chefProfile.company} in {group.createdBy.chefProfile.location} </div>
                     <div> Date: {convertDate(group.lunchDate)}</div>
@@ -36,13 +36,13 @@ export class GroupResults  extends React.Component{
                     <div hidden={seatVacancyCheck(group) === true}>
                         <div className= 'noVacancy'>FULL</div> 
                     </div>
-                    <div hidden={groupCreatorcheck(group, this.props.currentUser.id) === false }>
+                    <div hidden={groupCreatorCheck(group, this.props.currentUser.id) === false }>
                         <div className= 'noVacancy'> You Own this Group</div> 
                     </div>
                     <div hidden={currentMembersCheck(group.members, this.props.currentUser.id) === false}>
                         <div className= 'noVacancy'> You are already a member</div> 
                     </div> 
-                    <button onClick={() => this.onClickJoin(group._id)} disabled={seatVacancyCheck(group) === false || currentMembersCheck(group.members, this.props.currentUser.id) === true || groupCreatorcheck(group, this.props.currentUser.id) === true }  > Join this Group</button>
+                    <button onClick={() => this.onClickJoin(group._id)} disabled={seatVacancyCheck(group) === false || currentMembersCheck(group.members, this.props.currentUser.id) === true || groupCreatorCheck(group, this.props.currentUser.id) === true }  > Join this Group</button>
                 </div>
             )
             return (

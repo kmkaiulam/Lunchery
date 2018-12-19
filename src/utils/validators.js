@@ -15,3 +15,14 @@ export const matches = field => (value, allValues) =>
     field in allValues && value.trim() === allValues[field].trim()
         ? undefined
         : 'Does not match';
+
+export const checkDate = value => {
+    if(value)  
+    console.log(Math.round((new Date(value) - new Date(Date.now()))/8.64e+7))
+        return (new Date(value) - Date.now())/8.64e+7 > -2 ? false : `Cannot set date earlier than ${new Date(Date.now()).toDateString()}`
+    
+}
+
+export const hasFile = (values) => {
+        if(values) { return values.length > 0? undefined : 'Upload a profile picture'; }
+}

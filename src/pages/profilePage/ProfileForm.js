@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../../components/Input';
+import InputTextArea from '../../components/InputTextArea';
 import {updateProfile} from '../../modules/auth';
 import './ProfileForm.css';
 
@@ -38,7 +39,7 @@ export class ProfileForm extends React.Component{
                 />
                 <label  htmlFor='bio'> Bio</label>
                 <Field 
-                    component={Input}
+                    component={InputTextArea}
                     type='text'
                     name='bio'
                 /> 

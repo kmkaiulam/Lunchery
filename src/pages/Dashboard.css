@@ -5,3 +5,11 @@
 .dashboard{
     margin-top:100px;
 }
+.calendar-component{
+    margin:0 auto;
+}
+.second-column{
+    display:flex;
+    justify-content:space-around;
+
+}

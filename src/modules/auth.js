@@ -9,6 +9,7 @@ import {saveAuthToken, clearAuthToken} from '../utils/auth';
 //AUTHORIZATION
 export const SET_AUTH_TOKEN = 'app/auth/SET_AUTH_TOKEN';
 export const CLEAR_AUTH = 'app/auth/CLEAR_AUTH';
+export const LOGGED_OUT= 'app/auth/LOGGED_OUT';
 export const AUTH_REQUEST = 'app/auth/AUTH_REQUEST';
 export const AUTH_SUCCESS = 'app/auth/AUTH_SUCCESS';
 export const AUTH_ERROR = 'app/auth/AUTH_ERROR';
@@ -20,23 +21,36 @@ export const PROFILE_UPDATE_REQUEST = 'app/auth/PROFILE_UPDATE_REQUEST';
 export const PROFILE_SUCCESS = 'app/auth/PROFILE_SUCCESS';
 export const PROFILE_ERROR = 'app/auth/PROFILE_ERROR';
 //LUNCH GROUP
+export const LUNCH_GROUP_GET_FILTER = 'app/auth/LUNCH_GROUP_FILTER';
+export const LUNCH_GROUP_GET_REQUEST = 'app/auth/LUNCH_GROUP_REQUEST';
+export const LUNCH_GROUP_GET_SUCCESS = 'app/auth/LUNCH_GROUP_SUCCESS';
+export const LUNCH_GROUP_GET_ERROR = 'app/auth/LUNCH_GROUP_ERROR';
+
 export const LUNCH_GROUP_CREATE_CLICK = 'app/auth/LUNCH_GROUP_CREATE_CLICK';
 export const LUNCH_GROUP_CREATE_CANCEL= 'app/auth/LUNCH_GROUP_CREATE_CANCEL';
 export const LUNCH_GROUP_CREATE_REQUEST= 'app/auth/LUNCH_GROUP_CREATE_REQUEST';
 export const LUNCH_GROUP_CREATE_SUCCESS= 'app/auth/LUNCH_GROUP_CREATE_SUCCESS';
 export const LUNCH_GROUP_CREATE_ERROR= 'app/auth/LUNCH_GROUP_CREATE_ERROR';
+
 export const LUNCH_GROUP_JOIN_REQUEST= 'app/auth/LUNCH_GROUP_JOIN_REQUEST';
 export const LUNCH_GROUP_JOIN_SUCCESS= 'app/auth/LUNCH_GROUP_JOIN_SUCCESS';
 export const LUNCH_GROUP_JOIN_ERROR= 'app/auth/LUNCH_GROUP_JOIN_ERROR';
+
 export const LUNCH_GROUP_LEAVE_REQUEST= 'app/auth/LUNCH_GROUP_LEAVE_REQUEST';
 export const LUNCH_GROUP_LEAVE_SUCCESS= 'app/auth/LUNCH_GROUP_LEAVE_SUCCESS';
 export const LUNCH_GROUP_LEAVE_ERROR= 'app/auth/LUNCH_GROUP_LEAVE_ERROR';
-//GROUP
-export const GROUP_LOAD = 'app/auth/CHEF_LOAD';
-export const GROUP_FILTER = 'app/auth/CHEF_FILTER';
-export const GROUP_REQUEST = 'app/auth/CHEF_REQUEST';
-export const GROUP_SUCCESS = 'app/auth/CHEF_SUCCESS';
-export const GROUP_ERROR = 'app/auth/CHEF_ERROR';
+
+export const LUNCH_GROUP_EDIT_CLICK = 'app/auth/LUNCH_GROUP_EDIT_CLICK';
+export const LUNCH_GROUP_EDIT_CANCEL= 'app/auth/LUNCH_GROUP_EDIT_CANCEL';
+export const LUNCH_GROUP_EDIT_REQUEST= 'app/auth/LUNCH_GROUP_EDIT_REQUEST';
+export const LUNCH_GROUP_EDIT_SUCCESS= 'app/auth/LUNCH_GROUP_EDIT_SUCCESS';
+export const LUNCH_GROUP_EDIT_ERROR= 'app/auth/LUNCH_GROUP_EDIT_ERROR';
+
+export const LUNCH_GROUP_DELETE_REQUEST= 'app/auth/LUNCH_GROUP_DELETE_REQUEST';
+export const LUNCH_GROUP_DELETE_SUCCESS= 'app/auth/LUNCH_GROUP_DELETE_SUCCESS';
+export const LUNCH_GROUP_DELETE_ERROR= 'app/auth/LUNCH_GROUP_DELETE_ERROR';
+
+
 //WORKWEEK
 export const WORKWEEK_LOAD = 'app/auth/WORKWEEK_LOAD';
 export const WORKWEEK_EDIT_CLICK= 'app/auth/WORKWEEK_EDIT_CLICK';
@@ -53,6 +67,10 @@ export const setAuthToken = authToken => ({
 
 export const clearAuth = () => ({
     type: CLEAR_AUTH
+});
+
+export const loggedOut = () => ({
+    type: LOGGED_OUT
 });
 
 export const authRequest = () => ({
@@ -97,95 +115,129 @@ export const profileError = error => ({
     error
 });
 //LUNCHGROUP
+export const lunchGroupGetRequest = (groupId) => ({
+    type: LUNCH_GROUP_GET_REQUEST,
+    groupId
+});
+
+export const lunchGroupGetFilter = (searchTerm) => ({
+    type: LUNCH_GROUP_GET_FILTER,
+    searchTerm
+});
+
+export const lunchGroupGetSuccess = groupResults => ({
+    type: LUNCH_GROUP_GET_SUCCESS,
+    groupResults
+});
+
+export const lunchGroupGetError = error => ({
+    type: LUNCH_GROUP_GET_ERROR,
+    error
+});
+
 export const lunchGroupCreateClick = () => ({
     type: LUNCH_GROUP_CREATE_CLICK
 });
+
 export const lunchGroupCreateCancel = () => ({
     type:LUNCH_GROUP_CREATE_CANCEL
 });
+
 export const lunchGroupCreateRequest = () => ({
     type: LUNCH_GROUP_CREATE_REQUEST
 });
+
 export const lunchGroupCreateSuccess = newLunchGroup => ({
     type: LUNCH_GROUP_CREATE_REQUEST,
     newLunchGroup
 });
+
 export const lunchGroupCreateError = error => ({
     type: LUNCH_GROUP_CREATE_ERROR,
     error
 });
+
 export const lunchGroupJoinRequest = () => ({
     type: LUNCH_GROUP_JOIN_REQUEST
 });
+
 export const lunchGroupJoinSuccess = newLunchGroup => ({
     type: LUNCH_GROUP_JOIN_SUCCESS,
     newLunchGroup
 });
+
 export const lunchGroupJoinError = error => ({
     type: LUNCH_GROUP_JOIN_ERROR,
     error
 });
+
 export const lunchGroupLeaveRequest = () => ({
     type: LUNCH_GROUP_LEAVE_REQUEST
 });
+
 export const lunchGroupLeaveSuccess = () => ({
     type: LUNCH_GROUP_LEAVE_SUCCESS
 });
+
 export const lunchGroupLeaveError = error => ({
     type: LUNCH_GROUP_LEAVE_ERROR,
     error
 });
 
-
-//GROUP
-export const groupLoad = () => ({
-    type: GROUP_LOAD,
+export const lunchGroupEditClick= editGroupId => ({
+    type: LUNCH_GROUP_EDIT_CLICK,
+    editGroupId
 });
 
-export const groupRequest = (groupId) => ({
-    type: GROUP_REQUEST,
-    groupId
+export const lunchGroupEditCancel = () => ({
+    type: LUNCH_GROUP_EDIT_CANCEL
 });
 
-export const groupFilter = (searchTerm) => ({
-    type: GROUP_FILTER,
-    searchTerm
+export const lunchGroupEditRequest = () => ({
+    type: LUNCH_GROUP_EDIT_REQUEST
 });
 
-export const groupSuccess = groupResults => ({
-    type: GROUP_SUCCESS,
-    groupResults
+export const lunchGroupEditSuccess = lunchGroupEdit => ({
+    type: LUNCH_GROUP_EDIT_SUCCESS,
+    lunchGroupEdit
 });
 
-export const groupError = error => ({
-    type: GROUP_ERROR,
+export const lunchGroupEditError = error => ({
+    type: LUNCH_GROUP_EDIT_ERROR,
     error
 });
 
+export const lunchGroupDeleteRequest = () => ({
+    type: LUNCH_GROUP_DELETE_REQUEST,
+});
 
+export const lunchGroupDeleteSuccess = () => ({
+    type: LUNCH_GROUP_DELETE_SUCCESS,
+});
 
-
-
-
-
-
+export const lunchGroupDeleteError = error => ({
+    type: LUNCH_GROUP_DELETE_ERROR,
+    error
+});
 
 // ----INITIAL STATE----
 const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null,
     groupResults: null,
+    error: null,
     chefAccount: false,
     chefsLoaded: false,
     profileEdit: false,
+    profilePicEdit: false,
     profileUpToDate: false,
     createLunchGroup: false,
     lunchGroupUpdated: false,
     authLoading: false,
     loading:false,
-    error: null,
     searchTerm:'',
-    newGroup: null
+    newGroup: null,
+    editGroupId: null,
 };
 
 
@@ -199,6 +251,10 @@ export default function authReducer(state=initialState, action) {
         return Object.assign({}, state, {
             authToken: null,
             currentUser: null
+        });
+    } else if (action.type === LOGGED_OUT) {
+        return Object.assign({}, initialState, {
+            initialState
         });
     } else if (action.type === AUTH_REQUEST) {
         return Object.assign({}, state, {
@@ -246,6 +302,26 @@ export default function authReducer(state=initialState, action) {
             loading: false,
             error: action.error
         });
+    } else if (action.type === LUNCH_GROUP_GET_REQUEST) {
+        return Object.assign({}, state, {
+            loading:true,
+            error: null,
+        });
+    } else if (action.type === LUNCH_GROUP_GET_SUCCESS) {
+        return Object.assign({}, state, {
+            loading: false,
+            groupResults: action.groupResults, 
+            lunchGroupUpdated: false,
+        });
+    } else if (action.type === LUNCH_GROUP_GET_ERROR) {
+        return Object.assign({}, state, {
+            loading: false,
+            error: action.error, 
+        });    
+    } else if (action.type === LUNCH_GROUP_GET_FILTER) {
+        return Object.assign({}, state, {
+           searchTerm: action.searchTerm
+        });
     } else if (action.type === LUNCH_GROUP_CREATE_CLICK) {
         return Object.assign({}, state, {
             createLunchGroup: true
@@ -289,32 +365,52 @@ export default function authReducer(state=initialState, action) {
     } else if (action.type === LUNCH_GROUP_LEAVE_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
-            lunchGroupUpdated: true
         });        
     } else if (action.type === LUNCH_GROUP_LEAVE_ERROR) {
         return Object.assign({}, state, {
             loading: false,
             error: action.error
         });
-    } else if (action.type === GROUP_REQUEST) {
+    } else if (action.type === LUNCH_GROUP_EDIT_CLICK) {
         return Object.assign({}, state, {
-            loading:true,
-            error: null,
+            editGroupId: action.editGroupId
+        });        
+    } else if (action.type === LUNCH_GROUP_EDIT_CANCEL) {
+        return Object.assign({}, state, {
+           editGroupId: null,
         });
-    } else if (action.type === GROUP_SUCCESS) {
+    } else if (action.type === LUNCH_GROUP_EDIT_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true,
+        });
+    } else if (action.type === LUNCH_GROUP_EDIT_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
-            groupResults: action.groupResults, 
-            lunchGroupUpdated: false,
-        });
-    } else if (action.type === GROUP_ERROR) {
+            editGroupId: null
+        });      
+    } else if (action.type === LUNCH_GROUP_EDIT_ERROR) {
         return Object.assign({}, state, {
             loading: false,
-            error: action.error, 
+            editGroupId: null,
+            error: action.error
         });    
-    } else if (action.type === GROUP_FILTER) {
+    } else if (action.type === LUNCH_GROUP_DELETE_ERROR) {
         return Object.assign({}, state, {
-           searchTerm: action.searchTerm
+            loading: false,
+            error: action.error
+        });
+    } else if (action.type === LUNCH_GROUP_DELETE_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true,
+        });
+    } else if (action.type === LUNCH_GROUP_DELETE_SUCCESS) {
+        return Object.assign({}, state, {
+            loading: false,
+        });        
+    } else if (action.type === LUNCH_GROUP_DELETE_ERROR) {
+        return Object.assign({}, state, {
+            loading: false,
+            error: action.error
         });
     }
     return state;
@@ -341,38 +437,7 @@ export const getUserInfo = (authToken) => dispatch => {
     )
 };
 
-//   CHANGE TO GET GROUP INFO
-export const getGroupResults = () => dispatch => {
-    dispatch(groupRequest())
-    return (
-        fetch(`${API_BASE_URL}/groups/`, {
-            method: 'GET',
-            headers:{
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .then(groupInfo => {
-            console.log(groupInfo)
-            dispatch(groupSuccess(groupInfo))
-        }) 
-        .catch(err => {
-            console.log(err);
-            const {code} = err;
-            const message =
-                code === 401
-                    ? 'Cannot get group results'
-                    : 'please try again';
-            dispatch(groupError(err));
-            return Promise.reject(
-                new SubmissionError({
-                    _error: message
-            })
-            );
-        })
-    )
-};
+
 
 //PROFILE FUNCTIONS
 export const profileEdit = () => (dispatch) => {
@@ -388,7 +453,7 @@ export const updateProfile = profile => (dispatch, getState) => {
     //can clean up with deconstructing (with  one get state)
     const authToken = getState().auth.authToken;
     const chefId = getState().auth.currentUser.id;
-
+    
     return fetch(`${API_BASE_URL}/users/${chefId}`, {
         method: 'PUT',
         headers: {
@@ -429,6 +494,38 @@ export const lunchGroupCancel = () => (dispatch) => {
     dispatch(lunchGroupCreateCancel());
 }
 
+export const getLunchGroupResults = () => dispatch => {
+    dispatch(lunchGroupGetRequest())
+    return (
+        fetch(`${API_BASE_URL}/groups/`, {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(groupInfo => {
+            console.log(groupInfo)
+            dispatch(lunchGroupGetSuccess(groupInfo))
+        }) 
+        .catch(err => {
+            console.log(err);
+            const {code} = err;
+            const message =
+                code === 401
+                    ? 'Cannot get group results'
+                    : 'please try again';
+            dispatch(lunchGroupGetError(err));
+            return Promise.reject(
+                new SubmissionError({
+                    _error: message
+            })
+            );
+        })
+    )
+};
+
 export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
     console.log('posting a new group')
     dispatch(lunchGroupCreateRequest());
@@ -464,7 +561,7 @@ export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
 };
 
 export const filterLunchGroups = (searchTerm) => (dispatch, getState) => {
-    dispatch(groupFilter(searchTerm))
+    dispatch(lunchGroupGetFilter(searchTerm))
 }
 
 export const joinLunchGroup = (groupId) => (dispatch, getState) => {
@@ -484,8 +581,7 @@ export const joinLunchGroup = (groupId) => (dispatch, getState) => {
     .then(newGroup => {
         console.log(newGroup)
         dispatch(lunchGroupJoinSuccess(newGroup))
-        dispatch(getGroupResults())}
-    )
+    })
     .catch(err => {
         console.log(err);
         const {code} = err;
@@ -515,9 +611,10 @@ export const leaveLunchGroup = (groupId) => (dispatch, getState) => {
         body: JSON.stringify()
     })
     .then(res => normalizeResponseErrors(res))
-    .then(res => 
-        dispatch(lunchGroupLeaveSuccess())    
-    )
+    .then(res => {
+        dispatch(lunchGroupLeaveSuccess())
+        dispatch(getLunchGroupResults())
+    })
     .catch(err => {
         console.log(err);
         const {code} = err;
@@ -526,6 +623,83 @@ export const leaveLunchGroup = (groupId) => (dispatch, getState) => {
                 ? 'Not authorized or'
                 : 'No longer a member of this group';
         dispatch(lunchGroupLeaveError(err));
+        return Promise.reject(
+            new SubmissionError({
+                _error: message
+            })
+        );
+    })
+};
+
+export const editLunchGroupClick= groupId => (dispatch) =>  {
+    dispatch(lunchGroupEditClick(groupId));
+};
+
+export const editLunchGroupCancel= () => (dispatch) =>  {
+    dispatch(lunchGroupEditCancel());
+};
+
+
+export const editLunchGroup = (groupUpdate) => (dispatch, getState) => {
+    const groupId = getState().auth.editGroupId; 
+    console.log(`editing lunch group: ${groupId}`)
+    dispatch(lunchGroupEditRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/groups/${groupId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify(groupUpdate)
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+        dispatch(lunchGroupEditSuccess())
+        dispatch(getLunchGroupResults())
+    })
+    .catch(err => {
+        console.log(err);
+        const {code} = err;
+        const message =
+            code === 401
+                ? 'Not authorized or'
+                : 'cannot edit this group';
+        dispatch(lunchGroupEditError(err));
+        return Promise.reject(
+            new SubmissionError({
+                _error: message
+            })
+        );
+    })
+};
+
+
+export const deleteLunchGroup = (groupId) => (dispatch, getState) => {
+    console.log(`deleting lunch group: ${groupId}`)
+    dispatch(lunchGroupDeleteRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/groups/${groupId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify()
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+        dispatch(lunchGroupDeleteSuccess())
+        dispatch(getLunchGroupResults())
+    })
+    .catch(err => {
+        console.log(err);
+        const {code} = err;
+        const message =
+            code === 401
+                ? 'Not authorized or'
+                : 'group no longer exists';
+        dispatch(lunchGroupDeleteError(err));
         return Promise.reject(
             new SubmissionError({
                 _error: message
@@ -592,6 +766,7 @@ export const logout = () => (dispatch, getState) => {
     console.log('Logging out')
     dispatch(clearAuth());
     clearAuthToken(authToken);
+    dispatch(loggedOut)
 }
 
 
