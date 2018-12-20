@@ -37,7 +37,6 @@ export function ProfilePage(props) {
                     <button onClick={() => onClickCancel()}> Cancel Edit</button>
                     <ProfileForm /> 
                     <ProfilePicForm />
-                   
                 </div>
             )
         }

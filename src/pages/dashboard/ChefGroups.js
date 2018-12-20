@@ -20,7 +20,6 @@ export class ChefGroups extends React.Component {
     render(){
         let chefGroups;
         if (!this.props.editGroupId) {
-   
             chefGroups = this.props.groupResults.filter(group => groupCreatorCheck( group, this.props.currentUser.id) === true).sort((a,b) => sortByDate(a,b)).map((group, index) => 
                 <div key={index} className='myGroups'>
                     <div> Date: {convertDate(group.lunchDate)} @ {group.lunchTime}</div>
@@ -32,7 +31,7 @@ export class ChefGroups extends React.Component {
                 </div>
             )
            return (
-               <div className='chefsGroups'>
+               <div hidden={this.props.isChef === false} className='chefsGroups'>
                <h2> Chef's Groups </h2>
                 {chefGroups}
                </div>
@@ -50,11 +49,14 @@ export class ChefGroups extends React.Component {
             </div>
         )
        return (
-           <div className='chefsGroups'>
+           <div hidden={ this.props.isChef=== false} className='chefsGroups'>
             <h2> Chef's Groups </h2>
+            <div className= 'two-column'>
                 {chefGroups}
                 <LunchGroupEditForm />
+            </div>
                 <button onClick={() => this.onClickCancel()}> Cancel Edit</button> 
+                
            </div>
        )}
     }  
@@ -64,6 +66,7 @@ const mapStateToProps=state => ({
     loading: state.auth.loading,
     groupResults: state.auth.groupResults,
     currentUser: state.auth.currentUser,
+    isChef: state.auth.currentUser.chef,
     editGroupId: state.auth.editGroupId
 });
 

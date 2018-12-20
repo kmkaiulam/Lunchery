@@ -9,10 +9,9 @@ import './Dashboard.css';
 import RequiresLogin from './RequiresLogin';
 import {Redirect} from 'react-router-dom';
 import { getLunchGroupResults } from '../modules/auth';
-import { currentMembersCheck, splitDate} from '../utils/common';
+
 
 export function Dashboard(props) {
-    let myLunchDates; 
     if(props.currentUser.chef === true && props.currentUser.chefProfile.displayName === '') {
         return  <Redirect to='/profilePage'/>
     }
@@ -23,21 +22,34 @@ export function Dashboard(props) {
         </div>
         )
     }
-    else if (props.groupResults) {
-        myLunchDates= props.groupResults.filter(group => currentMembersCheck(group, props.currentUser._id) === true).map(group => splitDate(group.lunchDate))
+
+    if (props.currentUser.chef === true) {
         return (
         <div className='dashboard'>
-            <h1> Welcome {props.currentUser.username}!</h1>  
+            <h1> Welcome Chef {props.currentUser.chefProfile.displayName}!</h1> 
+            <ChefGroups />
             <Calendar className='calendar-component' minDate = {new Date(Date.now())} calendarType = {"US"} />
-            <div className='second-column'>
+            <div className='two-column'>
                 <MyGroups/> 
                 <MyChefs />
             </div>
-            <ChefGroups />
+        </div>
+      )
+    }
+    else if (props.currentUser.chef === false) {
+        return (
+        <div className='dashboard'>
+            <h1> Welcome {props.currentUser.firstName}!</h1> 
+            <Calendar className='calendar-component' minDate = {new Date(Date.now())} calendarType = {"US"} />
+            <div className='two-column'>
+                <MyGroups/> 
+                <MyChefs />
+            </div>
         </div>
       )
     }
 }
+
 
 
 
@@ -46,7 +58,7 @@ const mapStateToProps = state => {
     currentUser: state.auth.currentUser,
     groupResults:state.auth.groupResults,
     lunchGroupUpdated: state.auth.lunchGroupUpdated,
-    editGroupId: state.auth.editGroupId
+    editGroupId: state.auth.editGroupId,
 }};
 
 export default RequiresLogin()(connect(mapStateToProps)(Dashboard));

@@ -54,7 +54,7 @@ export const currentMembersCheck = (group, myId) => {
     if( currentMemberFilter(group, myId) !== myId) {
         return false;
     }
-    else if(currentMemberFilter(group, myId) === myId){
+    else if(currentMemberFilter(group, myId) === myId || currentMemberFilter(group, myId)){
         return true;
     }
 };
@@ -77,12 +77,36 @@ export const membersPresent = group => {
     }
 };
 
+export const retrieveGroupMemberIds = (groupArray, index) => {
+    return Object.values(groupArray[index].members.map(members => members._id))
+}
 
-export const uniqueEntries = (chefidArray, groupArray, container) => {
+export const evaluateMembership = (groupArray, index, myId) => {
+    if (retrieveGroupMemberIds(groupArray, index).find(id => id === myId) !== undefined) {
+        return true;
+    } 
+    else if (retrieveGroupMemberIds(groupArray, index).find(id => id === myId) !== undefined) {
+        return false;
+    }
+}
+
+ export const filterUserGroups = (groupArray, myId) => {
+     let usersGroup = [{}]
+    for (let i=0; i <groupArray.length; i++){
+        if(evaluateMembership(groupArray, i, myId) === true){
+            usersGroup[i] = groupArray[i]
+        }
+    }
+        return usersGroup.filter(el => el.createdBy !== undefined) 
+};
+
+
+export const uniqueEntries = (chefidArray, groupArray) => {
+    let container =[{}]
     for (let i=0; i <chefidArray.length; i++) {
          if (chefidArray[i] === groupArray[i].createdBy._id){
-            container[i]= groupArray[i]
+            container[i] = groupArray[i]
          }
     }   
     return container  
- }       
+}       

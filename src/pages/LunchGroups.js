@@ -16,7 +16,7 @@ export function LunchGroups(props) {
        props.dispatch(lunchGroupCancel())
      }
     console.log(props.createLunchGroup);
-    if (props.lunchGroupUpdated === true || !props.groupResults) {
+    if (props.lunchGroupUpdated === true || !props.groupResults || props.newLunchGroup !== null) {
         props.dispatch(getLunchGroupResults());
         return ( <div className= 'loader'>
         <Loading type='spinningBubbles' color='black' />
@@ -34,6 +34,7 @@ export function LunchGroups(props) {
     else 
         return (
         <div className='lunchGroups'>
+        <h1>Lunch Groups</h1> 
         <GroupSearchInput />
         <GroupResults />
             <button onClick={() => onClickCreate()} hidden={!props.currentUser.chef}> Create a New Group </button>
@@ -49,7 +50,8 @@ const mapStateToProps= state => {
         currentUser: state.auth.currentUser,
         createLunchGroup: state.auth.createLunchGroup,
         lunchGroupUpdated: state.auth.lunchGroupUpdated,
-        groupResults: state.auth.groupResults
+        groupResults: state.auth.groupResults,
+        newLunchGroup: state.auth.newLunchGroup
     }
 }
 export default RequiresLogin()(connect(mapStateToProps)(LunchGroups))

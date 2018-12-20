@@ -8,8 +8,8 @@
 .calendar-component{
     margin:0 auto;
 }
-.second-column{
+
+.two-column{
     display:flex;
     justify-content:space-around;
-
 }

@@ -1,9 +1,10 @@
 nav{
-    background-color: gray;
-    height:62px;
-    width:100%;
-    position:fixed;
-    top: 0;
+  height: 62px;
+  font-size: 20px;
+  width: 100%;
+  position: fixed;
+  top: 20px;
+  border-bottom: solid black 1px;
 }
 
 #menu{

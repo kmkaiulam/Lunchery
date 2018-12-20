@@ -226,8 +226,6 @@ const initialState = {
     currentUser: null,
     groupResults: null,
     error: null,
-    chefAccount: false,
-    chefsLoaded: false,
     profileEdit: false,
     profilePicEdit: false,
     profileUpToDate: false,
@@ -236,7 +234,7 @@ const initialState = {
     authLoading: false,
     loading:false,
     searchTerm:'',
-    newGroup: null,
+    newLunchGroup:null,
     editGroupId: null,
 };
 
@@ -295,7 +293,6 @@ export default function authReducer(state=initialState, action) {
             currentUser: newUserInfo,
             profileUpToDate: true,
             profileEdit: false,
-            chefsLoaded: false
         });
     } else if (action.type === PROFILE_ERROR) {
         return Object.assign({}, state, {
@@ -312,6 +309,7 @@ export default function authReducer(state=initialState, action) {
             loading: false,
             groupResults: action.groupResults, 
             lunchGroupUpdated: false,
+            newLunchGroup: null,
         });
     } else if (action.type === LUNCH_GROUP_GET_ERROR) {
         return Object.assign({}, state, {
@@ -352,6 +350,7 @@ export default function authReducer(state=initialState, action) {
     } else if (action.type === LUNCH_GROUP_JOIN_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
+            lunchGroupUpdated: true,
         });        
     } else if (action.type === LUNCH_GROUP_JOIN_ERROR) {
         return Object.assign({}, state, {
@@ -542,6 +541,7 @@ export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
     .then(res => res.json())
     .then(newGroup => {
         dispatch(lunchGroupCreateSuccess(newGroup))
+        dispatch(getLunchGroupResults())
         dispatch(lunchGroupCancel())
     })
     .catch(err => {

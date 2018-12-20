@@ -17,11 +17,11 @@ export function NavBar(props) {
             <Link to='/lunchgroups' className='menuitem'> Lunch Groups</Link>
             <Link hidden={props.currentUser} to='/registration' className='menuitem'>Registration</Link>
             <Link hidden={props.currentUser} to='/login' className='menuitem'>Login</Link>
-            <Link to='/profilepage' className='menuitem'> Profile Page</Link>
+            <Link hidden={!props.currentUser || props.currentUser.chef === false}to='/profilepage' className='menuitem'> Profile Page</Link>
             <button onClick={() => onClick()}> Logout  </button>
-            {/* why does this automatically run if not written as an empty function? */}
         </div>
   </nav>
+  
   )
 }
 

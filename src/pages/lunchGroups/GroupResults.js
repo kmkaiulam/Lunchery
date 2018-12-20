@@ -15,15 +15,15 @@ export class GroupResults  extends React.Component{
     }  
     //style the loader 
     render(){
-        if (this.props.loading === true) {
-            this.props.dispatch(getLunchGroupResults());
-            return (
-            <div className= 'loader'>
-                <Loading type='spinningBubbles' color='black' />
-            </div>
-            )
-        }
-        else {
+        // if (this.props.loading === true) {
+        //     this.props.dispatch(getLunchGroupResults());
+        //     return (
+        //     <div className= 'loader'>
+        //         <Loading type='spinningBubbles' color='black' />
+        //     </div>
+        //     )
+        // }
+        // else {
             let results= this.props.groupResults.filter(group => group.createdBy.chefProfile.company.toLowerCase().includes(this.props.searchTerm.toLowerCase())).sort((a,b) => sortByDate( a, b)).map((group, index) => 
                 <div key={index} className='groupResult card col-4'>
                     <div> Company: {group.createdBy.chefProfile.company} in {group.createdBy.chefProfile.location} </div>
@@ -51,7 +51,7 @@ export class GroupResults  extends React.Component{
                 </div>
             )    
         }
-    }
+    
 }
 
 

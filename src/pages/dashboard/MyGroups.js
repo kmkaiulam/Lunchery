@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {currentMembersCheck, membersPresent, convertDate, sortByDate} from '../../utils/common';
+import {filterUserGroups, convertDate, sortByDate} from '../../utils/common';
 import './MyGroups.css';
 import { leaveLunchGroup, getLunchGroupResults } from '../../modules/auth';
 
@@ -10,8 +10,8 @@ export class MyGroups extends React.Component {
         this.props.dispatch(getLunchGroupResults());
     }
     render(){
-        //destructring would clean this up a lot
-            let myGroups = this.props.groupResults.filter(group => membersPresent(group) === true && currentMembersCheck(group, this.props.currentUser._id) === true).sort((a,b) => sortByDate(a,b)).map((group, index) => 
+        let myGroupsObj = filterUserGroups(this.props.groupResults, this.props.currentUser.id)
+         let myGroups = myGroupsObj.sort((a,b) => sortByDate(a,b)).map((group, index) => 
                 <div key={index} className='myGroups'>
                     <div> Company: {group.createdBy.chefProfile.company} in {group.createdBy.chefProfile.location} </div>
                     <div> Date: {convertDate(group.lunchDate)} @ {group.lunchTime}</div>
@@ -21,16 +21,16 @@ export class MyGroups extends React.Component {
                     <div> Cost: ${group.cost} </div> 
                     <button onClick={() => this.onClickLeave(group._id)}> Leave this Group</button>
                 </div>
-            )
-           return (
-               <div className='myGroups'>
-               <h2> My Groups </h2>
-                   {myGroups}
+        )
+        return (
+                <div className='myGroups'>
+                    <h2> My Groups </h2>
+                    {myGroups} 
                </div>
-           ) 
-    }   
-    
-}
+        ) 
+    }
+}   
+
 
 
 
