@@ -1,4 +1,10 @@
-.profile{
-  
+.profile-bio{
+    max-width: 320px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+}
 
+.profileImage{
+    height: 200px;
 }

@@ -1,4 +1,3 @@
-.profileForm{
-    display:flex;
-    justify-content:space-evenly;
+.profile-form{
+   margin-top: 100px;
 }

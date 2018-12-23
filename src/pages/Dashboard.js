@@ -2,12 +2,13 @@ import React from 'react';
 import Loading from 'react-loading';
 import Calendar from 'react-calendar';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import ChefGroups from './dashboard/ChefGroups';
 import MyGroups from './dashboard/MyGroups';
 import MyChefs from './dashboard/MyChefs';
 import './Dashboard.css';
 import RequiresLogin from './RequiresLogin';
-import {Redirect} from 'react-router-dom';
+
 import { getLunchGroupResults } from '../modules/auth';
 
 

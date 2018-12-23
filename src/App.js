@@ -15,6 +15,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <NavBar />
+        <div className = 'lunchery-banner'></div>
           <Route exact path='/' component={Landing}/>
           <Route exact path='/dashboard' component={Dashboard}/>
           <Route exact path='/registration' component={RegistrationPage}/>

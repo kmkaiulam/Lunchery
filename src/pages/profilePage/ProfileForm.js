@@ -7,8 +7,8 @@ import './ProfileForm.css';
 
 export class ProfileForm extends React.Component{
     onSubmit(values) {
-    const {displayName, company, location, style, picture, bio} = values; 
-        const chefProfile = {displayName, company, location, style, picture, bio} 
+        const {displayName, company, location, style, bio} = values; 
+        const chefProfile = {displayName, company, location, style, bio} 
         console.log(chefProfile);
         return this.props.dispatch(updateProfile(chefProfile))
     }
@@ -49,12 +49,6 @@ export class ProfileForm extends React.Component{
                     type='text'
                     name='style'
                 />           
-                 <label  htmlFor='picture'>Picture</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='picture'
-                />       
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>

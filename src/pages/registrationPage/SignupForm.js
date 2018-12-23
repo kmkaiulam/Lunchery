@@ -67,7 +67,8 @@ export class SignupForm extends React.Component {
                     type='checkbox' 
                     name='chef' />
                 <button
-                    type="submit"
+                    className='signup-btn'
+                    type='submit'
                     disabled={this.props.pristine || this.props.submitting}>
                     Register
                 </button>

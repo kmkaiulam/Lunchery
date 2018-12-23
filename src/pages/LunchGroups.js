@@ -1,7 +1,7 @@
 import React from 'react';
 import Loading from '../components/Loading';
 import {connect} from 'react-redux';
-import { lunchGroupCreate, lunchGroupCancel, getLunchGroupResults } from '../modules/auth';
+import { lunchGroupCreateToggle, getLunchGroupResults } from '../modules/auth';
 import LunchGroupForm from './lunchGroups/LunchGroupForm';
 import GroupResults from './lunchGroups/GroupResults';
 import GroupSearchInput from './lunchGroups/GroupSearchInput';
@@ -10,11 +10,9 @@ import './LunchGroups.css'
 
 export function LunchGroups(props) {
    let onClickCreate = () => {
-     props.dispatch(lunchGroupCreate())
+     props.dispatch(lunchGroupCreateToggle())
      }
-     let onClickCancel = () => {
-       props.dispatch(lunchGroupCancel())
-     }
+    
     console.log(props.createLunchGroup);
     if (props.lunchGroupUpdated === true || !props.groupResults || props.newLunchGroup !== null) {
         props.dispatch(getLunchGroupResults());
@@ -26,8 +24,10 @@ export function LunchGroups(props) {
     if (props.createLunchGroup === true) {
         return (
             <div className='lunchGroups lunchGroupForm'>
+              <h1>Create A New Lunch Group</h1> 
                 <LunchGroupForm />
-                <button onClick={() => onClickCancel()}> Cancel </button>
+                <GroupResults />
+                <button onClick={() => onClickCreate()}> Cancel </button>
             </div>
         )
     }
@@ -35,6 +35,7 @@ export function LunchGroups(props) {
         return (
         <div className='lunchGroups'>
         <h1>Lunch Groups</h1> 
+        <button onClick={() => onClickCreate()} hidden={!props.currentUser.chef}> Create a New Group </button>
         <GroupSearchInput />
         <GroupResults />
             <button onClick={() => onClickCreate()} hidden={!props.currentUser.chef}> Create a New Group </button>

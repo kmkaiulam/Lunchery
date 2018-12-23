@@ -1,6 +1,6 @@
 .login{
     border: solid 2px;
     border-radius: 20px;
-    margin: 100px auto;
-    width: 45%;
+    margin: 20px auto;
+    max-width:400px;
 }

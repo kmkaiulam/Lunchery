@@ -18,9 +18,7 @@ export const matches = field => (value, allValues) =>
 
 export const checkDate = value => {
     if(value)  
-    console.log(Math.round((new Date(value) - new Date(Date.now()))/8.64e+7))
-        return (new Date(value) - Date.now())/8.64e+7 > -1 ? false : `Cannot set date earlier than ${new Date(Date.now()).toDateString()}`
-    
+        return (new Date(value) - Date.now())/8.64e+7 > -1 ? undefined : `Cannot set date on or earlier than ${new Date(Date.now()).toDateString()}`
 }
 
 export const hasFile = (values) => {

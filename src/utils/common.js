@@ -101,12 +101,29 @@ export const evaluateMembership = (groupArray, index, myId) => {
 };
 
 
-export const uniqueEntries = (chefidArray, groupArray) => {
-    let container =[{}]
+export const grabMatches = (chefidArray, groupArray) => {
+    let matchArray = [];
     for (let i=0; i <chefidArray.length; i++) {
-         if (chefidArray[i] === groupArray[i].createdBy._id){
-            container[i] = groupArray[i]
-         }
-    }   
-    return container  
-}       
+        matchArray.push(groupArray.findIndex(groupArray => groupArray.createdBy._id === chefidArray[i]))
+    }
+    return matchArray;
+}
+
+
+export const grabUniqueChefEntries = (groupArray, matchArray) => {
+        let chefArrayObj = [{}];
+        for ( let i=0; i <matchArray.length; i++){
+            chefArrayObj[i] = groupArray[matchArray[i]]
+        }
+        return chefArrayObj
+}
+
+
+export const uniqueEntries = (chefidArray, groupArray) => {
+  let matchArray = grabMatches(chefidArray, groupArray);
+  let chefArrayObj = grabUniqueChefEntries(groupArray, matchArray);
+    return chefArrayObj
+}
+    
+  
+  

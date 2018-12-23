@@ -13,12 +13,12 @@ export function NavBar(props) {
     <nav>
         <div id='menu'>
             <Link to='/' className='menuitem'>About</Link>
-            <Link to='/dashboard' className='menuitem'> Dashboard</Link>
-            <Link to='/lunchgroups' className='menuitem'> Lunch Groups</Link>
+            <Link hidden={!props.currentUser} to='/dashboard' className='menuitem'> Dashboard</Link>
+            <Link hidden={!props.currentUser} to='/lunchgroups' className='menuitem'> Lunch Groups</Link>
             <Link hidden={props.currentUser} to='/registration' className='menuitem'>Registration</Link>
             <Link hidden={props.currentUser} to='/login' className='menuitem'>Login</Link>
             <Link hidden={!props.currentUser || props.currentUser.chef === false}to='/profilepage' className='menuitem'> Profile Page</Link>
-            <button onClick={() => onClick()}> Logout  </button>
+            <button hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
         </div>
   </nav>
   

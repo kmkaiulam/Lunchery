@@ -13,13 +13,21 @@ export const LOGGED_OUT= 'app/auth/LOGGED_OUT';
 export const AUTH_REQUEST = 'app/auth/AUTH_REQUEST';
 export const AUTH_SUCCESS = 'app/auth/AUTH_SUCCESS';
 export const AUTH_ERROR = 'app/auth/AUTH_ERROR';
+ 
+
 //PROFILE
+export const PROFILE_REQUEST= 'app/auth/PROFILE_REQUEST'
 export const PROFILE_LOAD = 'app/auth/PROFILE_LOAD';
 export const PROFILE_EDIT_CLICK = 'app/auth/PROFILE_EDIT_CLICK';
-export const PROFILE_EDIT_CANCEL = 'app/auth/PROFILE_EDIT_CANCEL';
 export const PROFILE_UPDATE_REQUEST = 'app/auth/PROFILE_UPDATE_REQUEST';
+export const PROFILE_IMAGE_UPDATE_REQUEST = 'app/auth/PROFILE_IMAGE_UPDATE_REQUEST';
 export const PROFILE_SUCCESS = 'app/auth/PROFILE_SUCCESS';
 export const PROFILE_ERROR = 'app/auth/PROFILE_ERROR';
+
+
+// export const PROFILE_IMAGE_UPDATE = 'app/auth/PROFILE_IMAGE_UPDATE';
+// export const PROFILE_IMAGE_UPDATE_SUCCESS = 'app/auth/PROFILE_IMAGE_UPDATE_SUCCESS';
+// export const PROFILE_IMAGE_UPDATE_ERROR = 'app/auth/PROFILE_IMAGE_UPDATE_ERROR';
 //LUNCH GROUP
 export const LUNCH_GROUP_GET_FILTER = 'app/auth/LUNCH_GROUP_FILTER';
 export const LUNCH_GROUP_GET_REQUEST = 'app/auth/LUNCH_GROUP_REQUEST';
@@ -50,14 +58,6 @@ export const LUNCH_GROUP_DELETE_REQUEST= 'app/auth/LUNCH_GROUP_DELETE_REQUEST';
 export const LUNCH_GROUP_DELETE_SUCCESS= 'app/auth/LUNCH_GROUP_DELETE_SUCCESS';
 export const LUNCH_GROUP_DELETE_ERROR= 'app/auth/LUNCH_GROUP_DELETE_ERROR';
 
-
-//WORKWEEK
-export const WORKWEEK_LOAD = 'app/auth/WORKWEEK_LOAD';
-export const WORKWEEK_EDIT_CLICK= 'app/auth/WORKWEEK_EDIT_CLICK';
-export const WORKWEEK_EDIT_CANCEL = 'app/auth/WORKWEEK_EDIT_CANCEL';
-export const WORKWEEK_UPDATE_REQUEST = 'app/auth/WORKWEEK_UPDATE_REQUEST';
-export const WORKWEEK_SUCCESS = 'app/auth/WORKWEEK_SUCCESS';
-export const WORKWEEK_ERROR = 'app/auth/WORKWEEK_ERROR';
 // ----ACTION CREATORS----
 //AUTHORIZATION
 export const setAuthToken = authToken => ({
@@ -93,12 +93,12 @@ export const profileLoad = () => ({
     type: PROFILE_LOAD
 });
 
-export const profileEditClick = () => ({
-    type: PROFILE_EDIT_CLICK
+export const profileRequest = () => ({
+    type: PROFILE_REQUEST
 });
 
-export const profileEditCancel = () => ({
-    type: PROFILE_EDIT_CANCEL
+export const profileEditClick = () => ({
+    type: PROFILE_EDIT_CLICK
 });
 
 export const profileUpdateRequest = () => ({
@@ -114,6 +114,26 @@ export const profileError = error => ({
     type: PROFILE_ERROR,
     error
 });
+
+// export const profileImageUpdate = boolean => ({
+//     type: PROFILE_IMAGE_UPDATE, 
+//     data: boolean
+// });
+
+export const profileImageUpdateRequest = () => ({
+    type: PROFILE_IMAGE_UPDATE_REQUEST
+});
+
+// export const profileImageUpdateSuccess = (link) => ({
+//     type: PROFILE_IMAGE_UPDATE_SUCCESS, data: link
+// });
+
+// export const profileImageUpdateError = error => ({
+//     type: PROFILE_IMAGE_UPDATE_ERROR,
+//     error
+// });
+
+
 //LUNCHGROUP
 export const lunchGroupGetRequest = (groupId) => ({
     type: LUNCH_GROUP_GET_REQUEST,
@@ -137,10 +157,6 @@ export const lunchGroupGetError = error => ({
 
 export const lunchGroupCreateClick = () => ({
     type: LUNCH_GROUP_CREATE_CLICK
-});
-
-export const lunchGroupCreateCancel = () => ({
-    type:LUNCH_GROUP_CREATE_CANCEL
 });
 
 export const lunchGroupCreateRequest = () => ({
@@ -271,16 +287,17 @@ export default function authReducer(state=initialState, action) {
         });
     } else if (action.type === PROFILE_LOAD) {
         return Object.assign({}, state, {
+            loading:true,
             profileUpToDate: true,
         });
+    } else if (action.type === PROFILE_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true
+    });
     } else if (action.type === PROFILE_EDIT_CLICK) {
             return Object.assign({}, state, {
-                profileEdit: true
+                profileEdit: (!state.profileEdit)
         });
-    } else if (action.type === PROFILE_EDIT_CANCEL) {
-        return Object.assign({}, state, {
-            profileEdit: false
-    });
     } else if (action.type === PROFILE_UPDATE_REQUEST) {
         return Object.assign({}, state, {
             loading: true,
@@ -322,20 +339,17 @@ export default function authReducer(state=initialState, action) {
         });
     } else if (action.type === LUNCH_GROUP_CREATE_CLICK) {
         return Object.assign({}, state, {
-            createLunchGroup: true
-        });
-    } else if (action.type === LUNCH_GROUP_CREATE_CANCEL) {
-        return Object.assign({}, state, {
-            createLunchGroup: false
+            createLunchGroup: (!state.createLunchGroup)
         });
     } else if (action.type === LUNCH_GROUP_CREATE_REQUEST) {
          return Object.assign({}, state, {
             loading: true,
         });
     } else if (action.type === LUNCH_GROUP_CREATE_SUCCESS) {
+       // let updatedGroupResults = Object.assign({}, state.groupResults, action.newLunchGroup)
         return Object.assign({}, state, {
             loading: false,
-            newLunchGroup: action.newLunchGroup,
+            groupResults: [...state.groupResults, action.newLunchGroup],
             lunchGroupUpdated: true,
        });
     } else if (action.type === LUNCH_GROUP_CREATE_ERROR) {
@@ -419,6 +433,7 @@ export default function authReducer(state=initialState, action) {
 export const getUserInfo = (authToken) => dispatch => {
     const decodedToken =jwtDecode(authToken);
     const userId = decodedToken.user.id
+    dispatch(profileRequest())
     return (
         fetch(`${API_BASE_URL}/users/${userId}`, {
             method: 'GET',
@@ -431,7 +446,7 @@ export const getUserInfo = (authToken) => dispatch => {
             .then(res => res.json())
             .then(userInfo => {
                 dispatch(profileLoad())
-                dispatch(authSuccess(userInfo))
+                dispatch(profileSuccess(userInfo))
             })
     )
 };
@@ -439,19 +454,14 @@ export const getUserInfo = (authToken) => dispatch => {
 
 
 //PROFILE FUNCTIONS
-export const profileEdit = () => (dispatch) => {
+export const profileEditToggle = () => (dispatch) => {
     dispatch(profileEditClick());
-}
-
-export const profileCancelEdit = () => (dispatch) => {
-    dispatch(profileEditCancel());
 }
 
 export const updateProfile = profile => (dispatch, getState) => {
     dispatch(profileUpdateRequest());
-    //can clean up with deconstructing (with  one get state)
-    const authToken = getState().auth.authToken;
-    const chefId = getState().auth.currentUser.id;
+    const { authToken , currentUser } = getState().auth;
+    const chefId = currentUser.id
     
     return fetch(`${API_BASE_URL}/users/${chefId}`, {
         method: 'PUT',
@@ -466,7 +476,9 @@ export const updateProfile = profile => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(updatedProfile => {
-        dispatch(profileSuccess(updatedProfile))}
+        dispatch(profileSuccess(updatedProfile))
+        dispatch(getLunchGroupResults())
+    }
     )
     .catch(err => {
         console.log(err);
@@ -484,13 +496,32 @@ export const updateProfile = profile => (dispatch, getState) => {
     })
 };
 
-//LUNCHGROUP FUNCTIONS
-export const lunchGroupCreate = () => (dispatch) => {
-    dispatch(lunchGroupCreateClick());
-}
+export const uploadProfileImage = profileImage => (dispatch, getState) => {
+    const { authToken , currentUser } = getState().auth;
+    const userId = currentUser.id
+    
+    dispatch(profileImageUpdateRequest());
+    return (
+            fetch(`${API_BASE_URL}/users/profileImage/${userId}`, {
+                method: 'PUT',
+                headers: {
+                        Authorization: `Bearer ${authToken}`,
+                },
+                body: profileImage,
+        
+            })
+            .then(res => normalizeResponseErrors(res))
+            .then(res => res.json()))
+        .then(res => {
+            dispatch(profileSuccess(res.profileImage))
+            dispatch(getUserInfo(authToken))}
+        )
+        .catch(error => console.log(error))
+};
 
-export const lunchGroupCancel = () => (dispatch) => {
-    dispatch(lunchGroupCreateCancel());
+//LUNCHGROUP FUNCTIONS
+export const lunchGroupCreateToggle = () => (dispatch) => {
+    dispatch(lunchGroupCreateClick());
 }
 
 export const getLunchGroupResults = () => dispatch => {
@@ -541,8 +572,8 @@ export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
     .then(res => res.json())
     .then(newGroup => {
         dispatch(lunchGroupCreateSuccess(newGroup))
-        dispatch(getLunchGroupResults())
-        dispatch(lunchGroupCancel())
+        // dispatch(getLunchGroupResults())
+        dispatch(lunchGroupCreateToggle())
     })
     .catch(err => {
         console.log(err);
@@ -560,7 +591,7 @@ export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
     })
 };
 
-export const filterLunchGroups = (searchTerm) => (dispatch, getState) => {
+export const filterLunchGroups = (searchTerm) => dispatch => {
     dispatch(lunchGroupGetFilter(searchTerm))
 }
 
@@ -641,11 +672,10 @@ export const editLunchGroupCancel= () => (dispatch) =>  {
 
 
 export const editLunchGroup = (groupUpdate) => (dispatch, getState) => {
-    const groupId = getState().auth.editGroupId; 
-    console.log(`editing lunch group: ${groupId}`)
+    const { authToken, editGroupId} = getState().auth;
+    console.log(`editing lunch group: ${editGroupId}`)
     dispatch(lunchGroupEditRequest());
-    const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/groups/${groupId}`, {
+    return fetch(`${API_BASE_URL}/groups/${editGroupId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

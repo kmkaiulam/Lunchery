@@ -1,20 +1,26 @@
 import React from 'react';
 import Profile from './profilePage/Profile';
 import ProfileForm from './profilePage/ProfileForm';
-import ProfilePicForm from './profilePage/ProfilePicForm';
+import ProfileImageForm from './profilePage/ProfileImageForm';
 import {connect} from 'react-redux';
-import {profileEdit, profileCancelEdit} from '../modules/auth';
+import {profileEditToggle} from '../modules/auth';
 import RequiresLogin from './RequiresLogin';
 import './ProfilePage.css';
+import Loading from '../components/Loading';
 
 export function ProfilePage(props) {
     let onClickEdit = () => {
-        props.dispatch(profileEdit())
+        props.dispatch(profileEditToggle())
     }
-    let onClickCancel = () => {
-        props.dispatch(profileCancelEdit())
-    }
-        if (props.currentUser.chefProfile.displayName ===''){
+    const {profileEdit, chefProfile, loading} = props
+        if(loading === true ) {
+            return (
+              <div className= 'loader'>
+                <Loading type='spinningBubbles' color='black' />
+             </div>
+            )
+        }
+        if (chefProfile.displayName ===''){
             return (
                 <div className='profilePage'> 
                     <div>Please Update your Chef Profile</div>
@@ -22,7 +28,7 @@ export function ProfilePage(props) {
                 </div>
             )
         }
-        if (props.profileEdit === false){
+        if (profileEdit === false){
             return (
                 <div className='profilePage'>
                     <Profile />
@@ -30,21 +36,25 @@ export function ProfilePage(props) {
                 </div>
             )
         }
-        else if (props.profileEdit === true) {
+        else if (profileEdit === true) {
             return (
                 <div className='profilePage'>
+                <div className='edit-column'>
                     <Profile /> 
-                    <button onClick={() => onClickCancel()}> Cancel Edit</button>
                     <ProfileForm /> 
-                    <ProfilePicForm />
+                </div>
+                    <button onClick={() => onClickEdit()}> Cancel Edit</button>
+                    <ProfileImageForm />
                 </div>
             )
         }
-    }
+}
+
 const mapStateToProps= state => {
     return {
+        loading: state.auth.loading,
         profileEdit: state.auth.profileEdit,
-        currentUser: state.auth.currentUser,
+        chefProfile: state.auth.currentUser.chefProfile,
         profilePicEdit: state.auth.profilePicEdit
     }
 }
