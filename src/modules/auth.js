@@ -2,8 +2,10 @@
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
+import {normalize} from 'normalizr'
 import {normalizeResponseErrors} from '../utils/error';
 import {saveAuthToken, clearAuthToken} from '../utils/auth';
+import groupsSchema from '../utils/normalize';
 
 // ----ACTIONS----
 //AUTHORIZATION
@@ -223,8 +225,10 @@ export const lunchGroupEditError = error => ({
     error
 });
 
-export const lunchGroupDeleteRequest = () => ({
+export const lunchGroupDeleteRequest = (groupId) => ({
     type: LUNCH_GROUP_DELETE_REQUEST,
+    groupId
+    
 });
 
 export const lunchGroupDeleteSuccess = () => ({
@@ -241,6 +245,7 @@ const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null,
     groupResults: null,
+    groupId: null,
     error: null,
     profileEdit: false,
     profilePicEdit: false,
@@ -346,10 +351,10 @@ export default function authReducer(state=initialState, action) {
             loading: true,
         });
     } else if (action.type === LUNCH_GROUP_CREATE_SUCCESS) {
-       // let updatedGroupResults = Object.assign({}, state.groupResults, action.newLunchGroup)
+        let updatedGroupResults = Object.assign({}, ...state.groupResults, [state, action.newLunchGroup])
         return Object.assign({}, state, {
             loading: false,
-            groupResults: [...state.groupResults, action.newLunchGroup],
+            groupResults: action.newLunchGroup,
             lunchGroupUpdated: true,
        });
     } else if (action.type === LUNCH_GROUP_CREATE_ERROR) {
@@ -415,10 +420,13 @@ export default function authReducer(state=initialState, action) {
     } else if (action.type === LUNCH_GROUP_DELETE_REQUEST) {
         return Object.assign({}, state, {
             loading: true,
+            groupId: action.groupId
         });
     } else if (action.type === LUNCH_GROUP_DELETE_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
+            groupResults: deleteSingleGroup(state.groupResults, state.groupId),
+            groupId: null
         });        
     } else if (action.type === LUNCH_GROUP_DELETE_ERROR) {
         return Object.assign({}, state, {
@@ -536,6 +544,8 @@ export const getLunchGroupResults = () => dispatch => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then(groupInfo => {
+            const normalizedGroupData = normalize(groupInfo, groupsSchema)
+            console.log(normalizedGroupData)
             console.log(groupInfo)
             dispatch(lunchGroupGetSuccess(groupInfo))
         }) 
@@ -571,8 +581,10 @@ export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(newGroup => {
+        console.log(newGroup)
         dispatch(lunchGroupCreateSuccess(newGroup))
         // dispatch(getLunchGroupResults())
+        console.log(getState().auth.groupResults)
         dispatch(lunchGroupCreateToggle())
     })
     .catch(err => {
@@ -707,7 +719,7 @@ export const editLunchGroup = (groupUpdate) => (dispatch, getState) => {
 
 export const deleteLunchGroup = (groupId) => (dispatch, getState) => {
     console.log(`deleting lunch group: ${groupId}`)
-    dispatch(lunchGroupDeleteRequest());
+    dispatch(lunchGroupDeleteRequest(groupId));
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/groups/${groupId}`, {
         method: 'DELETE',
@@ -720,7 +732,7 @@ export const deleteLunchGroup = (groupId) => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => {
         dispatch(lunchGroupDeleteSuccess())
-        dispatch(getLunchGroupResults())
+       // dispatch(getLunchGroupResults())
     })
     .catch(err => {
         console.log(err);
@@ -822,3 +834,9 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             clearAuthToken(authToken);
         });
 };
+
+function deleteSingleGroup(groups, groupId){
+    return groups.filter (groups => {
+        return groups._id !== groupId
+    })
+}
