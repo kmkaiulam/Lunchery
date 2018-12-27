@@ -16,7 +16,7 @@ export function Dashboard(props) {
     if(props.currentUser.chef === true && props.currentUser.chefProfile.displayName === '') {
         return  <Redirect to='/profilePage'/>
     }
-    if(!props.groupResults || props.lunchGroupUpdated === true) {
+    if(!props.groupResults) {
      props.dispatch(getLunchGroupResults());
         return ( <div className= 'loader'>
         <Loading type='spinningBubbles' color='black' />

@@ -14,7 +14,7 @@ export function LunchGroups(props) {
      }
     
     console.log(props.createLunchGroup);
-    if (props.lunchGroupUpdated === true || !props.groupResults || props.newLunchGroup !== null) {
+    if (!props.groupResults) {
         props.dispatch(getLunchGroupResults());
         return ( <div className= 'loader'>
         <Loading type='spinningBubbles' color='black' />

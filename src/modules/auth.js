@@ -166,7 +166,7 @@ export const lunchGroupCreateRequest = () => ({
 });
 
 export const lunchGroupCreateSuccess = newLunchGroup => ({
-    type: LUNCH_GROUP_CREATE_REQUEST,
+    type: LUNCH_GROUP_CREATE_SUCCESS,
     newLunchGroup
 });
 
@@ -309,10 +309,10 @@ export default function authReducer(state=initialState, action) {
             error: null
         });
     } else if (action.type === PROFILE_SUCCESS) {
-        let newUserInfo = Object.assign({}, state.currentUser, action.profileUpdate)
+        let newUserInfo = Object.assign({}, ...state.currentUser, action.profileUpdate)
         return Object.assign({}, state, {
             loading: false,
-            currentUser: newUserInfo,
+            currentUser: newUserInfo, // How do i have my action.profileUpdate create a copy and alter the object? need to write a function
             profileUpToDate: true,
             profileEdit: false,
         });
@@ -351,10 +351,9 @@ export default function authReducer(state=initialState, action) {
             loading: true,
         });
     } else if (action.type === LUNCH_GROUP_CREATE_SUCCESS) {
-        let updatedGroupResults = Object.assign({}, ...state.groupResults, [state, action.newLunchGroup])
         return Object.assign({}, state, {
             loading: false,
-            groupResults: action.newLunchGroup,
+            groupResults: [...state.groupResults, action.newLunchGroup],
             lunchGroupUpdated: true,
        });
     } else if (action.type === LUNCH_GROUP_CREATE_ERROR) {
@@ -583,8 +582,6 @@ export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
     .then(newGroup => {
         console.log(newGroup)
         dispatch(lunchGroupCreateSuccess(newGroup))
-        // dispatch(getLunchGroupResults())
-        console.log(getState().auth.groupResults)
         dispatch(lunchGroupCreateToggle())
     })
     .catch(err => {
@@ -840,3 +837,4 @@ function deleteSingleGroup(groups, groupId){
         return groups._id !== groupId
     })
 }
+

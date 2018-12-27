@@ -15,15 +15,6 @@ export class GroupResults  extends React.Component{
     }  
     //style the loader 
     render(){
-        // if (this.props.loading === true) {
-        //     this.props.dispatch(getLunchGroupResults());
-        //     return (
-        //     <div className= 'loader'>
-        //         <Loading type='spinningBubbles' color='black' />
-        //     </div>
-        //     )
-        // }
-        // else {
             let results= this.props.groupResults.filter(group => group.createdBy.chefProfile.company.toLowerCase().includes(this.props.searchTerm.toLowerCase())).sort((a,b) => sortByDate( a, b)).map((group, index) => 
                 <div key={index} className='groupResult card col-4'>
                     <div> Company: {group.createdBy.chefProfile.company} in {group.createdBy.chefProfile.location} </div>
@@ -45,12 +36,13 @@ export class GroupResults  extends React.Component{
                     <button onClick={() => this.onClickJoin(group._id)} disabled={seatVacancyCheck(group) === false || currentMembersCheck(group.members, this.props.currentUser.id) === true || groupCreatorCheck(group, this.props.currentUser.id) === true }  > Join this Group</button>
                 </div>
             )
-            return (
+        
+        return (
                 <div className='groupResults col-12'>
                     {results}
                 </div>
-            )    
-        }
+        )    
+    }
     
 }
 
