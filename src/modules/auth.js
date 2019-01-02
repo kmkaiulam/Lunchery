@@ -2,10 +2,9 @@
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
-import {normalize} from 'normalizr'
 import {normalizeResponseErrors} from '../utils/error';
 import {saveAuthToken, clearAuthToken} from '../utils/auth';
-import groupsSchema from '../utils/normalize';
+
 
 // ----ACTIONS----
 //AUTHORIZATION
@@ -244,6 +243,7 @@ export const lunchGroupDeleteError = error => ({
 const initialState = {
     authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null,
+    currentUserId: null,
     groupResults: null,
     groupId: null,
     error: null,
@@ -284,6 +284,7 @@ export default function authReducer(state=initialState, action) {
         return Object.assign({}, state, {
             authLoading: false,
             currentUser: action.currentUser,
+            currentUserId: action.currentUser.id
         });
     } else if (action.type === AUTH_ERROR) {
         return Object.assign({}, state, {
@@ -312,7 +313,7 @@ export default function authReducer(state=initialState, action) {
         let newUserInfo = Object.assign({}, ...state.currentUser, action.profileUpdate)
         return Object.assign({}, state, {
             loading: false,
-            currentUser: newUserInfo, // How do i have my action.profileUpdate create a copy and alter the object? need to write a function
+            currentUser: action.profileUpdate, 
             profileUpToDate: true,
             profileEdit: false,
         });
@@ -368,6 +369,7 @@ export default function authReducer(state=initialState, action) {
     } else if (action.type === LUNCH_GROUP_JOIN_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
+            groupResults: action.newLunchGroup,
             lunchGroupUpdated: true,
         });        
     } else if (action.type === LUNCH_GROUP_JOIN_ERROR) {
@@ -467,8 +469,8 @@ export const profileEditToggle = () => (dispatch) => {
 
 export const updateProfile = profile => (dispatch, getState) => {
     dispatch(profileUpdateRequest());
-    const { authToken , currentUser } = getState().auth;
-    const chefId = currentUser.id
+    const { authToken , currentUserId } = getState().auth;
+    const chefId = currentUserId
     
     return fetch(`${API_BASE_URL}/users/${chefId}`, {
         method: 'PUT',
@@ -484,7 +486,7 @@ export const updateProfile = profile => (dispatch, getState) => {
     .then(res => res.json())
     .then(updatedProfile => {
         dispatch(profileSuccess(updatedProfile))
-        dispatch(getLunchGroupResults())
+        //dispatch(getLunchGroupResults())
     }
     )
     .catch(err => {
@@ -504,8 +506,8 @@ export const updateProfile = profile => (dispatch, getState) => {
 };
 
 export const uploadProfileImage = profileImage => (dispatch, getState) => {
-    const { authToken , currentUser } = getState().auth;
-    const userId = currentUser.id
+    const { authToken , currentUserId } = getState().auth;
+    const userId = currentUserId
     
     dispatch(profileImageUpdateRequest());
     return (
@@ -543,9 +545,6 @@ export const getLunchGroupResults = () => dispatch => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then(groupInfo => {
-            const normalizedGroupData = normalize(groupInfo, groupsSchema)
-            console.log(normalizedGroupData)
-            console.log(groupInfo)
             dispatch(lunchGroupGetSuccess(groupInfo))
         }) 
         .catch(err => {
@@ -637,7 +636,7 @@ export const joinLunchGroup = (groupId) => (dispatch, getState) => {
         );
     })
 };
-
+// NEED TO FIX THIS ONE
 export const leaveLunchGroup = (groupId) => (dispatch, getState) => {
     console.log(`leaving lunch group: ${groupId}`)
     dispatch(lunchGroupLeaveRequest());
