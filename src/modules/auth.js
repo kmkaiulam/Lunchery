@@ -22,6 +22,7 @@ export const LANDING_INFO_CLICK = 'app/auth/LANDING_INFO_CLICK';
 export const PROFILE_REQUEST= 'app/auth/PROFILE_REQUEST'
 export const PROFILE_LOAD = 'app/auth/PROFILE_LOAD';
 export const PROFILE_EDIT_CLICK = 'app/auth/PROFILE_EDIT_CLICK';
+export const PROFILE_IMAGE_UPDATE_CLICK= 'app/auth/PROFILE_IMAGE_UPDATE_CLICK';
 export const PROFILE_UPDATE_REQUEST = 'app/auth/PROFILE_UPDATE_REQUEST';
 export const PROFILE_UPDATE_SUCCESS= 'app/auth/PROFILE_UPDATE_SUCCESS';
 export const PROFILE_IMAGE_UPDATE_REQUEST = 'app/auth/PROFILE_IMAGE_UPDATE_REQUEST';
@@ -105,6 +106,10 @@ export const profileRequest = () => ({
 
 export const profileEditClick = () => ({
     type: PROFILE_EDIT_CLICK
+});
+
+export const profileImageUpdateClick = () => ({
+    type: PROFILE_IMAGE_UPDATE_CLICK
 });
 
 export const profileUpdateRequest = () => ({
@@ -248,6 +253,7 @@ const initialState = {
     error: null,
     profileUpToDate: false,
     profileEdit: false,
+    profileImageEdit: false,
     createLunchGroup: false,
     lunchGroupUpdated: false,
     authLoading: false,
@@ -303,8 +309,13 @@ export default function authReducer(state=initialState, action) {
     });
     } else if (action.type === PROFILE_EDIT_CLICK) {
             return Object.assign({}, state, {
-                profileEdit: (!state.profileEdit)
+                profileEdit: (!state.profileEdit),
+                profileImageEdit:false
         });
+    } else if (action.type === PROFILE_IMAGE_UPDATE_CLICK) {
+        return Object.assign({}, state, {
+            profileImageEdit: (!state.profileImageEdit)
+    });
     } else if (action.type === PROFILE_UPDATE_REQUEST) {
         return Object.assign({}, state, {
             loading: true,
@@ -315,7 +326,8 @@ export default function authReducer(state=initialState, action) {
             loading: false,
             currentUser: action.profileUpdate, 
             profileEdit: false,
-            profileUpToDate: false
+            profileUpToDate: false,
+            profileImageEdit:false
         });
     } else if (action.type === PROFILE_SUCCESS) {
         return Object.assign({}, state, {
@@ -474,6 +486,10 @@ export const infoClick= () => (dispatch) => {
 //PROFILE FUNCTIONS
 export const profileEditToggle = () => (dispatch) => {
     dispatch(profileEditClick());
+}
+
+export const profileImageEditToggle = () => (dispatch) => {
+    dispatch(profileImageUpdateClick());
 }
 
 export const updateProfile = profile => (dispatch, getState) => {

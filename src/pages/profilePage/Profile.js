@@ -3,6 +3,7 @@ import './Profile.css';
 import {AMZ_S3_URL} from '../../config';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../modules/auth';
+
 export function Profile(props) {
     const {authToken, profileUpToDate, chefProfile } = props
     if (profileUpToDate === false) {

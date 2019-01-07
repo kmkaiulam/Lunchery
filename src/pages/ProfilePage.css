@@ -2,7 +2,12 @@
   margin-top: 20px;
    
 }
+
+.profile-image-form{
+  margin-top: 50px;
+}
 .edit-column{
     display: flex;
     justify-content: center;
+    flex-wrap:wrap;
 }
