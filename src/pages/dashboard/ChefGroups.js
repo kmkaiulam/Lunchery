@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {groupCreatorCheck, convertDate, membersPresent, sortByDate} from '../../utils/common';
-import './MyGroups.css';
-import LunchGroupEditForm from './LunchGroupEditForm';
+import './ChefGroups.css';
+import LunchGroupEditForm from './LunchGroupEditForm'
 import { deleteLunchGroup, editLunchGroupClick, editLunchGroupCancel } from '../../modules/auth';
 
 export class ChefGroups extends React.Component {
@@ -16,12 +16,33 @@ export class ChefGroups extends React.Component {
         this.props.dispatch(editLunchGroupCancel())
     }
     render(){
-       
         const  {groupResults, currentUser, editGroupId, isChef }= this.props
         let chefGroups;
         if (!editGroupId) {
-            chefGroups = groupResults.filter(group => groupCreatorCheck( group, currentUser.id) === true).sort((a,b) => sortByDate(a,b)).map((group, index) => 
-                <div key={index} className='myGroups'>
+
+            // Grabbing Unique Members
+            let myOwnGroups = groupResults.filter(group => groupCreatorCheck( group, currentUser.id) === true).sort((a,b) => sortByDate(a,b));
+            let memberArray = [];
+            myOwnGroups.forEach(group => {
+                memberArray.push(group.members)
+            })
+           
+            let newArray = [];
+            for ( let i= 0; i < memberArray.length; i++) {
+                 for ( let j= 0; j <memberArray[i].length; j++) {
+                     newArray.push(memberArray[i][j].username)
+                 }
+            }
+           let myMembers= [...new Set(newArray)]; 
+       
+           let myGroupMembers = myMembers.map((user, index) => 
+             <div key={index} className= 'members-only'> 
+                <div> {user} </div>
+            </div>
+            )
+            
+            chefGroups = myOwnGroups.map((group, index) => 
+                <div key={index}  className='chef-group'>
                     <div> Date: {convertDate(group.lunchDate)} @ {group.lunchTime}</div>
                     <div> Location: {group.lunchLocation}</div>
                     <div> Menu: {group.menu} </div>
@@ -32,16 +53,16 @@ export class ChefGroups extends React.Component {
                 </div>
             )
            return (
-                <div hidden={isChef === false} className='chefsGroups'>
+                <div hidden={isChef === false} className='chef-groups'>
                     <h2> Chef's Groups </h2>
                     {chefGroups}
+                    <h2> My Members </h2>
+                    {myGroupMembers}  
                </div>
            ) 
         }
-
-        if (editGroupId) {
-
-            chefGroups = groupResults.sort((a,b) => sortByDate(a,b)).map((group, index) => {
+        else {
+            chefGroups = groupResults.sort((a,b) => sortByDate(a,b)).map((group, index) => 
             <div key={index} hidden={group._id !== editGroupId} className='myGroups'>
                     <div> Date: {convertDate(group.lunchDate)}</div>
                     <div> Location: {group.lunchLocation} @ {group.lunchTime}</div>
@@ -50,7 +71,7 @@ export class ChefGroups extends React.Component {
                     <div> Seat Limit: ${group.seatLimit}</div>
                     <div> EDITING THIS GROUP</div>
             </div>
-            })
+            )
        return (
             <div hidden={ isChef=== false} className='chefsGroups'>
                 <h2> Chef's Groups </h2>

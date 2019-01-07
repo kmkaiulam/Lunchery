@@ -21,6 +21,7 @@ export class ProfileForm extends React.Component{
                 )}>
                 <label  htmlFor='displayName'>Name</label>
                 <Field 
+                    className='field-input' 
                     component={Input}
                     type='text'
                     name='displayName'
@@ -44,7 +45,7 @@ export class ProfileForm extends React.Component{
                     name='bio'
                 /> 
                  <label  htmlFor='style'>Style</label>
-                <Field 
+                <Field
                     component={Input}
                     type='text'
                     name='style'

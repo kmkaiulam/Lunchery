@@ -4,7 +4,7 @@ import {AMZ_S3_URL} from '../../config';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../modules/auth';
 export function Profile(props) {
-    const {authToken, chefProfile, profileUpToDate, } = props
+    const {authToken, profileUpToDate, chefProfile } = props
     if (profileUpToDate === false) {
         props.dispatch(getUserInfo(authToken));
         return <div>Loading...</div>
@@ -22,10 +22,7 @@ export function Profile(props) {
                 <div className='profile-bio'>
                     <div>{chefProfile.bio}</div>   
                 </div> 
-                <h2>Style</h2>
-                <div className='style'>
-                    {chefProfile.style}  
-                </div>
+                <h2>Style: {chefProfile.style}</h2>
             </div>
         )
     }

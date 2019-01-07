@@ -1,15 +1,13 @@
-.row{
-    display:flex;
-    justify-content: center;
-}
 .dashboard{
     margin-top:20px;
 }
 .calendar-component{
-    margin:0 auto;
+    margin:20px auto;
 }
 
-.two-column{
-    display:flex;
-    justify-content:space-around;
+.page-element{
+    border:black solid 1px;
+    margin: 20px auto;
+    width: 80%;
+    padding-bottom: 20px;
 }

@@ -2,17 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {filterUserGroups, convertDate, sortByDate} from '../../utils/common';
 import './MyGroups.css';
-import { leaveLunchGroup, getLunchGroupResults } from '../../modules/auth';
+import { leaveLunchGroup} from '../../modules/auth';
 
 export class MyGroups extends React.Component {
     onClickLeave= (groupId) => {
         this.props.dispatch(leaveLunchGroup(groupId))
-        this.props.dispatch(getLunchGroupResults());
     }
     render(){
         let myGroupsObj = filterUserGroups(this.props.groupResults, this.props.currentUser.id)
          let myGroups = myGroupsObj.sort((a,b) => sortByDate(a,b)).map((group, index) => 
-                <div key={index} className='myGroups'>
+                <div key={index} className='my-group'>
                     <div> Company: {group.createdBy.chefProfile.company} in {group.createdBy.chefProfile.location} </div>
                     <div> Date: {convertDate(group.lunchDate)} @ {group.lunchTime}</div>
                     <div> Location: {group.lunchLocation}</div>
@@ -23,9 +22,11 @@ export class MyGroups extends React.Component {
                 </div>
         )
         return (
-                <div className='myGroups'>
+                <div>
                     <h2> My Groups </h2>
-                    {myGroups} 
+                    <div className ='my-groups'>
+                        {myGroups}
+                    </div> 
                </div>
         ) 
     }

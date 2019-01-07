@@ -11,15 +11,16 @@ export function NavBar(props) {
   }
   return (
     <nav>
-        <div id='menu'>
+        <div id='nav-menu'>
             <Link to='/' className='menuitem'>About</Link>
             <Link hidden={!props.currentUser} to='/dashboard' className='menuitem'> Dashboard</Link>
             <Link hidden={!props.currentUser} to='/lunchgroups' className='menuitem'> Lunch Groups</Link>
             <Link hidden={props.currentUser} to='/registration' className='menuitem'>Registration</Link>
             <Link hidden={props.currentUser} to='/login' className='menuitem'>Login</Link>
             <Link hidden={!props.currentUser || props.currentUser.chef === false}to='/profilepage' className='menuitem'> Profile Page</Link>
-            <button hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
+            <button className='menuitem' hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
         </div>
+       
   </nav>
   
   )

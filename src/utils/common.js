@@ -68,6 +68,15 @@ export const groupCreatorCheck = (group, myId) => {
    }
 };
 
+export const hasActiveGroups = (groups, myId) => {
+   if(groups.filter(group => groupCreatorCheck( group, myId) === true).length === 0) {
+       return false;
+   }
+   else if (groups.filter(group => groupCreatorCheck( group, myId) === true).length > 0) {
+       return true;
+   }
+}
+
 export const membersPresent = group => {
     if(group.members.length > 0) {
         return true;

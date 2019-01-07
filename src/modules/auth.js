@@ -15,25 +15,24 @@ export const AUTH_REQUEST = 'app/auth/AUTH_REQUEST';
 export const AUTH_SUCCESS = 'app/auth/AUTH_SUCCESS';
 export const AUTH_ERROR = 'app/auth/AUTH_ERROR';
  
+//INFO
+export const LANDING_INFO_CLICK = 'app/auth/LANDING_INFO_CLICK';
 
 //PROFILE
 export const PROFILE_REQUEST= 'app/auth/PROFILE_REQUEST'
 export const PROFILE_LOAD = 'app/auth/PROFILE_LOAD';
 export const PROFILE_EDIT_CLICK = 'app/auth/PROFILE_EDIT_CLICK';
 export const PROFILE_UPDATE_REQUEST = 'app/auth/PROFILE_UPDATE_REQUEST';
+export const PROFILE_UPDATE_SUCCESS= 'app/auth/PROFILE_UPDATE_SUCCESS';
 export const PROFILE_IMAGE_UPDATE_REQUEST = 'app/auth/PROFILE_IMAGE_UPDATE_REQUEST';
 export const PROFILE_SUCCESS = 'app/auth/PROFILE_SUCCESS';
 export const PROFILE_ERROR = 'app/auth/PROFILE_ERROR';
 
-
-// export const PROFILE_IMAGE_UPDATE = 'app/auth/PROFILE_IMAGE_UPDATE';
-// export const PROFILE_IMAGE_UPDATE_SUCCESS = 'app/auth/PROFILE_IMAGE_UPDATE_SUCCESS';
-// export const PROFILE_IMAGE_UPDATE_ERROR = 'app/auth/PROFILE_IMAGE_UPDATE_ERROR';
 //LUNCH GROUP
 export const LUNCH_GROUP_GET_FILTER = 'app/auth/LUNCH_GROUP_FILTER';
 export const LUNCH_GROUP_GET_REQUEST = 'app/auth/LUNCH_GROUP_REQUEST';
-export const LUNCH_GROUP_GET_SUCCESS = 'app/auth/LUNCH_GROUP_SUCCESS';
-export const LUNCH_GROUP_GET_ERROR = 'app/auth/LUNCH_GROUP_ERROR';
+export const LUNCH_GROUP_GET_SUCCESS = 'app/auth/LUNCH_GROUP_GET_SUCCESS';
+export const LUNCH_GROUP_GET_ERROR = 'app/auth/LUNCH_GROUP_GET_ERROR';
 
 export const LUNCH_GROUP_CREATE_CLICK = 'app/auth/LUNCH_GROUP_CREATE_CLICK';
 export const LUNCH_GROUP_CREATE_CANCEL= 'app/auth/LUNCH_GROUP_CREATE_CANCEL';
@@ -89,6 +88,12 @@ export const authError = error => ({
     error
 });
 
+// INFO
+export const landingInfoClick = () => ({
+    type: LANDING_INFO_CLICK
+});
+
+
 //PROFILE
 export const profileLoad = () => ({
     type: PROFILE_LOAD
@@ -104,11 +109,18 @@ export const profileEditClick = () => ({
 
 export const profileUpdateRequest = () => ({
     type: PROFILE_UPDATE_REQUEST
+    
 });
 
-export const profileSuccess = profileUpdate => ({
-    type: PROFILE_SUCCESS,
+export const profileUpdateSuccess = profileUpdate => ({
+    type: PROFILE_UPDATE_SUCCESS,
     profileUpdate
+});
+
+
+export const profileSuccess = profileInfo => ({
+    type: PROFILE_SUCCESS,
+    profileInfo
 });
 
 export const profileError = error => ({
@@ -116,23 +128,9 @@ export const profileError = error => ({
     error
 });
 
-// export const profileImageUpdate = boolean => ({
-//     type: PROFILE_IMAGE_UPDATE, 
-//     data: boolean
-// });
-
 export const profileImageUpdateRequest = () => ({
     type: PROFILE_IMAGE_UPDATE_REQUEST
 });
-
-// export const profileImageUpdateSuccess = (link) => ({
-//     type: PROFILE_IMAGE_UPDATE_SUCCESS, data: link
-// });
-
-// export const profileImageUpdateError = error => ({
-//     type: PROFILE_IMAGE_UPDATE_ERROR,
-//     error
-// });
 
 
 //LUNCHGROUP
@@ -192,8 +190,9 @@ export const lunchGroupLeaveRequest = () => ({
     type: LUNCH_GROUP_LEAVE_REQUEST
 });
 
-export const lunchGroupLeaveSuccess = () => ({
-    type: LUNCH_GROUP_LEAVE_SUCCESS
+export const lunchGroupLeaveSuccess = (updatedLunchGroups) => ({
+    type: LUNCH_GROUP_LEAVE_SUCCESS,
+    updatedLunchGroups
 });
 
 export const lunchGroupLeaveError = error => ({
@@ -214,9 +213,9 @@ export const lunchGroupEditRequest = () => ({
     type: LUNCH_GROUP_EDIT_REQUEST
 });
 
-export const lunchGroupEditSuccess = lunchGroupEdit => ({
+export const lunchGroupEditSuccess = updatedGroups => ({
     type: LUNCH_GROUP_EDIT_SUCCESS,
-    lunchGroupEdit
+    updatedGroups
 });
 
 export const lunchGroupEditError = error => ({
@@ -247,16 +246,15 @@ const initialState = {
     groupResults: null,
     groupId: null,
     error: null,
-    profileEdit: false,
-    profilePicEdit: false,
     profileUpToDate: false,
+    profileEdit: false,
     createLunchGroup: false,
     lunchGroupUpdated: false,
     authLoading: false,
     loading:false,
     searchTerm:'',
-    newLunchGroup:null,
     editGroupId: null,
+    infoForChef: false,
 };
 
 
@@ -291,10 +289,13 @@ export default function authReducer(state=initialState, action) {
             authLoading: false,
             error: action.error
         });
+    } else if (action.type === LANDING_INFO_CLICK) {
+        return Object.assign({}, state, {
+            infoForChef: (!state.infoForChef)
+        });
     } else if (action.type === PROFILE_LOAD) {
         return Object.assign({}, state, {
             loading:true,
-            profileUpToDate: true,
         });
     } else if (action.type === PROFILE_REQUEST) {
         return Object.assign({}, state, {
@@ -309,13 +310,18 @@ export default function authReducer(state=initialState, action) {
             loading: true,
             error: null
         });
-    } else if (action.type === PROFILE_SUCCESS) {
-        let newUserInfo = Object.assign({}, ...state.currentUser, action.profileUpdate)
+    } else if (action.type === PROFILE_UPDATE_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
             currentUser: action.profileUpdate, 
-            profileUpToDate: true,
             profileEdit: false,
+            profileUpToDate: false
+        });
+    } else if (action.type === PROFILE_SUCCESS) {
+        return Object.assign({}, state, {
+            loading: false,
+            currentUser: action.profileInfo, 
+            profileUpToDate: true
         });
     } else if (action.type === PROFILE_ERROR) {
         return Object.assign({}, state, {
@@ -332,7 +338,6 @@ export default function authReducer(state=initialState, action) {
             loading: false,
             groupResults: action.groupResults, 
             lunchGroupUpdated: false,
-            newLunchGroup: null,
         });
     } else if (action.type === LUNCH_GROUP_GET_ERROR) {
         return Object.assign({}, state, {
@@ -355,7 +360,7 @@ export default function authReducer(state=initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             groupResults: [...state.groupResults, action.newLunchGroup],
-            lunchGroupUpdated: true,
+            profileEdit: false,
        });
     } else if (action.type === LUNCH_GROUP_CREATE_ERROR) {
         return Object.assign({}, state, {
@@ -370,7 +375,6 @@ export default function authReducer(state=initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             groupResults: action.newLunchGroup,
-            lunchGroupUpdated: true,
         });        
     } else if (action.type === LUNCH_GROUP_JOIN_ERROR) {
         return Object.assign({}, state, {
@@ -384,6 +388,7 @@ export default function authReducer(state=initialState, action) {
     } else if (action.type === LUNCH_GROUP_LEAVE_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
+            groupResults: action.updatedLunchGroups
         });        
     } else if (action.type === LUNCH_GROUP_LEAVE_ERROR) {
         return Object.assign({}, state, {
@@ -405,6 +410,7 @@ export default function authReducer(state=initialState, action) {
     } else if (action.type === LUNCH_GROUP_EDIT_SUCCESS) {
         return Object.assign({}, state, {
             loading: false,
+            groupResults: action.updatedGroups,
             editGroupId: null
         });      
     } else if (action.type === LUNCH_GROUP_EDIT_ERROR) {
@@ -453,14 +459,17 @@ export const getUserInfo = (authToken) => dispatch => {
         })
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(userInfo => {
+            .then(profileInfo => {
                 dispatch(profileLoad())
-                dispatch(profileSuccess(userInfo))
+                dispatch(profileSuccess(profileInfo))
             })
     )
 };
 
-
+//INFO FUNCTION
+export const infoClick= () => (dispatch) => {
+    dispatch(landingInfoClick());
+}
 
 //PROFILE FUNCTIONS
 export const profileEditToggle = () => (dispatch) => {
@@ -485,10 +494,8 @@ export const updateProfile = profile => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(updatedProfile => {
-        dispatch(profileSuccess(updatedProfile))
-        //dispatch(getLunchGroupResults())
-    }
-    )
+        dispatch(profileUpdateSuccess(updatedProfile))
+    })
     .catch(err => {
         console.log(err);
         const {code} = err;
@@ -521,12 +528,25 @@ export const uploadProfileImage = profileImage => (dispatch, getState) => {
             })
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json()))
-        .then(res => {
-            dispatch(profileSuccess(res.profileImage))
-            dispatch(getUserInfo(authToken))}
-        )
-        .catch(error => console.log(error))
+        .then(updatedProfile => {
+            dispatch(profileUpdateSuccess(updatedProfile))
+        })
+        .catch(err => {
+            console.log(err);
+            const {code} = err;
+            const message =
+                code === 401
+                    ? 'Cannot update'
+                    : 'please try again';
+            dispatch(profileError(err));
+            return Promise.reject(
+                new SubmissionError({
+                    _error: message
+                })
+            );
+        })
 };
+
 
 //LUNCHGROUP FUNCTIONS
 export const lunchGroupCreateToggle = () => (dispatch) => {
@@ -579,7 +599,6 @@ export const createNewGroup = (newLunchGroup) => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(newGroup => {
-        console.log(newGroup)
         dispatch(lunchGroupCreateSuccess(newGroup))
         dispatch(lunchGroupCreateToggle())
     })
@@ -618,7 +637,6 @@ export const joinLunchGroup = (groupId) => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(newGroup => {
-        console.log(newGroup)
         dispatch(lunchGroupJoinSuccess(newGroup))
     })
     .catch(err => {
@@ -636,7 +654,7 @@ export const joinLunchGroup = (groupId) => (dispatch, getState) => {
         );
     })
 };
-// NEED TO FIX THIS ONE
+
 export const leaveLunchGroup = (groupId) => (dispatch, getState) => {
     console.log(`leaving lunch group: ${groupId}`)
     dispatch(lunchGroupLeaveRequest());
@@ -650,9 +668,9 @@ export const leaveLunchGroup = (groupId) => (dispatch, getState) => {
         body: JSON.stringify()
     })
     .then(res => normalizeResponseErrors(res))
-    .then(res => {
-        dispatch(lunchGroupLeaveSuccess())
-        dispatch(getLunchGroupResults())
+    .then(res => res.json())
+    .then(updatedLunchGroups => {
+        dispatch(lunchGroupLeaveSuccess(updatedLunchGroups))
     })
     .catch(err => {
         console.log(err);
@@ -691,10 +709,9 @@ export const editLunchGroup = (groupUpdate) => (dispatch, getState) => {
         },
         body: JSON.stringify(groupUpdate)
     })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => {
-        dispatch(lunchGroupEditSuccess())
-        dispatch(getLunchGroupResults())
+    .then(res =>  res.json())
+    .then(updatedLunchGroups => {
+        dispatch(lunchGroupEditSuccess(updatedLunchGroups))
     })
     .catch(err => {
         console.log(err);
@@ -728,7 +745,6 @@ export const deleteLunchGroup = (groupId) => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => {
         dispatch(lunchGroupDeleteSuccess())
-       // dispatch(getLunchGroupResults())
     })
     .catch(err => {
         console.log(err);

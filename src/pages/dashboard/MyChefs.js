@@ -29,12 +29,16 @@ export class MyChefs extends React.Component {
                     
              </div> 
         )
-     return (
-               <div className='myChefs'>
-               <h2> My Chefs </h2>
-                    {myChefs} 
-               </div>
-    )};   
+        return (
+               <div>
+                <h2> My Chefs </h2>
+                <div className='my-chefs'>
+                    {myChefs}
+                </div> 
+               </div> 
+        )
+
+    }
     }
 }
 const mapStateToProps= state => ({

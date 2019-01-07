@@ -3,7 +3,8 @@ import Profile from './profilePage/Profile';
 import ProfileForm from './profilePage/ProfileForm';
 import ProfileImageForm from './profilePage/ProfileImageForm';
 import {connect} from 'react-redux';
-import {profileEditToggle} from '../modules/auth';
+import {profileEditToggle, getLunchGroupResults, getUserInfo} from '../modules/auth';
+import {hasActiveGroups} from '../utils/common';
 import RequiresLogin from './RequiresLogin';
 import './ProfilePage.css';
 import Loading from '../components/Loading';
@@ -12,13 +13,14 @@ export function ProfilePage(props) {
     let onClickEdit = () => {
         props.dispatch(profileEditToggle())
     }
-    const {profileEdit, chefProfile, loading} = props
-        if(loading === true ) {
+    const {profileEdit , chefProfile, groupResults, currentUserId} = props
+        if (!groupResults) {
+            props.dispatch(getLunchGroupResults());
             return (
-              <div className= 'loader'>
-                <Loading type='spinningBubbles' color='black' />
-             </div>
-            )
+            <div className= 'loader'>
+              <Loading type='spinningBubbles' color='black' />
+           </div>
+          )
         }
         if (chefProfile.displayName ===''){
             return (
@@ -32,7 +34,8 @@ export function ProfilePage(props) {
             return (
                 <div className='profilePage'>
                     <Profile />
-                    <button onClick={() => onClickEdit()}> Edit Profile </button>
+                    <button onClick={() => onClickEdit()} disabled={hasActiveGroups(groupResults,currentUserId) === true}> Edit Profile </button>
+                    <p hidden={hasActiveGroups(groupResults, currentUserId) === false}> Note: Cannot edit profile while having active groups</p>
                 </div>
             )
         }
@@ -52,10 +55,11 @@ export function ProfilePage(props) {
 
 const mapStateToProps= state => {
     return {
-        loading: state.auth.loading,
+        authToken: state.auth.authToken,
+        currentUserId: state.auth.currentUserId,
+        chefProfile:state.auth.currentUser.chefProfile,
         profileEdit: state.auth.profileEdit,
-        chefProfile: state.auth.currentUser.chefProfile,
-        profilePicEdit: state.auth.profilePicEdit
+        groupResults: state.auth.groupResults
     }
 }
 export default RequiresLogin()(connect(mapStateToProps)(ProfilePage))

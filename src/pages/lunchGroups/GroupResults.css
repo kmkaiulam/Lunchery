@@ -1,14 +1,6 @@
 .noVacancy{
     color:red;
     background-color: white;
-
-}
-.groupResults{
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:center;
-    max-width: 900px;
 }
 
 .card{
@@ -26,12 +18,14 @@
 }
 .groupResult{
     padding:20px;
+    margin:0 auto;
+    min-width:300px;
   
     
 }
 
-.col-4{
-    width: 33%;
+.col-9{
+    width: 75%;
 }
 .col-12{
     width:100%;

@@ -1,7 +1,6 @@
 import React from 'react';
-import Loading from 'react-loading';
 import {connect} from 'react-redux';
-import {joinLunchGroup, getLunchGroupResults} from '../../modules/auth'
+import {joinLunchGroup} from '../../modules/auth'
 import {convertDate, seatsAvailable, seatVacancyCheck, currentMembersCheck, groupCreatorCheck, sortByDate} from '../../utils/common';
 import './GroupResults.css';
 
@@ -16,7 +15,7 @@ export class GroupResults  extends React.Component{
     //style the loader 
     render(){
             let results= this.props.groupResults.filter(group => group.createdBy.chefProfile.company.toLowerCase().includes(this.props.searchTerm.toLowerCase())).sort((a,b) => sortByDate( a, b)).map((group, index) => 
-                <div key={index} className='groupResult card col-4'>
+                <div key={index} className='groupResult card col-9'>
                     <div> Company: {group.createdBy.chefProfile.company} in {group.createdBy.chefProfile.location} </div>
                     <div> Date: {convertDate(group.lunchDate)}</div>
                     <div> Location: {group.lunchLocation} @ {group.lunchTime}</div>

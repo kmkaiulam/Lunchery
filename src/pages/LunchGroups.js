@@ -23,11 +23,11 @@ export function LunchGroups(props) {
     }
     if (props.createLunchGroup === true) {
         return (
-            <div className='lunchGroups lunchGroupForm'>
+            <div className='lunchGroups'>
               <h1>Create A New Lunch Group</h1> 
                 <LunchGroupForm />
-                <GroupResults />
                 <button onClick={() => onClickCreate()}> Cancel </button>
+                <GroupResults />
             </div>
         )
     }
@@ -38,7 +38,6 @@ export function LunchGroups(props) {
         <button onClick={() => onClickCreate()} hidden={!props.currentUser.chef}> Create a New Group </button>
         <GroupSearchInput />
         <GroupResults />
-            <button onClick={() => onClickCreate()} hidden={!props.currentUser.chef}> Create a New Group </button>
         </div>    
     );
 }
@@ -50,9 +49,7 @@ const mapStateToProps= state => {
         profileEdit: state.auth.profileEdit,
         currentUser: state.auth.currentUser,
         createLunchGroup: state.auth.createLunchGroup,
-        lunchGroupUpdated: state.auth.lunchGroupUpdated,
         groupResults: state.auth.groupResults,
-        newLunchGroup: state.auth.newLunchGroup
     }
 }
 export default RequiresLogin()(connect(mapStateToProps)(LunchGroups))

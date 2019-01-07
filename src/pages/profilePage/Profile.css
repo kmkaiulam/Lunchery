@@ -8,3 +8,9 @@
 .profileImage{
     height: 200px;
 }
+
+@media (max-width: 720px){
+    .profileImage{
+        height: 125px;
+    }
+}
