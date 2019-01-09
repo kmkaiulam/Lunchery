@@ -3,21 +3,34 @@ import {connect} from 'react-redux';
 import ForDiners from './landing/ForDiners';
 import ForChefs from './landing/ForChefs';
 import WhatIsLunchery from './landing/WhatIsLunchery';
-import {infoClick} from '../modules/auth'
+import {infoClick, login} from '../modules/auth'
 import './Landing.css';
+
 
 export class Landing extends React.Component {
   render(){
+  
+    let onClickDinerDemo = () => {
+        this.props.dispatch(login('GuestDiner', '123123'))
+  
+    }
+    let onClickChefDemo = () => {
+        this.props.dispatch(login('GuestChef', 'password'))
+    }
+
     let onClickInfo = () => {
       this.props.dispatch(infoClick())
-      console.log(this.props.infoForChef)
-  }
-    if(this.props.infoForChef === false) {
+    }
+
+    if( this.props.infoForChef === false) {
       return (
         <div className='landing'>
         <WhatIsLunchery />
+        <div className='landing-buttons'> 
          <button onClick={() => onClickInfo()} > Chef Info </button>
-          <ForDiners />
+         <button className='demo-button' onClick={() => onClickDinerDemo()} > Diner Demo </button>
+        </div>
+        <ForDiners />
         </div>
       )
     }
@@ -25,11 +38,14 @@ export class Landing extends React.Component {
       return (
         <div className='landing'>
           <WhatIsLunchery />
-          <button onClick={() => onClickInfo()} > Diner Info </button>
-          <ForChefs />       
+          <div className='landing-buttons'> 
+            <button onClick={() => onClickInfo()} > Diner Info </button>
+            <button className= 'demo-button' onClick={() => onClickChefDemo()} > Chef Demo </button>
+          </div>
+          <ForChefs />
         </div>
       )
-    }
+  }
 }
 
    
@@ -37,8 +53,9 @@ export class Landing extends React.Component {
 
 const mapStateToProps = state => {
   return{
-    infoForChef: state.auth.infoForChef
-}};
+    infoForChef: state.auth.infoForChef,
+  }
+}
 
 
 export default connect(mapStateToProps)(Landing);

@@ -50,7 +50,7 @@ export function ProfilePage(props) {
                     <Profile /> 
                     <ProfileForm /> 
                 </div>
-                    <button onClick={() => onClickEdit()}> Cancel Edit</button>
+                    <button className='cancel-button' onClick={() => onClickEdit()}> Cancel Edit</button>
                 </div>
             )
         }
@@ -61,7 +61,7 @@ export function ProfilePage(props) {
                     <Profile /> 
                     <div className='profile-image-form'>
                      <ProfileImageForm />
-                     <button onClick={() => onClickEditImage()}> Cancel Edit</button>
+                     <button className='cancel-button' onClick={() => onClickEditImage()}> Cancel Edit</button>
                     </div>
                 </div>
                    

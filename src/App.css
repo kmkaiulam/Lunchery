@@ -2,6 +2,12 @@
   text-align: center;
 }
 
+.loader{
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
 .two-column{
   display: flex;
   justify-content: center;
@@ -24,6 +30,7 @@ input{
   width : 300px !important;
   height:40px;
   margin: 5px 0;
+  text-align:center;
 
   -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
      -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */

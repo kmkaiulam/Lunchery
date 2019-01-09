@@ -1,5 +1,4 @@
 import React from 'react';
-import './GroupSearchInput.css';
 import {connect} from 'react-redux';
 import {filterLunchGroups} from '../../modules/auth';
 

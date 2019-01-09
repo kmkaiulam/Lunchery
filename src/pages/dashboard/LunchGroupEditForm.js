@@ -2,7 +2,6 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../../components/Input';
 import {editLunchGroup} from '../../modules/auth';
-import './LunchGroupEditForm.css'
 import {checkDate} from '../../utils/validators';
 
 export class LunchGroupEditForm extends React.Component{

@@ -3,7 +3,6 @@ import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../../components/Input';
 import {required, nonEmpty, checkDate} from '../../utils/validators';
 import {createNewGroup} from '../../modules/auth';
-import './LunchGroupForm.css'
 
 
 export class LunchGroupForm extends React.Component{

@@ -5,6 +5,11 @@
     margin-right:20px;
 }
 
+.landing-buttons{
+    display:flex;
+    margin-top:20px;
+}
+
 .lunchery-what{
     margin-top:50px;
 
