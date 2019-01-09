@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
+        <div role='main' className="App">
           <NavBar />
         <div className = 'lunchery-banner'></div>
           <Route exact path='/' component={Landing}/>
