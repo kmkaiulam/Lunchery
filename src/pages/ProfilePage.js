@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import {profileEditToggle, profileImageEditToggle, getLunchGroupResults} from '../modules/auth';
 import {hasActiveGroups} from '../utils/common';
 import RequiresLogin from './RequiresLogin';
-
 import './ProfilePage.css';
 import Loading from '../components/Loading';
 
@@ -28,7 +27,6 @@ export function ProfilePage(props) {
         }
         if (chefProfile.displayName ===''){
             return (
-                
                 <div className='profilePage'> 
                     <div>Please Update your Chef Profile</div>
                     <ProfileForm />

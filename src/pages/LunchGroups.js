@@ -13,7 +13,6 @@ export function LunchGroups(props) {
      props.dispatch(lunchGroupCreateToggle())
      }
     
-    console.log(props.createLunchGroup);
     if (!props.groupResults) {
         props.dispatch(getLunchGroupResults());
         return ( <div className= 'loader'>

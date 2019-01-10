@@ -22,5 +22,4 @@ if (authToken) {
     store.dispatch(refreshAuthToken());
 }
 
-console.log(store.getState())
 export default store;
