@@ -14,6 +14,7 @@ class App extends Component {
     return (
       <Router>
         <div role='main' className="App">
+          <NavBar />
         <div className = 'lunchery-banner'></div>
           <Route exact path='/' component={Landing}/>
           <Route exact path='/dashboard' component={Dashboard}/>

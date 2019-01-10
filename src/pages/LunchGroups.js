@@ -5,22 +5,23 @@ import { lunchGroupCreateToggle, getLunchGroupResults } from '../modules/auth';
 import LunchGroupForm from './lunchGroups/LunchGroupForm';
 import GroupResults from './lunchGroups/GroupResults';
 import GroupSearchInput from './lunchGroups/GroupSearchInput';
-import RequiresLogin from  './RequiresLogin';
+import RequiresLogin from '../components/RequiresLogin';
 import './LunchGroups.css'
 
 export function LunchGroups(props) {
    let onClickCreate = () => {
      props.dispatch(lunchGroupCreateToggle())
      }
-    
-    if (!props.groupResults) {
+    const {groupResults, createLunchGroup, currentUser} = props
+
+    if (!groupResults) {
         props.dispatch(getLunchGroupResults());
         return ( <div className= 'loader'>
         <Loading type='spinningBubbles' color='black' />
         </div>
         )
     }
-    if (props.createLunchGroup === true) {
+    if (createLunchGroup === true) {
         return (
             <div className='lunchGroups'>
               <h1>Create A New Lunch Group</h1> 
@@ -34,7 +35,7 @@ export function LunchGroups(props) {
         return (
         <div className='lunchGroups'>
         <h1>Lunch Groups</h1> 
-        <button onClick={() => onClickCreate()} hidden={!props.currentUser.chef}> Create a New Group </button>
+        <button onClick={() => onClickCreate()} hidden={!currentUser.chef}> Create a New Group </button>
         <GroupSearchInput />
         <GroupResults />
         </div>    

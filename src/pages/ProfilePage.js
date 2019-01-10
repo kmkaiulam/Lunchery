@@ -5,7 +5,7 @@ import ProfileImageForm from './profilePage/ProfileImageForm';
 import {connect} from 'react-redux';
 import {profileEditToggle, profileImageEditToggle, getLunchGroupResults} from '../modules/auth';
 import {hasActiveGroups} from '../utils/common';
-import RequiresLogin from './RequiresLogin';
+import RequiresLogin from '../components/RequiresLogin';
 import './ProfilePage.css';
 import Loading from '../components/Loading';
 
@@ -57,14 +57,13 @@ export function ProfilePage(props) {
        else if (profileImageEdit === true) {
             return (
                 <div className='profilePage'>
-                <div className='edit-column'>
-                    <Profile /> 
-                    <div className='profile-image-form'>
-                     <ProfileImageForm />
-                     <button className='cancel-button' onClick={() => onClickEditImage()}> Cancel Edit</button>
+                    <div className='edit-column'>
+                        <Profile /> 
+                        <div className='profile-image-form'>
+                        <ProfileImageForm />
+                        <button className='cancel-button' onClick={() => onClickEditImage()}> Cancel Edit</button>
+                        </div>
                     </div>
-                </div>
-                   
                 </div>
             )
         }

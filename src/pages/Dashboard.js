@@ -7,7 +7,7 @@ import ChefGroups from './dashboard/ChefGroups';
 import MyGroups from './dashboard/MyGroups';
 import MyChefs from './dashboard/MyChefs';
 import './Dashboard.css';
-import RequiresLogin from './RequiresLogin';
+import RequiresLogin from '../components/RequiresLogin';
 import { getLunchGroupResults, getUserInfo } from '../modules/auth';
 
 
