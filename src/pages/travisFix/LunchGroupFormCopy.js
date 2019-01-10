@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from '../../components/Input';
+import Input from '../../components/Input'
 import {required, nonEmpty, checkDate} from '../../utils/validators';
 import {createNewGroup} from '../../modules/auth';
 
