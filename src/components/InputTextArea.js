@@ -3,7 +3,7 @@ import React from 'react';
 
 export default class InputTextArea extends React.Component {
     render () {
-        const { label } = this.props;
+        
         let errorNotify;
 
         if (this.props.meta.touched && this.props.meta.error) {
@@ -14,7 +14,6 @@ export default class InputTextArea extends React.Component {
 
         return (
             <div className="form-input">
-                <label htmlFor={this.props.input.name}>{label? `${label}: `: undefined} </label>
                 <div className="error-message">{errorNotify}</div>
                 <textarea
                     {...this.props.input}

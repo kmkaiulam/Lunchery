@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {groupCreatorCheck, convertDate, membersPresent, sortByDate} from '../../utils/common';
+import {groupCreatorCheck, convertDate, membersPresent, sortByDate, retrieveGroupMembers} from '../../utils/common';
 import './ChefGroups.css';
 import LunchGroupEditForm from './LunchGroupEditForm'
 import { deleteLunchGroup, editLunchGroupClick, editLunchGroupCancel } from '../../modules/auth';
@@ -22,22 +22,11 @@ export class ChefGroups extends React.Component {
 
             // Grabbing Unique Members
             let myOwnGroups = groupResults.filter(group => groupCreatorCheck( group, currentUser.id) === true).sort((a,b) => sortByDate(a,b));
-            let memberArray = [];
-            myOwnGroups.forEach(group => {
-                memberArray.push(group.members)
-            })
-           
-            let newArray = [];
-            for ( let i= 0; i < memberArray.length; i++) {
-                 for ( let j= 0; j <memberArray[i].length; j++) {
-                     newArray.push(memberArray[i][j].username)
-                 }
-            }
-           let myMembers= [...new Set(newArray)]; 
+            let myMembers= retrieveGroupMembers(myOwnGroups); 
        
-           let myGroupMembers = myMembers.map((user, index) => 
+             let myGroupMembers = myMembers.map((user, index) => 
              <div key={index} className= 'members-only'> 
-                <div> {user} </div>
+               <div> {user} </div>
             </div>
             )
             

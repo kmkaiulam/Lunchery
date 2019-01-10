@@ -25,6 +25,13 @@ body{
   font-size:1.2em;
 }
 
+h1{
+  font-size: 1.5em !important;
+}
+
+h2{
+  font-size: 1.3em !important;
+}
 input{
   font-size: 1.2em;
   width : 300px !important;

@@ -11,7 +11,7 @@ export class Landing extends React.Component {
   render(){
   
     let onClickDinerDemo = () => {
-        this.props.dispatch(login('GuestDiner', '123123'))
+        this.props.dispatch(login('Guest', '123123'))
   
     }
     let onClickChefDemo = () => {
@@ -28,7 +28,7 @@ export class Landing extends React.Component {
         <WhatIsLunchery />
         <div className='landing-buttons'> 
          <button onClick={() => onClickInfo()} > Chef Info </button>
-         <button className='demo-button' onClick={() => onClickDinerDemo()} > Diner Demo </button>
+         <button hidden={this.props.currentUser} className='demo-button' onClick={() => onClickDinerDemo()} > Diner Demo </button>
         </div>
         <ForDiners />
         </div>
@@ -40,7 +40,7 @@ export class Landing extends React.Component {
           <WhatIsLunchery />
           <div className='landing-buttons'> 
             <button onClick={() => onClickInfo()} > Diner Info </button>
-            <button className= 'demo-button' onClick={() => onClickChefDemo()} > Chef Demo </button>
+            <button hidden={this.props.currentUser} className= 'demo-button' onClick={() => onClickChefDemo()} > Chef Demo </button>
           </div>
           <ForChefs />
         </div>
@@ -54,6 +54,7 @@ export class Landing extends React.Component {
 const mapStateToProps = state => {
   return{
     infoForChef: state.auth.infoForChef,
+    currentUser: state.auth.currentUser
   }
 }
 

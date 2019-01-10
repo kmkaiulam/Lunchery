@@ -9,8 +9,9 @@ export class GroupSearchInput extends React.Component{
         render(){
             return ( 
                 <div>
-                    <label  htmlFor='companyName'></label>
-                    <input placeholder='Search by Company' onChange={ (e) => this.handleChange(e)}/>
+                   
+                    <label htmlFor='companyName'> </label>
+                    <input aria-label='company search' placeholder='Search by Company' onChange={ (e) => this.handleChange(e)}/>
                 </div>
             )      
         }

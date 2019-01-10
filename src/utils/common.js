@@ -6,36 +6,15 @@ export const convertDate = date => {
     correctDate.setDate(correctDate.getDate()+1)
     return new Date(correctDate).toDateString();
 };
-//DON't NEED
-export const stringifyDate = date => {
-    return  new Date(date).toString()
-   }
-   
-export const splitDate = date => {
-         return stringifyDate(date).split(' ').slice(0,4).join(' ')
- }
-   
-export const findDate = (array, date) => {
-    return array.find(x => x === splitDate(date))
-}
 
-export const matchingDate = (array, date) => {
-    if (findDate(array, date) === date) {
-        return true
-    }   
-    else {
-           return false;
-       }
-}
 export const sortByDate = (a,b) => {
     return new Date(a.lunchDate)- new Date(b.lunchDate)
 }
 
-
+//GROUP FUNCTIONS
 export const seatsAvailable = seats => {
     return seats.seatLimit - seats.members.length
 };
-
 
 export const seatVacancyCheck = seats => {
      if (seatsAvailable(seats) <= 0) {
@@ -135,4 +114,18 @@ export const uniqueEntries = (chefidArray, groupArray) => {
 }
     
   
-  
+//MEMBER FUNCTIONS
+export const retrieveGroupMembers = (filteredGroupResults) => {
+    let memberArray = [];
+    filteredGroupResults.forEach(group => {
+        memberArray.push(group.members)
+    })
+    let newArray = [];
+    for ( let i= 0; i < memberArray.length; i++) {
+        for ( let j= 0; j <memberArray[i].length; j++) {
+         newArray.push(memberArray[i][j].username)
+        }
+    }
+    let myMembers= [...new Set(newArray)]; 
+    return myMembers
+}

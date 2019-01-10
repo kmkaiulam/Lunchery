@@ -5,7 +5,6 @@ import ProfilePage from './pages/ProfilePage';
 import Landing from './pages/Landing';
 import RegistrationPage from './pages/RegistrationPage';
 import Login from './pages/Login';
-import NavBar from './components/Navbar';
 import LunchGroups from './pages/LunchGroups';
 import './App.css';
 
@@ -14,7 +13,6 @@ class App extends Component {
     return (
       <Router>
         <div role='main' className="App">
-          <NavBar />
         <div className = 'lunchery-banner'></div>
           <Route exact path='/' component={Landing}/>
           <Route exact path='/dashboard' component={Dashboard}/>

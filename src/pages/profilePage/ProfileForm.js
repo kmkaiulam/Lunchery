@@ -19,37 +19,47 @@ export class ProfileForm extends React.Component{
                 onSubmit={this.props.handleSubmit(values => 
                     this.onSubmit(values)
                 )}>
-                <label  htmlFor='displayName'>Name</label>
-                <Field 
-                    className='field-input' 
-                    component={Input}
-                    type='text'
-                    name='displayName'
-                />                
-                <label  htmlFor='companyName'>Company Name</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='company'
-                />
-                <label  htmlFor='location'>Location</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='location'
-                />
-                <label  htmlFor='bio'> Bio</label>
-                <Field 
-                    component={InputTextArea}
-                    type='text'
-                    name='bio'
-                /> 
-                 <label  htmlFor='style'>Style</label>
-                <Field
-                    component={Input}
-                    type='text'
-                    name='style'
-                />           
+                <label  htmlFor='displayName'>Name
+                    <Field 
+                        aria-label='displayName'
+                        className='field-input' 
+                        component={Input}
+                        type='text'
+                        name='displayName'
+                    />                
+                </label>
+                <label  htmlFor='companyName'>Company Name
+                    <Field 
+                        aria-label='companyName'
+                        component={Input}
+                        type='text'
+                        name='company'
+                    />
+                </label>
+                <label  htmlFor='location'>Location
+                    <Field 
+                        aria-label='location'
+                        component={Input}
+                        type='text'
+                        name='location'
+                    />
+                </label>
+                <label  htmlFor='bio'> Bio
+                    <Field 
+                        aria-label='bio'
+                        component={InputTextArea}
+                        type='text'
+                        name='bio'
+                    /> 
+                </label>
+                 <label  htmlFor='style'>Style
+                    <Field
+                        aria-label='style'
+                        component={Input}
+                        type='text'
+                        name='style'
+                    />           
+                </label>
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>

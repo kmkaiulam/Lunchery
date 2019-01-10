@@ -11,7 +11,7 @@ export function RegistrationPage(props) {
     }
     return (
         <div className="register">
-            <h2>Register for Lunchery</h2>
+            <h1> Lunchery Registration </h1>
             <SignupForm />
         </div>
     );
