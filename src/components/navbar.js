@@ -20,7 +20,6 @@ export function NavBar(props) {
             <Link hidden={!props.currentUser || props.currentUser.chef === false}to='/profilepage' className='menuitem'> Profile Page</Link>
             <button className='menuitem' hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
         </div>
-       
   </nav>
   
   )

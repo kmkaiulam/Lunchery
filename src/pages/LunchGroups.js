@@ -2,7 +2,7 @@ import React from 'react';
 import Loading from '../components/Loading';
 import {connect} from 'react-redux';
 import { lunchGroupCreateToggle, getLunchGroupResults } from '../modules/auth';
-import LunchGroupForm from './lunchGroups/LunchGroupForm';
+import LunchGroupForm from './profilePage/LunchGroupForm2';
 import GroupResults from './lunchGroups/GroupResults';
 import GroupSearchInput from './lunchGroups/GroupSearchInput';
 import RequiresLogin from '../components/RequiresLogin';
