@@ -6,7 +6,7 @@ export default function ForChefs(props) {
 
           <div className='lunchery-element'> 
             <h1> How does it work?</h1>
-            <div className='two-column'>
+            <div className='two-column lunchery-info'>
               <div>
                 <h2> For Chefs</h2>
                 <p> Schedule your own lunch group for others to join</p>

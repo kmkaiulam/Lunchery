@@ -3,15 +3,16 @@ nav{
   font-size: 1.2em;
   width: 100%;
   top: 20px;
-  border-bottom: solid black 1px;
 }
 
 #nav-menu{
   text-align: center;
   color: black;
   margin-top: 15px;
+  padding-bottom:20px;
   display: flex;
   justify-content: center;
+  border-bottom: 1px solid black
 }
 .menuitem{
   padding: 0 10px;

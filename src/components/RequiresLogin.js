@@ -9,7 +9,7 @@ export default () => Component => {
              return <div>Authenticating...</div>;
         }
         else if (!loggedIn || error) {
-            return <Redirect to='/login' />;
+            return <Redirect to='/' />;
         }
         return <Component {...passThroughProps} />;
     }

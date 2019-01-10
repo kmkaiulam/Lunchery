@@ -3,8 +3,8 @@ import React from 'react';
 
 export default function WhatIsLunchery(props) {
     return (
-    <div className ='what-is-lunchery'>
-        <div className='two-column'> 
+    <div className ='lunchery-element'>
+        <div className='two-column lunchery-info'> 
             <img className='landing-img' src='/images/lunchery-logo.png' alt='lunchery logo'></img>
             <div className='lunchery-what'> 
                 <h1>What is Lunchery?</h1>

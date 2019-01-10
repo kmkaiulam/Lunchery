@@ -12,13 +12,13 @@
   display: flex;
   justify-content: center;
   max-width:800px;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 .three-column {
   display: flex;
   justify-content: center;
   max-width:600px;
-  margin: 0 auto;
+  margin: 10px auto;
 }
   
 body{
@@ -100,7 +100,7 @@ textarea{
     font-size:1em;
   }
   body{
-    font-size:.8em;
+    font-size:1em;
   }
   input{
     font-size: 1.0em;
