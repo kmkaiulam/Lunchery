@@ -9,14 +9,31 @@ I love cooking for other people, and there are few greater pasttimes than talkin
 ## Live Demo
 https://murmuring-castle-16562.herokuapp.com/
 
+## Note on Usage
+Lunchery has two different user types
+    1. Chefs
+    2. Diners
+   
+Chefs Users enjoy the following exclusive privileges:
+    1.Profile Editing
+    2.Creating a lunch group
+   
+Diners can still: 
+1. Search for lunch groups at their company
+2. Track the groups they committed to and see their chefs on their dashboard
+
 ## Screenshots
 LANDING
+
 ![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-landing.jpg)
 
-![Screenshot]
+CHEF DASHBOARD
 
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-chefdashboard.png)
 
-![Screenshot]
+PROFILE EDIT
+
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/Lunchery-Profile-Edit.png)
 
 
 ## Tools
