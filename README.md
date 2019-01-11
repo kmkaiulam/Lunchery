@@ -41,11 +41,14 @@ CHEF DASHBOARD
 
 ![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-chefdashboard.png)
 
-CREATE A GROUP & PROFILE EDIT
+SEARCH GROUPS
 
-![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-creategroup.jpg)
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-search.png)
 
-![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/Lunchery-Profile-Edit.png)
+
+PROFILE PAGE
+
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-profile-page-edit.png)
 
 
 
