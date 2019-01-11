@@ -3,7 +3,9 @@ import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../../components/Input'
 import {required, nonEmpty, checkDate} from '../../utils/validators';
 import {createNewGroup} from '../../modules/auth';
-
+//React Testing passes locally, but fails on Travis due to some bug on Travis-CI  related to relative path
+// Originally housed in lunchgroups folder
+//This copy of component made to resolve bug  
 
 export class LunchGroupForm extends React.Component{
     onSubmit(values) {

@@ -8,7 +8,9 @@ import LunchGroups from '../../pages/LunchGroups';
 import RegistrationPage from '../../pages/RegistrationPage';
 import Login from '../../pages/Login';
 
-
+//NOTE: Concerning NavBar import
+//React Testing passes locally, but fails on Travis due to some bug on Travis-CI related to relative path
+//Copy of component made to resolve bug when doing shallow testing  
 
 export class Main extends React.Component {
     render() {

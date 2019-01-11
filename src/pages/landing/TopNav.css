@@ -17,10 +17,11 @@ nav{
     cursor: pointer;
     text-decoration: none;
   }
-  .menuitem:hover{
+  .top-nav-item:hover{
     background-color: black;
     color: white !important;
   }
+
   button.menuitem{
     margin: 0px !important;
   }

@@ -8,6 +8,10 @@ import GroupSearchInput from './lunchGroups/GroupSearchInput';
 import RequiresLogin from '../components/RequiresLogin';
 import './LunchGroups.css'
 
+//NOTE: Concerning LunchGroupForm import
+//React Testing passes locally, but fails on Travis due to some bug related to relative path
+//Copy of component made to resolve bug when doing shallow testing  
+
 export function LunchGroups(props) {
    let onClickCreate = () => {
      props.dispatch(lunchGroupCreateToggle())
