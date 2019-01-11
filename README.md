@@ -11,17 +11,21 @@ https://murmuring-castle-16562.herokuapp.com/
 
 ## Note on Usage
 Lunchery has two different user types
+<br>
     1. Chefs
+ <br>
     2. Diners
    
 Chefs Users enjoy the following exclusive privileges:
-    1.Profile Editing
-    2.Creating a lunch group
+<br>
+1. Profile Editing 
+2. Creating a lunch group
    
-Diners can still: 
-1. Search for lunch groups at their company
-2. Track the groups they committed to and see their chefs on their dashboard
-
+Diners have a reduced set of privileges: 
+1. Search for lunch groups to join
+2. Manage the groups they have joined.
+3  View their chefs on their dashboard
+ 
 ## Screenshots
 LANDING
 
