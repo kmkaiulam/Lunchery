@@ -9,23 +9,29 @@ I love cooking for other people, and there are few greater pasttimes than talkin
 ## Live Demo
 https://murmuring-castle-16562.herokuapp.com/
 
+## Tools
+- React
+- Mongo DB
+- Express
+- Node JS
+- mLab
+- Heroku
+
+## Credits
+- Create-React-App : https://github.com/facebook/create-react-app
+
 ## Note on Usage
-Lunchery has two different user types
-<br>
-    1. Chefs
- <br>
-    2. Diners
+Lunchery has two different user types: Chef users and Diner Users
+
+All users share this set of common privileges:
+1. Search for Lunch Groups to join
+2. Tracking and managing groups on your dashboard
+3. View My Chefs on your dashboard
+
+But Chefs Users enjoy the following exclusive privileges:
+1. Creating and editing your profile  
+2. Creating a lunch group for others to join
    
-Chefs Users enjoy the following exclusive privileges:
-<br>
-1. Profile Editing 
-2. Creating a lunch group
-   
-Diners have a reduced set of privileges: 
-1. Search for lunch groups to join
-2. Manage the groups they have joined.
-3  View their chefs on their dashboard
- 
 ## Screenshots
 LANDING
 
@@ -35,21 +41,13 @@ CHEF DASHBOARD
 
 ![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-chefdashboard.png)
 
+CREATE A GROUP
+
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-creategroup.jpg)
+
+
 PROFILE EDIT
 
 ![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/Lunchery-Profile-Edit.png)
 
-
-## Tools
-- React
-- Mongo DB
-- Express
-- Node JS
-- mLab
-- Heroku
-
-
-
-## Credits
-- Create-React-App : https://github.com/facebook/create-react-app
 
