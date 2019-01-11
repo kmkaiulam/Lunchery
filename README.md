@@ -9,6 +9,16 @@ I love cooking for other people, and there are few greater pasttimes than talkin
 ## Live Demo
 https://murmuring-castle-16562.herokuapp.com/
 
+## Screenshots
+LANDING
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-landing.jpg)
+
+![Screenshot]
+
+
+![Screenshot]
+
+
 ## Tools
 - React
 - Mongo DB
@@ -16,6 +26,8 @@ https://murmuring-castle-16562.herokuapp.com/
 - Node JS
 - mLab
 - Heroku
+
+
 
 ## Credits
 - Create-React-App : https://github.com/facebook/create-react-app
