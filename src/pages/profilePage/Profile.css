@@ -5,6 +5,10 @@
     margin: 0 auto;
 }
 
+.profile{
+    margin-right:20px;
+}
+
 .profileImage{
     height: 200px;
 }
