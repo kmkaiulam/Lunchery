@@ -12,10 +12,10 @@ export function TopNav(props) {
   return (
     <nav>
         <div id='top-nav'>
-            <Link hidden={props.currentUser} to='/' className='menuitem'>About</Link>
-            <Link hidden={props.currentUser} to='/registration' className='menuitem'>Registration</Link>
-            <Link hidden={props.currentUser} to='/login' className='menuitem'>Login</Link>
-            <button className='menuitem' hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
+            <Link hidden={props.currentUser} to='/' className='menuitem top-nav-item'>About</Link>
+            <Link hidden={props.currentUser} to='/registration' className='menuitem top-nav-item'>Registration</Link>
+            <Link hidden={props.currentUser} to='/login' className='menuitem top-nav-item'>Login</Link>
+            <button className='menuitem top-nav-item' hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
         </div>
   </nav>
   
