@@ -14,9 +14,6 @@ export const LOGGED_OUT= 'app/auth/LOGGED_OUT';
 export const AUTH_REQUEST = 'app/auth/AUTH_REQUEST';
 export const AUTH_SUCCESS = 'app/auth/AUTH_SUCCESS';
 export const AUTH_ERROR = 'app/auth/AUTH_ERROR';
- 
-//DEMO 
-export const DEMO = 'app/auth/DEMO';
 
 //INFO
 export const LANDING_INFO_CLICK = 'app/auth/LANDING_INFO_CLICK';
@@ -90,12 +87,6 @@ export const authSuccess = currentUser => ({
 export const authError = error => ({
     type: AUTH_ERROR,
     error
-});
-
-//DEMO
-
-export const demo = () => ({
-    type:DEMO
 });
 
 // INFO
@@ -270,7 +261,6 @@ const initialState = {
     searchTerm:'',
     editGroupId: null,
     infoForChef: false,
-    demo: null
 };
 
 
@@ -304,10 +294,6 @@ export default function authReducer(state=initialState, action) {
         return Object.assign({}, state, {
             authLoading: false,
             error: action.error
-        });
-    } else if (action.type === DEMO) {
-        return Object.assign({}, state, {
-            demo: true
         });
     } else if (action.type === LANDING_INFO_CLICK) {
         return Object.assign({}, state, {
@@ -492,10 +478,6 @@ export const getUserInfo = (authToken) => dispatch => {
     )
 };
 
-//DEMO FUNCTION
-export const demoClick = () => (dispatch) => {
-    dispatch(demo());
-}
 //INFO FUNCTION
 export const infoClick = () => (dispatch) => {
     dispatch(landingInfoClick());

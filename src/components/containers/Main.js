@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from "react-router-dom";
-import NavBar from '../Navbar'
+import NavBar from '../../pages/travisFix/NavbarCopy'
 import Dashboard from  '../../pages/Dashboard';
 import ProfilePage from '../../pages/ProfilePage';
 import LunchGroups from '../../pages/LunchGroups';
 import RegistrationPage from '../../pages/RegistrationPage';
 import Login from '../../pages/Login';
-import './Main.css'
+
 
 
 export class Main extends React.Component {
