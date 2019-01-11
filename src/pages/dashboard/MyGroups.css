@@ -1,0 +1,9 @@
+.my-groups{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+}
+
+.my-group{
+    margin-top: 30px;
+}

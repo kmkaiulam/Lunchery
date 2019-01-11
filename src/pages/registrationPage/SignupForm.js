@@ -4,7 +4,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../../modules/users';
 import {login} from '../../modules/auth';
 import Input from '../../components/Input';
-import {required, nonEmpty, matches, length, isTrimmed} from '../../validators';
+import {required, nonEmpty, matches, length, isTrimmed} from '../../utils/validators';
 const passwordLength= length({min:6, max: 10});
 const matchesPassword = matches('password');
 
@@ -67,7 +67,8 @@ export class SignupForm extends React.Component {
                     type='checkbox' 
                     name='chef' />
                 <button
-                    type="submit"
+                    className='signup-btn'
+                    type='submit'
                     disabled={this.props.pristine || this.props.submitting}>
                     Register
                 </button>

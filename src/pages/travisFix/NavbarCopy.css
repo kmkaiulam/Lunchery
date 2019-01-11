@@ -1,0 +1,29 @@
+nav{
+  font-size: 1.2em;
+  width: 100%;
+  top: 20px;
+}
+
+#nav-menu{
+  height:48px;
+  text-align: center;
+  color: black;
+  margin-top: 15px;
+  padding-bottom:20px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black
+}
+.menuitem{
+  padding: 0 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.menuitem:hover{
+  background-color: black;
+  color: white !important;
+}
+button.menuitem{
+  margin: 0px !important;
+}
+

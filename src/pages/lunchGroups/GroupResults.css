@@ -1,0 +1,35 @@
+.noVacancy{
+    color:black;
+    background-color:red;
+    max-width:300px;
+    margin: 0 auto;
+    
+}
+
+.card{
+    position: relative;
+    margin: 5px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 2px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.groupResult{
+    padding:20px;
+    margin:0 auto;
+    min-width:300px;
+  
+    
+}
+
+.col-9{
+    width: 75%;
+}
+.col-12{
+    width:100%;
+}

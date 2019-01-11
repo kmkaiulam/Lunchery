@@ -1,46 +1,40 @@
 import React from 'react'
 import './Profile.css';
+import {AMZ_S3_URL} from '../../config';
 import {connect} from 'react-redux';
 import {getUserInfo} from '../../modules/auth';
+
 export function Profile(props) {
-    if (props.profileUpToDate === false) {
-        props.dispatch(getUserInfo(props.authToken));
+    const {authToken, profileUpToDate, chefProfile } = props
+    if (profileUpToDate === false) {
+        props.dispatch(getUserInfo(authToken));
         return <div>Loading...</div>
     }
     else {
         return (
             <div className='profile'>
                 <div className='name'>
-                    <h1>{props.userInfo.chefProfile.displayName}</h1>   
+                    <h1>{chefProfile.displayName}</h1>   
                 </div>
-                <div className='company'>
-                    <h2>{props.userInfo.chefProfile.company} in {props.userInfo.chefProfile.location}</h2>   
-                </div>
-                 <div className='picture'>
-                    <div>{props.userInfo.chefProfile.picture}</div>   
+                <h2>{chefProfile.company} in {chefProfile.location}</h2>   
+                <div>
+                    <img className='profileImage' src={AMZ_S3_URL+chefProfile.profileImage} alt='current chef'></img>
                 </div> 
-                <h2>Style</h2>
-                <div className='style'>
-                    {props.userInfo.chefProfile.style}  
-                </div>
-                <div className='availability'> Daily Limit
-                     <div> Monday: {props.availability.mondayLimit}</div>
-                     <div> Tuesday: {props.availability.tuesdayLimit}</div>
-                     <div> Wednesday: {props.availability.wednesdayLimit}</div>
-                     <div> Thursday: {props.availability.thursdayLimit}</div>
-                     <div> Friday: {props.availability.fridayLimit}</div>
-                </div>
+                <div className='profile-bio'>
+                    <div>{chefProfile.bio}</div>   
+                </div> 
+                <h2>Style: {chefProfile.style}</h2>
             </div>
         )
-    };
-};
+    }
+}
 
 const mapStateToProps= state => {
     return {
         authToken:state.auth.authToken,
-        userInfo: state.auth.currentUser,
+        currentUser: state.auth.currentUser,
+        chefProfile: state.auth.currentUser.chefProfile,
         profileUpToDate: state.auth.profileUpToDate,
-        availability: state.auth.currentUser.availability
     }
 }
 

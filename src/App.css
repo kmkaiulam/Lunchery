@@ -2,27 +2,134 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.loader{
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.two-column{
+  display: flex;
+  justify-content: center;
+  max-width:800px;
+  margin: 10px auto;
+}
+.three-column {
+  display: flex;
+  justify-content: center;
+  max-width:600px;
+  margin: 10px auto;
+}
+  
+body{
+  font-size:1.2em;
 }
 
-.App-title {
-  font-size: 1.5em;
+h1{
+  font-size: 1.5em !important;
 }
 
-.App-intro {
-  font-size: large;
+h2{
+  font-size: 1.3em !important;
+}
+input{
+  font-size: 1.2em;
+  width : 300px !important;
+  height:40px;
+  margin: 5px 0;
+  text-align:center;
+
+  -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+     -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+          box-sizing: border-box;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+button{
+   margin:0 auto;
+   font-size:.8em;
+}
+
+textarea{
+   font-size:1.2em;
+   height:200px;
+   width: 300px;
+   box-sizing: border-box;
+}
+
+
+.lunchery-banner{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: top;
+  background-image: url(/images/lunchery-banner.png);
+  height: 200px;
+  max-width: 800px;
+  margin: 0 auto;
+  
+}
+
+@media (max-width:900px){
+  .three-column {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    max-width:300px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 720px){
+  .lunchery-banner{
+    background-size: cover;
+    background-image: url(/images/lunchery-banner.png);
+    background-position-y:top;
+    height: 150px;
+    margin: 0 auto;
+  }
+  .two-column{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+  }
+
+  h1, h2{
+    font-size:1.3em !important;
+    margin:.4em;
+  }
+  nav{
+    font-size:1em;
+  }
+  body{
+    font-size:1em;
+  }
+  input{
+    font-size: 1.0em;
+    width : 200px !important;
+    height:20px;
+    margin: 5px 0;
+   
+  
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+       -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+            box-sizing: border-box;
+  }
+  
+  button{
+     margin:0 auto;
+     font-size:.8em;
+  }
+  
+  textarea{
+     font-size:1.0em;
+     height:150px;
+     width: 200px;
+     box-sizing: border-box;
+  }
+  
+}
+
+@media (max-width: 400px){
+  .lunchery-banner{
+    height:125px;
+  }
 }

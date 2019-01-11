@@ -11,18 +11,26 @@ export function NavBar(props) {
   }
   return (
     <nav>
-        <div id='menu'>
-            <Link to='/' className='menuitem'>About</Link>
-            <Link to='/chefsearch' className='menuitem'>Chef Search</Link>
-            <Link to='/registration' className='menuitem'>Registration</Link>
-            <Link to='/login' className='menuitem'>Login</Link>
-            <Link to='/profilepage' className='menuitem'> Profile Page</Link>
-            <button onClick={() => onClick()}> Logout  </button>
-            {/* why does this automatically run if not written as an empty function? */}
+        <div id='nav-menu'>
+            <Link hidden={props.currentUser} to='/' className='About'> About </Link>
+            <Link hidden={!props.currentUser} to='/dashboard' className='menuitem'> Dashboard</Link>
+            <Link hidden={!props.currentUser} to='/lunchgroups' className='menuitem'> Lunch Groups</Link>
+            <Link hidden={props.currentUser} to='/registration' className='menuitem'>Registration</Link>
+            <Link hidden={props.currentUser} to='/login' className='menuitem'>Login</Link>
+            <Link hidden={!props.currentUser || props.currentUser.chef === false}to='/profilepage' className='menuitem'> Profile Page</Link>
+            <button className='menuitem' hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
         </div>
   </nav>
+  
   )
 }
 
-export default connect()(NavBar);
+const mapStateToProps= state => {
+  return {
+      currentUser: state.auth.currentUser
+  }
+}
+
+
+export default connect(mapStateToProps)(NavBar);
 

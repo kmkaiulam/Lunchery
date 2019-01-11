@@ -1,80 +1,51 @@
 import React from 'react';
+import {AMZ_S3_URL} from '../../config';
 import {connect} from 'react-redux';
+import {filterUserGroups, uniqueEntries} from '../../utils/common';
 import './MyChefs.css';
 
-export class  MyChefs extends React.Component {
-    render() {
-        const myChef = this.props.myChefs.map((myChef, index) => 
-    <div key={index} className='myChef'>
-        <div><img className='chefPortrait' src={myChef.image} alt={myChef.name}/></div>
-        <div>
-            <div><h3>{myChef.name}</h3></div>
-        </div>
-        <div>
-            <div><p>Speciality: {myChef.speciality}</p></div>
-        </div>
-        <div>
-            <div><img className='dish' src={myChef.dish} alt='signature dish' /></div>
-        </div>
-    </div>
-   );
-    return ( 
-        <div className = 'myChef'>
-            <h2>My Chefs</h2>
-            {myChef}
-        </div>
-    )
-   }
+export class MyChefs extends React.Component {
+    render(){
+        const {groupResults, currentUser} = this.props
+        let creatorsObj = filterUserGroups(groupResults, currentUser.id)
+        let creators = [...new Set(creatorsObj.map(group => group.createdBy._id))]  
+        let myChefObject= uniqueEntries(creators, creatorsObj);
+
+    if (creatorsObj.length <1 ){
+        return (
+            <div className='myChefs'>
+               <h2> My Chefs </h2>
+            </div>
+        )               
+    }    
+    else{
+         let myChefs = myChefObject.map((group, index) =>
+            <div key={index} className='my-chef'>
+                
+                    <h3> Chef {group.createdBy.chefProfile.displayName}</h3>
+                    <img className='chef-img' src={AMZ_S3_URL+group.createdBy.chefProfile.profileImage} alt='chef portrait'></img>
+                    <h3> Bio</h3>
+                    <div className='bio'> {group.createdBy.chefProfile.bio}</div> 
+                    
+             </div> 
+        )
+        return (
+               <div>
+                <h2> My Chefs </h2>
+                <div className='my-chefs'>
+                    {myChefs}
+                </div> 
+               </div> 
+        )
+
+    }
+    }
 }
-
-
-MyChefs.defaultProps = [
-    {
-    company: 'ABC Company',
-    name: 'Chef Amy',
-    bio: 'Lorem Ipsum dolor',
-    availability: 'everyday',
-    reviews: '',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-    speciality: 'Indian',
-    dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-    },
-    {
-    company: 'ABC Company',
-    name: 'Chef Jaz',
-    bio: 'Lorem Ipsum dolor',
-    availability: 'everyday',
-    reviews: '',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-    speciality: 'Indian',
-    dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-    },
-]
-    
-
-const mapStateToProps=state => ({
-    myChefs:[
-        {
-        company: 'ABC Company',
-        name: 'Chef Amy',
-        bio: 'Lorem Ipsum dolor',
-        availability: 'everyday',
-        reviews: '',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-        speciality: 'Indian',
-        dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-        },
-        {
-        company: 'ABC Company',
-        name: 'Chef Jaz',
-        bio: 'Lorem Ipsum dolor',
-        availability: 'everyday',
-        reviews: '',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ74PsvREfbIsR6FqZy3L4sCQ0KTK4BwL7cpkT3qb4dqp8ybntXWw',
-        speciality: 'Indian',
-        dish: 'https://images.media-allrecipes.com/userphotos/720x405/1116370.jpg'
-        },
-    ]
+const mapStateToProps= state => ({
+    loading: state.auth.loading,
+    groupResults: state.auth.groupResults,
+    currentUser: state.auth.currentUser,
+    chefProfile: state.auth.currentUser.chefProfile,
 });
 
 export default connect(mapStateToProps)(MyChefs);

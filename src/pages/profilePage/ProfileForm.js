@@ -1,15 +1,16 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../../components/Input';
+import InputTextArea from '../../components/InputTextArea';
 import {updateProfile} from '../../modules/auth';
 import './ProfileForm.css';
 
 export class ProfileForm extends React.Component{
     onSubmit(values) {
-        const {displayName, company, location, style, picture, monday, tuesday, wednesday, thursday, friday,  mondayLimit, tuesdayLimit, wednesdayLimit, thursdayLimit, fridayLimit, signatureDish} = values;
-        const chefProfile = {displayName, company, location, style, picture, monday, tuesday, wednesday, thursday, friday,  mondayLimit, tuesdayLimit, wednesdayLimit, thursdayLimit, fridayLimit, signatureDish}
+        const {displayName, company, location, style, bio} = values; 
+        const chefProfile = {displayName, company, location, style, bio} 
         console.log(chefProfile);
-        return this.props.dispatch(updateProfile(values))
+        return this.props.dispatch(updateProfile(chefProfile))
     }
     render(){
         return ( 
@@ -18,106 +19,47 @@ export class ProfileForm extends React.Component{
                 onSubmit={this.props.handleSubmit(values => 
                     this.onSubmit(values)
                 )}>
-                <label  htmlFor='displayName'>Name</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='displayName'
-                />                
-                <label  htmlFor='companyName'>Company Name</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='company'
-                />
-                  <label  htmlFor='location'>Location</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='location'
-                />
-                 <label  htmlFor='style'>Style</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='style'
-                />           
-                 <label  htmlFor='picture'>Picture</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='picture'
-                />       
-                <fieldset> Availability          
-                 <label htmlFor='monday'>Monday</label>
-                <Field 
-                    component={Input}
-                    type='checkbox'
-                    name='monday'
-                />                  
-                  <label htmlFor='tuesday'>Tuesday</label>
-                <Field 
-                    component={Input}
-                    type='checkbox'
-                    name='tuesday'
-                />                 
-                  <label htmlFor='wednesday'>Wednesday</label>
-                <Field 
-                    component={Input}
-                    type='checkbox'
-                    name='wednesday'
-                />                 
-                  <label htmlFor='thursday'>Thursday</label>
-                <Field 
-                    component={Input}
-                    type='checkbox'
-                    name='thursday'
-                />                 
-                  <label htmlFor='friday'>Friday</label>
-                <Field 
-                    component={Input}
-                    type='checkbox'
-                    name='friday'
-                />                 
-                  <label htmlFor='mondayLimit'>Monday Limit</label>
-                <Field 
-                    component={Input}
-                    type='number'
-                    name='mondayLimit'
-                />                       
-                  <label htmlFor='tuesdayLimit'>Tuesday Limit</label>
-                <Field 
-                    component={Input}
-                    type='number'
-                    name='tuesdayLimit'
-                />                      
-                  <label htmlFor='wednesdayLimit'>Wednesday Limit</label>
-                <Field 
-                    component={Input}
-                    type='number'
-                    name='wednesdayLimit'
-                />                 
-                  <label htmlFor='thursdayLimit'>Thursday Limit</label>
-                <Field 
-                    component={Input}
-                    type='number'
-                    name='thursdayLimit'
-                />                 
-                  <label htmlFor='fridayLimit'>Friday Limit</label>
-                <Field 
-                    component={Input}
-                    type='number'
-                    min='0'
-                    max='10'
-                    name='fridayLimit'
-                />                           
-                </fieldset>
-                <label htmlFor='signatureDish'>Signature Dish</label>
-                <Field 
-                    component={Input}
-                    type='text'
-                    name='signatureDish'
-                />                 
+                <label  htmlFor='displayName'>Name
+                    <Field 
+                        aria-label='displayName'
+                        className='field-input' 
+                        component={Input}
+                        type='text'
+                        name='displayName'
+                    />                
+                </label>
+                <label  htmlFor='companyName'>Company Name
+                    <Field 
+                        aria-label='companyName'
+                        component={Input}
+                        type='text'
+                        name='company'
+                    />
+                </label>
+                <label  htmlFor='location'>Location
+                    <Field 
+                        aria-label='location'
+                        component={Input}
+                        type='text'
+                        name='location'
+                    />
+                </label>
+                <label  htmlFor='bio'> Bio
+                    <Field 
+                        aria-label='bio'
+                        component={InputTextArea}
+                        type='text'
+                        name='bio'
+                    /> 
+                </label>
+                 <label  htmlFor='style'>Style
+                    <Field
+                        aria-label='style'
+                        component={Input}
+                        type='text'
+                        name='style'
+                    />           
+                </label>
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>

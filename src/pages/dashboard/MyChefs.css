@@ -1,14 +1,27 @@
-.myChef{
-    width:33%;
+.centered-text{
+    text-align:center;
 }
 
-.chefPortrait{
-    margin-top: 118px;
-    height:150px;
+.chef-img{
+    height:200px;
     width: auto;
 }
-.dish{
-    height:150px;
-    width:auto;
+
+.bio{
+    max-width: 360px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
+.my-chefs{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+@media (max-width: 720px){
+.chef-img{
+   height:125px; 
+}
+}
