@@ -6,11 +6,10 @@ import './NavbarCopy.css';
 
 export function NavBar(props) {
   let onClick = () => {
-    console.log('clicked Log out')
     props.dispatch(logout())
   }
   return (
-    <nav>
+    <nav> 
         <div id='nav-menu'>
             <Link hidden={props.currentUser} to='/' className='About'> About </Link>
             <Link hidden={!props.currentUser} to='/dashboard' className='menuitem'> Dashboard</Link>
