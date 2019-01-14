@@ -1,27 +1,81 @@
+
 nav{
     font-size: 1.2em;
     width: 100%;
     top: 20px;
 }
+
+.lunchery-logo{
+  float:left;
+  margin-top:10px;
+  margin-left:5px;
+  height:50px;
+}
+
+#top-nav{
+  height: 70px;
+  text-align: center;
+  color: black;
+  background-color:purple;
+}
   
-  #top-nav{
-    height: 30px;
-    text-align: center;
-    color: black;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-  }
-  .menuitem{
-    padding: 0 10px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  .top-nav-item:hover{
-    background-color: black;
-    color: white !important;
+.menuitem{
+  padding: 0 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.top-nav-item{
+  margin-left: 10px;
+}
+
+.nav-btn{
+  color: #fff;
+  margin-top:20px;
+  margin-left: 20px;
+  text-transform: uppercase;
+  background: slateblue;
+  padding: 5px;
+  border-radius: 5px;
+  border: black;
+}
+
+.nav-btn:hover{
+  background: #434343;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+  transition: all 0.4s ease 0s;
+}
+
+
+.top-nav-item:hover{
+  background-color: black;
+  color: white !important;
+}
+
+button.menuitem{
+  margin: 0px !important;
+}
+
+@media(max-width: 760px) {
+  .nav-btn{
+    color: #fff;
+    margin-top:10px;
+    margin-left: 20px;
+    text-transform: uppercase;
+    background: slateblue;
+    padding: 5px;
+    border-radius: 5px;
+    border: black;
+    font-size:.8em;
   }
 
-  button.menuitem{
-    margin: 0px !important;
+  .top-nav-item{
+    margin-top: 10px;
+    margin-left: 2px;
+    font-size:.8em;
   }
+
+}

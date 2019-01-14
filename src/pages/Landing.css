@@ -24,6 +24,7 @@
     border-radius: 5px;
     display: inline-block;
     border: black;
+    margin-bottom: 5px;
 }
 
 .landing-btn:hover{
@@ -45,7 +46,7 @@
 .lunchery-element{
     border: 1px solid black;
     background-color: rgba(225,225,225,.50);
-    margin: 10px auto;
+    margin: 0 auto;
     padding-bottom:20px;
     max-width:1000px
 }

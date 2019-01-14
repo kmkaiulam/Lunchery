@@ -15,13 +15,14 @@ export function NavBar(props) {
   return (
     <nav> 
         <div id='nav-menu'>
-            <Link hidden={props.currentUser} to='/' className='About navbar-item'> About </Link>
+            <img className='lunchery-logo' src='/images/lunchery-logo.png' alt='lunchery logo'></img>
+            <Link hidden={props.currentUser} to='/' className='menuitem navbar-item'> About </Link>
             <Link hidden={!props.currentUser} to='/dashboard' className='menuitem navbar-item'> Dashboard</Link>
             <Link hidden={!props.currentUser} to='/lunchgroups' className='menuitem navbar-item'> Lunch Groups</Link>
             <Link hidden={props.currentUser} to='/registration' className='menuitem navbar-item'>Registration</Link>
             <Link hidden={props.currentUser} to='/login' className='menuitem navbar-item'>Login</Link>
             <Link hidden={!props.currentUser || props.currentUser.chef === false}to='/profilepage' className='menuitem navbar-item'> Profile Page</Link>
-            <button className='menuitem logout-btn' hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
+            <button className='nav-btn' hidden={!props.currentUser} onClick={() => onClick()}> Logout  </button>
         </div>
   </nav>
   

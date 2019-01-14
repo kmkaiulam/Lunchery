@@ -60,10 +60,10 @@ textarea{
 .lunchery-banner{
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-y: top;
-  background-image: url(/images/lunchery-banner.png);
+  background-position-y: center;
+  background-image: url(/images/lunchery-banner-main.png);
   height: 200px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   
 }
@@ -81,8 +81,8 @@ textarea{
 @media (max-width: 720px){
   .lunchery-banner{
     background-size: cover;
-    background-image: url(/images/lunchery-banner.png);
-    background-position-y:top;
+    background-image: url(/images/lunchery-banner-main.png);
+    background-position-y:center;
     height: 150px;
     margin: 0 auto;
   }

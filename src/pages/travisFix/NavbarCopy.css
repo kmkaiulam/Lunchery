@@ -5,30 +5,45 @@ nav{
 }
 
 #nav-menu{
-  height:48px;
+  height:80px;
+  background-color:purple;
+  padding-top:10px;
   text-align: center;
   color: black;
-  margin-top: 15px;
-  padding-bottom:20px;
-  display: flex;
-  justify-content: center;
   border-bottom: 1px solid black
 }
 .menuitem{
-  padding: 0 10px;
-  cursor: pointer;
-  text-decoration: none;
+padding: 0 10px;
+background-color: purple;
+box-shadow: 0 5px 0 darkmagenta;
+color: white;
+padding: 1em 1.5em;
+position: relative;
+text-decoration: none;
+text-transform: uppercase;
+cursor: pointer;
+text-decoration: none;  
 }
 .navbar-item:hover{
   background-color: black;
   color: white !important;
 }
-button.menuitem{
-  margin: 0px !important;
+
+
+
+a:active {
+box-shadow: none;
+top: 5px;
 }
 
 @media (max-width: 720px){
   button.menuitem{
     height:20px;
+  }
+}
+
+@media (max-width:500px){
+  .navbar-item{
+    font-size:.8em;
   }
 }

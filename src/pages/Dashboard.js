@@ -1,6 +1,5 @@
 import React from 'react';
 import Loading from 'react-loading';
-import Calendar from 'react-calendar';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ChefGroups from './dashboard/ChefGroups';
@@ -38,7 +37,6 @@ const {currentUser, profileUpToDate, groupResults, authToken} = props
             <h1> Welcome Chef {currentUser.chefProfile.displayName}!</h1> 
             <div className= 'page-element'>
                 <ChefGroups />
-                <Calendar className='calendar-component' minDate = {new Date(Date.now())} calendarType = {"US"} />
             </div>
             <div className= 'page-element'> 
                 <MyGroups/> 
@@ -54,7 +52,6 @@ const {currentUser, profileUpToDate, groupResults, authToken} = props
         <div className='dashboard'>
             <h1> Welcome {currentUser.firstName}!</h1> 
             <div className= 'page-element'>
-                <Calendar className='calendar-component' minDate = {new Date(Date.now())} calendarType = {"US"} />
                 <MyGroups/>
             </div> 
             <div className='page-element'>
