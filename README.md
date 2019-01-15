@@ -39,16 +39,16 @@ LANDING
 
 CHEF DASHBOARD
 
-![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-chefdashboard.png)
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-chefdashboard.jpg)
 
 SEARCH GROUPS
 
-![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-search.png)
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-search.jpg)
 
 
 PROFILE PAGE
 
-![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-profile-page-edit.png)
+![Screenshot](https://github.com/kmkaiulam/Lunchery/blob/master/public/screenshots/lunchery-profile-page-edit.jpg)
 
 
 
