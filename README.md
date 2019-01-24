@@ -15,6 +15,7 @@ https://lunchery.herokuapp.com/
 - Express
 - Node JS
 - mLab
+- AWS
 - Heroku
 
 ## Credits
