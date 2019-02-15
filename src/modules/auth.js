@@ -282,11 +282,13 @@ export default function authReducer(state=initialState, action) {
     } else if (action.type === AUTH_REQUEST) {
         return Object.assign({}, state, {
             authLoading: true,
+            loading:true,
             error: null,
         });
     } else if (action.type === AUTH_SUCCESS) {
         return Object.assign({}, state, {
             authLoading: false,
+            loading: false,
             currentUser: action.currentUser,
             currentUserId: action.currentUser.id
         });
